@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,6 +9,8 @@ export default function HeroSlider() {
   const [startY, setStartY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const isHorizontalSwipeRef = useRef(false);
 
   const slides = [
     {
@@ -67,15 +69,47 @@ export default function HeroSlider() {
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     handleStart(touch.clientX, touch.clientY);
+    isHorizontalSwipeRef.current = false;
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+    };
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !touchStartRef.current) return;
+    
     const touch = e.touches[0];
-    handleMove(touch.clientX);
+    const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
+    const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+    
+    // Yatay hareket dikey hareketten fazlaysa scroll'u engelle
+    if (deltaX > deltaY && deltaX > 10) {
+      isHorizontalSwipeRef.current = true;
+      e.preventDefault();
+      e.stopPropagation();
+      handleMove(touch.clientX);
+      // Touch pozisyonunu güncelle
+      touchStartRef.current = {
+        x: touch.clientX,
+        y: touch.clientY,
+      };
+    } else if (isHorizontalSwipeRef.current && deltaX > 5) {
+      // Zaten yatay swipe başladıysa devam et
+      e.preventDefault();
+      e.stopPropagation();
+      handleMove(touch.clientX);
+      touchStartRef.current = {
+        x: touch.clientX,
+        y: touch.clientY,
+      };
+    }
   };
 
   const handleTouchEnd = () => {
     handleEnd();
+    isHorizontalSwipeRef.current = false;
+    touchStartRef.current = null;
   };
 
   // Mouse events

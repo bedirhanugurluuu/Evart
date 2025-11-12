@@ -147,8 +147,12 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+html {
+  background: #f4f4f4;
+}
+
 body {
-  background-color: #f4f4f4;
+  background: #f4f4f4;
   font-family: 'Gotham', sans-serif;
   color: #414042;
   position: relative;
