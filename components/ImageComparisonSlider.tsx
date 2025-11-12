@@ -1,0 +1,248 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+
+export default function ImageComparisonSlider() {
+  const [sliderPosition, setSliderPosition] = useState(50); // 0-100 arası
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const updateSliderPosition = (clientX: number) => {
+    if (!containerRef.current) return;
+    
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    const clampedPercentage = Math.max(0, Math.min(100, percentage));
+    setSliderPosition(clampedPercentage);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+    updateSliderPosition(e.clientX);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+    updateSliderPosition(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    updateSliderPosition(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    updateSliderPosition(e.touches[0].clientX);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div ref={sectionRef} className="w-full flex flex-col lg:flex-row pt-24 relative overflow-hidden">
+
+      {/* Sol Taraf - %70 */}
+      <div 
+        ref={containerRef}
+        className={`relative image-comparison-slider w-[100%] lg:w-[65%] h-[500px] md:h-[690px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
+          isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-70'
+        }`}
+        style={{
+          borderRadius: '0 142px 142px 0',
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleMouseUp}
+      >
+        {/* İlk Görsel - Arka Plan */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/project-1.jpg"
+            alt="Before"
+            className="w-full h-full object-cover"
+            style={{
+              borderRadius: '0 142px 142px 0',
+            }}
+          />
+        </div>
+
+        {/* İkinci Görsel - Perde Efekti */}
+        <div 
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+            borderRadius: '0 142px 142px 0',
+          }}
+        >
+          <img
+            src="/images/project-2.jpg"
+            alt="After"
+            className="w-full h-full object-cover"
+            style={{
+              borderRadius: '0 142px 142px 0',
+            }}
+          />
+        </div>
+
+        {/* Slider Handle - Ortada */}
+        <div
+          className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-10"
+          style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+          onMouseDown={handleMouseDown}
+        >
+          {/* Arrow İkonu - Sağa Sola */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+            <svg
+              className="w-6 h-6 text-gray-800"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            <svg
+              className="w-6 h-6 text-gray-800 -ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Sağ Taraf - %30 */}
+      <div className={`w-[100%] lg:w-[35%] px-4 py-12 lg:px-12 flex flex-col justify-center relative transition-all duration-1000 ease-out delay-300 ${
+        isVisible ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-70'
+      }`}>
+        
+      {/* Circular Text Animation - Üstte */}
+      <div className="absolute top-2 right-5 lg:left-12 transform z-30 w-16 h-16 md:w-32 md:h-32">
+        {/* Dönen Text SVG */}
+        <svg className="w-full h-full animate-spin-slow absolute inset-0" viewBox="0 0 200 200" style={{ transformOrigin: 'center' }}>
+          <defs>
+            <path
+              id="circle-path"
+              d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+              fill="none"
+            />
+          </defs>
+          <text
+            fontSize="14"
+            fill="#8c8c8c"
+            letterSpacing="0.15em"
+            fontFamily="Gotham, sans-serif"
+            fontWeight="500"
+          >
+            <textPath href="#circle-path" startOffset="0%">
+              MOVE IN NOW PAY IN INSTALLMENTS
+            </textPath>
+          </text>
+        </svg>
+        
+        {/* Güneş SVG - Ortada (Dönmüyor) */}
+        <svg className="w-full h-full absolute inset-0" viewBox="0 0 200 200">
+          <circle
+            cx="100"
+            cy="100"
+            r="20"
+            fill="#8c8c8c"
+            className="drop-shadow-lg"
+          />
+          {/* Güneş Işınları */}
+          {[...Array(8)].map((_, i) => {
+            const angle = (i * 45) * (Math.PI / 180);
+            const x1 = 100 + Math.cos(angle) * 25;
+            const y1 = 100 + Math.sin(angle) * 25;
+            const x2 = 100 + Math.cos(angle) * 32;
+            const y2 = 100 + Math.sin(angle) * 32;
+            return (
+              <line
+                key={i}
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                stroke="#8c8c8c"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            );
+          })}
+        </svg>
+      </div>
+        {/* Başlık */}
+        <h2 className="font-gotham-bold uppercase text-xl md:text-3xl mb-6" style={{ color: "#414042" }}>
+          evart oran - ankara
+        </h2>
+
+        {/* Uzun Yazı */}
+        <p className="font-gotham-book text-lg md:text-xl mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+          Evart Oran, Ankara'nın kalbinde modern yaşamın ve konforun buluştuğu özel bir projedir. Şehrin en prestijli lokasyonlarında konumlanan bu proje, çağdaş mimari anlayışı ile dikkat çekerken, aynı zamanda sürdürülebilir ve çevre dostu bir yaşam alanı sunmaktadır. Geniş yeşil alanları, modern sosyal tesisleri ve teknolojik altyapısı ile Evart Oran, yaşam kalitesini en üst seviyeye taşıyan bir projedir.
+        </p>
+
+        {/* Devamını Oku */}
+        <a 
+          href="#" 
+          className="font-gotham-light italic text-sm md:text-base inline-block relative read-more-link w-fit"
+          style={{ color: "#414042" }}
+        >
+          devamını oku
+        </a>
+      </div>
+    </div>
+  );
+}
+

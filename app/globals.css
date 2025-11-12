@@ -1,0 +1,411 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* Futura PT Font Family */
+@font-face {
+  font-family: 'Futura PT';
+  src: 
+       url('/fonts/FuturaPT-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: 
+       url('/fonts/FuturaPT-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: 
+       url('/fonts/FuturaPT-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src:
+       url('/fonts/FuturaPT-Demi.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: 
+       url('/fonts/FuturaPT-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: 
+       url('/fonts/FuturaPT-Heavy.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: 
+       url('/fonts/FuturaPT-ExtraBold.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Gotham Font Family */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Thin.woff2') format('woff2'),
+       url('/fonts/Gotham-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-XLight.woff2') format('woff2'),
+       url('/fonts/Gotham-XLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Light.woff2') format('woff2'),
+       url('/fonts/Gotham-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Book.woff2') format('woff2'),
+       url('/fonts/Gotham-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Medium.woff2') format('woff2'),
+       url('/fonts/Gotham-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Bold.woff2') format('woff2'),
+       url('/fonts/Gotham-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Black.woff2') format('woff2'),
+       url('/fonts/Gotham-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Questa Grande Font Family */
+@font-face {
+  font-family: 'Questa Grande';
+  src: url('/fonts/Questa_Grande_Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  background-color: #f4f4f4;
+  font-family: 'Gotham', sans-serif;
+  color: #414042;
+  position: relative;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/pattern.png');
+  background-repeat: repeat;
+  background-position: 0 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.2;
+  background-size: contain;
+}
+
+@layer utilities {
+  .container-custom {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+}
+
+@layer components {
+  /* Circle Glow Effect */
+  .circle-glow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 40%, transparent 70%);
+    border-radius: 0 0 50% 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gotham Font Utilities */
+  .font-gotham-thin {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 100;
+  }
+  
+  .font-gotham-xlight {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 200;
+  }
+  
+  .font-gotham-light {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 300;
+  }
+  
+  .font-gotham-book {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 400;
+  }
+  
+  .font-gotham-medium {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 500;
+  }
+  
+  .font-gotham-bold {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-gotham-black {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 900;
+  }
+
+  /* Futura PT Font Utilities */
+  .font-futura-light {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 300;
+  }
+  
+  .font-futura-book {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 400;
+  }
+  
+  .font-futura-medium {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 500;
+  }
+  
+  .font-futura-demi {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 600;
+  }
+  
+  .font-futura-bold {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-futura-heavy {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 800;
+  }
+  
+  .font-futura-extrabold {
+    font-family: 'Futura PT', sans-serif;
+    font-weight: 900;
+  }
+
+  /* Questa Grande Font Utilities */  
+  .font-questa-regular {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Read More Link Effect */
+  .read-more-link {
+    text-decoration: none;
+  }
+
+  .read-more-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 0.5px;
+    background-color: #414042;
+    transition: width 0.3s ease-out;
+  }
+
+  .read-more-link:hover::after {
+    width: 0%;
+  }
+
+  /* Circular Text Animation */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+    transform-origin: center;
+  }
+
+  /* Form Input Styles */
+  input::placeholder,
+  textarea::placeholder {
+    color: #869e9e;
+    opacity: 1;
+  }
+
+  /* Footer Email Input Placeholder */
+  footer input::placeholder {
+    color: white;
+    opacity: 1;
+    letter-spacing: 0.15em;
+  }
+
+  /* Header Nav Link Hover Effect */
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #414042;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* About Section Dots Animation */
+  @keyframes dot-bounce {
+    0% {
+      transform: translateY(0);
+    }
+    10% {
+      transform: translateY(-8px);
+    }
+    20% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .dot-bounce {
+    animation: dot-bounce 3s ease-in-out infinite;
+  }
+
+  /* Hero Slider Button Styles */
+  .hero-discover-btn {
+    width: 200px;
+    height: 39px;
+    border-radius: 13px;
+    letter-spacing: 3px;
+    filter: drop-shadow(2.63px 5.393px 1px rgba(0,0,0,0.09));
+    background-image: linear-gradient(136deg, #213838 0%, #435d5d 100%);
+    transition: background-image 0.3s ease;
+  }
+
+  .hero-discover-btn:hover {
+    background-image: linear-gradient(136deg, #2a4a4a 0%, #4d6d6d 100%);
+  }
+
+  @media (max-width: 768px) {
+    .hero-slider {
+      height: 400px !important;
+      max-height: unset !important;
+      object-fit: cover !important;
+    }
+    .hero-slider img {
+      height: 400px !important;
+      max-height: unset !important;
+      object-fit: cover !important;
+    }
+    .hero-discover-btn {
+      width: 130px;
+      height: 35px;
+      font-size: 0.65rem !important;
+      letter-spacing: 2px;
+    }
+    .image-comparison-slider {
+      border-radius: 0 !important;
+    }
+    .image-comparison-slider img {
+      border-radius: 0 !important;
+    }
+  }
+}
+
