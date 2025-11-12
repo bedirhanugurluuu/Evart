@@ -8,6 +8,8 @@ export default function ImageComparisonSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const isDraggingFromHandleRef = useRef(false);
 
   const updateSliderPosition = (clientX: number) => {
     if (!containerRef.current) return;
@@ -35,13 +37,39 @@ export default function ImageComparisonSlider() {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    // Sadece handle'dan tutulduğunda başlat
+    const target = e.target as HTMLElement;
+    const isHandle = target.closest('[data-slider-handle]');
+    
+    if (!isHandle) return;
+    
+    isDraggingFromHandleRef.current = true;
     setIsDragging(true);
+    touchStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
     updateSliderPosition(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    updateSliderPosition(e.touches[0].clientX);
+    if (!isDragging || !isDraggingFromHandleRef.current || !touchStartRef.current) return;
+    
+    const touch = e.touches[0];
+    const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
+    const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+    
+    // Yatay hareket dikey hareketten daha fazlaysa scroll'u engelle
+    if (deltaX > deltaY && deltaX > 10) {
+      e.preventDefault();
+      updateSliderPosition(touch.clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    isDraggingFromHandleRef.current = false;
+    touchStartRef.current = null;
   };
 
   useEffect(() => {
@@ -93,7 +121,7 @@ export default function ImageComparisonSlider() {
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
-        onTouchEnd={handleMouseUp}
+        onTouchEnd={handleTouchEnd}
       >
         {/* İlk Görsel - Arka Plan */}
         <div className="absolute inset-0">
@@ -127,7 +155,8 @@ export default function ImageComparisonSlider() {
 
         {/* Slider Handle - Ortada */}
         <div
-          className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-10"
+          data-slider-handle
+          className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-10 touch-none"
           style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
           onMouseDown={handleMouseDown}
         >
