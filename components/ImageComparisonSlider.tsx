@@ -59,10 +59,16 @@ export default function ImageComparisonSlider() {
     const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
     const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
     
-    // Yatay hareket dikey hareketten daha fazlaysa scroll'u engelle
-    if (deltaX > deltaY && deltaX > 10) {
+    // Yatay hareket varsa scroll'u engelle ve slider'ı güncelle
+    if (deltaX > 5 || (deltaX > deltaY && deltaX > 3)) {
       e.preventDefault();
+      e.stopPropagation();
       updateSliderPosition(touch.clientX);
+      // Touch pozisyonunu güncelle ki sürekli hareket edebilsin
+      touchStartRef.current = {
+        x: touch.clientX,
+        y: touch.clientY,
+      };
     }
   };
 
@@ -85,6 +91,13 @@ export default function ImageComparisonSlider() {
   }, [isDragging]);
 
   useEffect(() => {
+    // Mobilde parallax animasyonunu kapat
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -132,6 +145,7 @@ export default function ImageComparisonSlider() {
             style={{
               borderRadius: '0 142px 142px 0',
             }}
+            loading="lazy"
           />
         </div>
 
@@ -150,6 +164,7 @@ export default function ImageComparisonSlider() {
             style={{
               borderRadius: '0 142px 142px 0',
             }}
+            loading="lazy"
           />
         </div>
 

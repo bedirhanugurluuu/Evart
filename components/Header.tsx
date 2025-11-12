@@ -27,6 +27,7 @@ export default function Header() {
               src="/logo.png"
               alt="Evart Logo"
               className="h-16 w-auto"
+              loading="eager"
             />
           </a>
 

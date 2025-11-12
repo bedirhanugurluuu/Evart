@@ -133,6 +133,7 @@ export default function HeroSlider() {
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
                 className="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] object-contain pointer-events-none select-none"
+                loading="lazy"
               />
             </div>
           ))}

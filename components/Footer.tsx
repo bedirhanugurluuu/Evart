@@ -10,7 +10,7 @@ export default function Footer() {
             <div className="space-y-4">
               {/* Logo */}
               <div className="mb-6">
-                <img src="/logo.png" alt="Evart Logo" className="h-15 w-auto brightness-0 invert" />
+                <img src="/logo.png" alt="Evart Logo" className="h-15 w-auto brightness-0 invert" loading="eager" />
               </div>
 
               {/* Sabit Hat */}
