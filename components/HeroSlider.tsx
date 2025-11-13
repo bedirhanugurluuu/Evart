@@ -140,7 +140,7 @@ export default function HeroSlider() {
   return (
     <>
     <section 
-      className="relative hero-slider h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] w-full overflow-hidden cursor-grab active:cursor-grabbing"
+      className="relative hero-slider max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] w-full overflow-hidden cursor-grab active:cursor-grabbing"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -167,7 +167,8 @@ export default function HeroSlider() {
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
                 className="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] object-contain pointer-events-none select-none"
-                loading="lazy"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
               />
             </div>
           ))}

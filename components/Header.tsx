@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,36 +21,36 @@ export default function Header() {
   return (
     <header className="bg-white sticky top-0 z-50">
       <nav className="container-custom py-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img
               src="/logo.png"
               alt="Evart Logo"
               className="h-16 w-auto"
               loading="eager"
             />
-          </a>
+          </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+          {/* Desktop Menu - Kalan genişliğin tam ortasında */}
+          <div className="hidden md:flex flex-1 items-center justify-center space-x-8">
+            <Link href="/about" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               Hakkımızda
-            </a>
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            </Link>
+            <Link href="/oran" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               Evart Oran
-            </a>
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            </Link>
+            <Link href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               Evart Yalıkavak
-            </a>
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            </Link>
+            <Link href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               İletişim
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700"
+            className="md:hidden text-gray-700 ml-auto"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Menu"
           >
@@ -110,34 +111,34 @@ export default function Header() {
 
             {/* Menu Items */}
             <nav className="flex flex-col space-y-6">
-              <a 
-                href="#" 
+              <Link 
+                href="/about" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >
                 Hakkımızda
-              </a>
-              <a 
-                href="#" 
+              </Link>
+              <Link 
+                href="/oran" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >
                 Evart Oran
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="#" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >
                 Evart Yalıkavak
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="#" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >
                 İletişim
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

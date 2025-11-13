@@ -1,5 +1,7 @@
 'use client';
 
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <>
@@ -63,21 +65,21 @@ export default function Footer() {
 
             {/* Orta Taraf - Menü */}
             <div className="flex flex-col space-y-3 border-t border-white/20 pt-4 md:border-none md:pt-0">
-              <a href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              <Link href="/" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
                 ANASAYFA
-              </a>
-              <a href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="/about" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
                 HAKKIMIZDA
-              </a>
-              <a href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="/oran" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
                 EVART ORAN
-              </a>
-              <a href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
                 EVART YALIKAVAK
-              </a>
-              <a href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
                 İLETİŞİM
-              </a>
+              </Link>
             </div>
 
               {/* Sağ Taraf - Mail Form */}

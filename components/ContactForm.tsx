@@ -1,9 +1,69 @@
 'use client';
 
-export default function ContactForm() {
+import { useState } from "react";
+
+interface ContactFormProps {
+  projectName?: string;
+}
+
+export default function ContactForm({ projectName = "Evart" }: ContactFormProps) {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          projectName,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          phone: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
-    <section className="pb-16 pt-16 lg:pt-32">
-      <div className="container-custom">
+    <div className={projectName ? '' : 'pb-16 pt-16 lg:pt-32'}>
+      <div className={projectName ? '' : 'container-custom'}>
         <div className="grid items-end grid-cols-1 md:grid-cols-2 gap-12">
           {/* Sol Taraf */}
           <div className="flex flex-col justify-center">
@@ -125,13 +185,17 @@ export default function ContactForm() {
 
           {/* Sağ Taraf - Form */}
           <div>
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/* Ad ve Soyad - Yan Yana */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <input
                     type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     placeholder="Adınız"
+                    required
                     className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
                     style={{
                       border: "none",
@@ -143,7 +207,11 @@ export default function ContactForm() {
                 <div>
                   <input
                     type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     placeholder="Soyadınız"
+                    required
                     className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
                     style={{
                       border: "none",
@@ -159,7 +227,11 @@ export default function ContactForm() {
                 <div>
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     placeholder="Telefon"
+                    required
                     className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
                     style={{
                       border: "none",
@@ -171,7 +243,11 @@ export default function ContactForm() {
                 <div>
                   <input
                     type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     placeholder="Konu"
+                    required
                     className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
                     style={{
                       border: "none",
@@ -185,8 +261,12 @@ export default function ContactForm() {
               {/* Mesaj - Full Alan */}
               <div>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Bir mesaj yazın"
                   rows={4}
+                  required
                   className="w-full px-0 py-3 font-gotham-book font-medium text-base resize-none focus:outline-none bg-transparent"
                   style={{
                     border: "none",
@@ -196,28 +276,43 @@ export default function ContactForm() {
                 />
               </div>
 
+              {/* Submit Status Messages */}
+              {submitStatus === 'success' && (
+                <p className="text-green-600 font-gotham-book text-sm">
+                  Mesajınız başarıyla gönderildi!
+                </p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-red-600 font-gotham-book text-sm">
+                  Bir hata oluştu. Lütfen tekrar deneyin.
+                </p>
+              )}
+
               {/* Gönder Butonu */}
               <button
-                type="button"
-                className="inline-block font-gotham-bold text-white uppercase transition-all duration-300"
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-block font-gotham-bold text-white uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   backgroundColor: "#869e9e",
                   padding: "5px 10px",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#6d8a8a";
+                  if (!isSubmitting) {
+                    e.currentTarget.style.backgroundColor = "#6d8a8a";
+                  }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = "#869e9e";
                 }}
               >
-                gönder
+                {isSubmitting ? 'Gönderiliyor...' : 'gönder'}
               </button>
             </form>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

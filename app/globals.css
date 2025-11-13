@@ -71,8 +71,7 @@
 /* Gotham Font Family */
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Thin.woff2') format('woff2'),
-       url('/fonts/Gotham-Thin.woff') format('woff');
+  src: url('/fonts/Gotham-Thin.woff2') format('woff2');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -80,8 +79,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-XLight.woff2') format('woff2'),
-       url('/fonts/Gotham-XLight.woff') format('woff');
+  src: url('/fonts/Gotham-XLight.woff2') format('woff2');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -89,8 +87,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Light.woff2') format('woff2'),
-       url('/fonts/Gotham-Light.woff') format('woff');
+  src: url('/fonts/Gotham-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -98,8 +95,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Book.woff2') format('woff2'),
-       url('/fonts/Gotham-Book.woff') format('woff');
+  src: url('/fonts/Gotham-Book.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -107,8 +103,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Medium.woff2') format('woff2'),
-       url('/fonts/Gotham-Medium.woff') format('woff');
+  src: url('/fonts/Gotham-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -116,8 +111,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Bold.woff2') format('woff2'),
-       url('/fonts/Gotham-Bold.woff') format('woff');
+  src: url('/fonts/Gotham-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -125,8 +119,7 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Black.woff2') format('woff2'),
-       url('/fonts/Gotham-Black.woff') format('woff');
+  src: url('/fonts/Gotham-Black.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -145,10 +138,6 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
-}
-
-html {
-  background: #f4f4f4;
 }
 
 body {
@@ -387,16 +376,32 @@ body::after {
     background-image: linear-gradient(136deg, #2a4a4a 0%, #4d6d6d 100%);
   }
 
+  /* About Banner - Yazı Altı Karartı */
+  .about-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .about-banner {
+    position: relative;
+    z-index: 2;
+  }
+
   @media (max-width: 768px) {
     .hero-slider {
-      height: 400px !important;
-      max-height: unset !important;
-      object-fit: cover !important;
+      height: auto !important;
     }
     .hero-slider img {
-      height: 400px !important;
-      max-height: unset !important;
-      object-fit: cover !important;
+      min-height: 400px !important;
+      max-height: 400px !important;
+      object-fit: contain !important;
     }
     .hero-discover-btn {
       width: 130px;
