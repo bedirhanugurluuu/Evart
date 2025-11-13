@@ -33,16 +33,16 @@ export default function Header() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            <a href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               Hakkımızda
             </a>
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            <a href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               Evart Oran
             </a>
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            <a href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               Evart Yalıkavak
             </a>
-            <a href="#" className="hover:text-gray-900 transition font-gotham-regular nav-link">
+            <a href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
               İletişim
             </a>
           </div>
