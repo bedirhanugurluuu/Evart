@@ -16,7 +16,9 @@ export default function Home() {
       <ProjectsSection />
       <ImageComparisonSlider />
       <ImageComparisonSliderReverse />
-      <ContactForm />
+      <div className="container-custom py-16 lg:py-24">
+        <ContactForm />
+      </div>
       <Footer />
     </main>
   );

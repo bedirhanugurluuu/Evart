@@ -62,9 +62,8 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
     }
   };
   return (
-    <div className={projectName ? '' : 'pb-16 pt-16 lg:pt-32'}>
-      <div className={projectName ? '' : 'container-custom'}>
-        <div className="grid items-end grid-cols-1 md:grid-cols-2 gap-12">
+    <div>
+      <div className="grid items-end grid-cols-1 md:grid-cols-2 gap-12">
           {/* Sol Taraf */}
           <div className="flex flex-col justify-center">
             <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl" style={{ color: "#414042" }}>
@@ -311,7 +310,6 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
             </form>
           </div>
         </div>
-      </div>
     </div>
   );
 }
