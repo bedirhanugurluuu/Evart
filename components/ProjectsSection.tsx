@@ -17,10 +17,10 @@ export default function ProjectsSection() {
 
             {/* Evart Oran ve Evart Yalıkavak - Yan Yana */}
             <div className="flex items-center gap-10 md:gap-40">
-              <div className="font-gotham-book text-white text-lg md:text-xl">
+              <div className="font-gotham-book uppercase text-white text-lg md:text-xl">
                 evart oran
               </div>
-              <div className="font-gotham-book text-white text-lg md:text-xl">
+              <div className="font-gotham-book uppercase text-white text-lg md:text-xl">
                 evart yalıkavak
               </div>
             </div>
