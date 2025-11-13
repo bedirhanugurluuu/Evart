@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header className="bg-white sticky top-0 z-50">
       <nav className="container-custom py-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-start gap-20 lg:gap-40">
           {/* Logo */}
           <a href="/" className="flex items-center">
             <img
