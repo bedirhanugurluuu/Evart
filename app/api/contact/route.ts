@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -17,13 +15,17 @@ export async function POST(request: NextRequest) {
     }
 
     // Resend API Key kontrolü
-    if (!process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
       console.error('RESEND_API_KEY environment variable is not set');
       return NextResponse.json(
         { success: false, message: 'Email servisi yapılandırılmamış.' },
         { status: 500 }
       );
     }
+
+    // Resend instance'ı sadece API key varsa oluştur
+    const resend = new Resend(apiKey);
 
     // Email gönderme
     // Resend test modunda sadece doğrulanmış email adresine gönderebilir
