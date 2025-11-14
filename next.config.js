@@ -14,9 +14,10 @@ const nextConfig = {
   // Production optimizations
   swcMinify: true,
   // Experimental features for better performance
-  experimental: {
-    optimizeCss: true,
-  },
+  // optimizeCss kaldırıldı - critters dependency gerektiriyor ve build hatası veriyor
+  // experimental: {
+  //   optimizeCss: true,
+  // },
   // Headers for security and performance
   async headers() {
     return [
