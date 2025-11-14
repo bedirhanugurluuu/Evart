@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -49,7 +50,7 @@ export default function Footer() {
             <div className="space-y-4">
               {/* Logo */}
               <div className="mb-6">
-                <img src="/logo.png" alt="Evart Logo" className="h-15 w-auto brightness-0 invert" loading="eager" />
+                <Image src="/logo.png" alt="Evart Logo" width={120} height={60} className="h-15 w-auto brightness-0 invert" priority quality={90} />
               </div>
 
               {/* Sabit Hat */}

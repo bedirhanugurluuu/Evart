@@ -401,7 +401,7 @@ body::after {
     .hero-slider img {
       min-height: 400px !important;
       max-height: 400px !important;
-      object-fit: contain !important;
+      object-fit: cover !important;
     }
     .hero-discover-btn {
       width: 130px;

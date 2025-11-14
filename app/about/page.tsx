@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -18,11 +19,14 @@ export default function About() {
       {/* Ana Banner */}
       <section className="relative w-full h-[400px] md:h-[600px] lg:h-[800px] overflow-hidden about-banner">
         {/* Banner Görseli */}
-        <img
+        <Image
           src="/images/about-banner.jpg"
           alt="About Banner"
-          className="w-full h-full object-cover"
-          loading="eager"
+          fill
+          className="object-cover"
+          priority
+          quality={85}
+          sizes="100vw"
         />
         
         {/* Absolute Yazılar */}
@@ -91,19 +95,23 @@ export default function About() {
       {/* İki Görsel - Container Dışında, %60 ve %40 */}
       <section className="w-full max-h-[400px] flex">
         <div className="w-[60%]">
-          <img
+          <Image
             src="/images/about-image-1.jpg"
             alt="About Image 1"
-            className="w-full h-full object-cover"
-            loading="lazy"
+            fill
+            className="object-cover"
+            quality={85}
+            sizes="60vw"
           />
         </div>
         <div className="w-[40%]">
-          <img
+          <Image
             src="/images/about-image-2.jpg"
             alt="About Image 2"
-            className="w-full h-full object-cover"
-            loading="lazy"
+            fill
+            className="object-cover"
+            quality={85}
+            sizes="40vw"
           />
         </div>
       </section>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,11 +25,14 @@ export default function Header() {
         <div className="flex items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img
+            <Image
               src="/logo.png"
               alt="Evart Logo"
+              width={120}
+              height={64}
               className="h-16 w-auto"
-              loading="eager"
+              priority
+              quality={90}
             />
           </Link>
 

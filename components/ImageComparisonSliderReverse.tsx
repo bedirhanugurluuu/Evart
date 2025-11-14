@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ImageComparisonSliderReverse() {
   const [sliderPosition, setSliderPosition] = useState(50); // 0-100 arası
@@ -162,14 +163,17 @@ export default function ImageComparisonSliderReverse() {
       >
         {/* İlk Görsel - Arka Plan */}
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/images/project-3.jpg"
             alt="Before"
+            width={1092}
+            height={875}
             className="w-full h-full object-cover"
             style={{
               borderRadius: '142px 0 0 142px',
             }}
-            loading="lazy"
+            quality={85}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
 
@@ -181,14 +185,17 @@ export default function ImageComparisonSliderReverse() {
             borderRadius: '142px 0 0 142px',
           }}
         >
-          <img
+          <Image
             src="/images/project-4.jpg"
             alt="After"
+            width={1092}
+            height={875}
             className="w-full h-full object-cover"
             style={{
               borderRadius: '142px 0 0 142px',
             }}
-            loading="lazy"
+            quality={85}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
 

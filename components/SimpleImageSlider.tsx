@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 interface SimpleImageSliderProps {
   image1: string;
@@ -129,11 +130,13 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     >
       {/* İlk Görsel - Arka Plan */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={image1}
           alt={alt1}
-          className="w-full h-full object-cover"
-          loading="lazy"
+          fill
+          className="object-cover"
+          quality={85}
+          sizes="(max-width: 768px) 100vw, 70vw"
         />
       </div>
 
@@ -144,11 +147,13 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
           clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
         }}
       >
-        <img
+        <Image
           src={image2}
           alt={alt2}
-          className="w-full h-full object-cover"
-          loading="lazy"
+          fill
+          className="object-cover"
+          quality={85}
+          sizes="(max-width: 768px) 100vw, 70vw"
         />
       </div>
 

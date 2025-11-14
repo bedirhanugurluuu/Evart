@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -44,11 +45,14 @@ export default function Iletisim() {
       {/* Ana Banner */}
       <section className="relative w-full h-[400px] md:h-[600px] lg:h-[800px] overflow-hidden about-banner">
         {/* Banner Görseli */}
-        <img
+        <Image
           src="/images/about-banner.jpg"
           alt="İletişim Banner"
-          className="w-full h-full object-cover"
-          loading="eager"
+          fill
+          className="object-cover"
+          priority
+          quality={85}
+          sizes="100vw"
         />
         
         {/* Absolute Yazılar */}

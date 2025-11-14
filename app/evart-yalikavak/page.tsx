@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -46,11 +47,14 @@ export default function EvartYalikavak() {
       <section className="relative w-full h-[800px] md:h-[600px] lg:h-[800px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
         {/* Banner Görseli */}
         <div className="absolute inset-0 overflow-hidden">
-          <img
+          <Image
             src="/images/about-banner.jpg"
             alt="Evart Yalıkavak Banner"
-            className="w-full h-full object-cover"
-            loading="eager"
+            fill
+            className="object-cover"
+            priority
+            quality={85}
+            sizes="100vw"
           />
         </div>
 
@@ -108,15 +112,17 @@ export default function EvartYalikavak() {
             </div>
             {/* Sağ Taraf - Görsel */}
             <div 
-              className={`w-full transition-all duration-1000 ease-out delay-200 ${
+              className={`relative w-full h-full transition-all duration-1000 ease-out delay-200 ${
                 isVisible ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
               }`}
             >
-              <img
+              <Image
                 src="/images/yalikavak-1.jpg"
                 alt="Yalıkavak"
-                className="w-full h-full object-cover"
-                loading="lazy"
+                fill
+                className="object-cover"
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
@@ -139,12 +145,14 @@ export default function EvartYalikavak() {
               </div>
             </div>
             {/* Sağ 70% - Resim */}
-            <div className="lg:col-span-7">
-              <img
+            <div className="lg:col-span-7 relative h-[200px] md:h-[300px] lg:h-[400px]">
+              <Image
                 src="/images/yalikavak-2.jpg"
                 alt="Yaşam 1"
-                className="w-full h-[200px] md:h-[300px] lg:h-[400px] object-cover"
-                loading="lazy"
+                fill
+                className="object-cover"
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 70vw"
               />
             </div>
           </div>
@@ -213,12 +221,14 @@ export default function EvartYalikavak() {
               </div>
             </div>
             {/* Sağ 70% - Resim */}
-            <div className="lg:col-span-7">
-              <img
+            <div className="lg:col-span-7 relative h-[200px] md:h-[300px] lg:h-[400px]">
+              <Image
                 src="/images/yalikavak-5.jpg"
                 alt="Yaşam 5"
-                className="w-full h-[200px] md:h-[300px] lg:h-[400px] object-cover"
-                loading="lazy"
+                fill
+                className="object-cover"
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 70vw"
               />
             </div>
           </div>

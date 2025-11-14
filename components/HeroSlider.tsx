@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,6 +10,7 @@ export default function HeroSlider() {
   const [startY, setStartY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
+  const [videoError, setVideoError] = useState(false);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const isHorizontalSwipeRef = useRef(false);
 
@@ -163,12 +165,15 @@ export default function HeroSlider() {
               key={slide.id}
               className="w-full flex-shrink-0"
             >
-              <img
+              <Image
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
+                width={1920}
+                height={1200}
                 className="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] object-contain pointer-events-none select-none"
-                loading={index === 0 ? "eager" : "lazy"}
-                fetchPriority={index === 0 ? "high" : "auto"}
+                priority={index === 0}
+                quality={85}
+                sizes="100vw"
               />
             </div>
           ))}
@@ -177,7 +182,7 @@ export default function HeroSlider() {
 
       {/* Content Overlay */}
       <div className="absolute inset-0 z-10 flex items-center pointer-events-none">
-        <div className="container-custom w-full pointer-events-none">
+        <div className="container-custom w-full pointer-events-none lg:h-full lg:pt-32">
           <div className="flex justify-end pointer-events-none">
             <div className="text-left max-w- pointer-events-auto">
               <p 
@@ -240,7 +245,7 @@ export default function HeroSlider() {
       </div>
     </section>
 
-    {/* Rotating Circle with GIF - En altta, yarısı slider içinde */}
+    {/* Rotating Circle with Video - En altta, yarısı slider içinde */}
     <div className="relative flex justify-center -mt-[50px] left-1/2 transform -translate-x-1/2 z-20">
       <div 
         className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-white shadow-lg circle-glow"
@@ -248,11 +253,17 @@ export default function HeroSlider() {
           filter: 'drop-shadow(0px 4px 16px rgba(22, 149, 136, 0.4))',
         }}
       >
-        <img
-          src="/images/wave.gif"
-          alt="Loading"
-          className="w-full h-full object-cover"
-        />
+        <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            style={{ pointerEvents: 'none' }}
+            onError={() => setVideoError(true)}
+          >
+            <source src="/images/waves.mp4" type="video/mp4" />
+          </video>
       </div>
     </div>
 
