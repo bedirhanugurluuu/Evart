@@ -94,7 +94,7 @@ export default function About() {
 
       {/* İki Görsel - Container Dışında, %60 ve %40 */}
       <section className="w-full max-h-[400px] flex">
-        <div className="w-[60%]">
+        <div className="relative w-[60%] h-[400px]">
           <Image
             src="/images/about-image-1.jpg"
             alt="About Image 1"
@@ -104,7 +104,7 @@ export default function About() {
             sizes="60vw"
           />
         </div>
-        <div className="w-[40%]">
+        <div className="relative w-[40%] h-[400px]">
           <Image
             src="/images/about-image-2.jpg"
             alt="About Image 2"
