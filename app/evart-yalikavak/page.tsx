@@ -1,16 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import SimpleImageSlider from "@/components/SimpleImageSlider";
 
-export default function Oran() {
+export default function EvartYalikavak() {
   const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -23,7 +48,7 @@ export default function Oran() {
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/images/about-banner.jpg"
-            alt="Evart Oran Banner"
+            alt="Evart Yalıkavak Banner"
             className="w-full h-full object-cover"
             loading="eager"
           />
@@ -32,22 +57,26 @@ export default function Oran() {
         {/* Contact Form - Absolute position ile banner üzerinde */}
         <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 z-10">
           <div className="container-custom">
-            <ContactForm projectName="Evart Oran" absoluteOverlay={true} />
+            <ContactForm projectName="Yalıkavak" absoluteOverlay={true} />
           </div>
         </div>
       </section>
 
       {/* Başlık Bölümü - Container içinde */}
-      <section className="py-20">
+      <section ref={sectionRef} className="py-20 overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Sol Taraf - Başlık ve Noktalar */}
-            <div className="text-center md:text-left">
+            <div 
+              className={`text-center md:text-left transition-all duration-1000 ease-out ${
+                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-12 opacity-0'
+              }`}
+            >
               <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl mb-2" style={{ color: "#414042" }}>
-                Ankara'nın kalbinde
+                Şehrin Enerjisiyle
               </h2>
               <p className="font-questa-regular text-3xl md:text-4xl mb-4" style={{ color: "#414042" }}>
-                Seçkin Bir Yaşam
+                Bodrum’un ruhu buluşuyor
               </p>
               {/* 3 Yuvarlak */}
               <div className="flex justify-center md:justify-start items-center gap-2">
@@ -74,14 +103,18 @@ export default function Oran() {
                 ></div>
               </div>
               <p className="font-gotham-book text-base md:text-lg mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
-                Evart Oran, yalnızca bir konut projesi değil; geleceğin yaşam standartlarını bugünden inşa eden bir vizyonun yansımasıdır. Çankaya Oran’da, büyükelçiliklerin ve prestijli kurumların merkezinde konumlanan proje; modern mimarisi, yüksek kira potansiyeli ve yatırım değeriyle öne çıkıyor.
+                Evart Yalıkavak, Bodrum’un ilk rezidans projesi olarak yalnızca bir yaşam alanı değil, aynı zamanda yeni bir yaşam biçimi sunuyor. Geleneksel Bodrum mimarisini modern şehirli bir yaklaşımla harmanlayan proje, hem kazandıran bir yatırım modeli hem de ayrıcalıklı bir yaşam deneyimi vaat ediyor.
               </p>
             </div>
             {/* Sağ Taraf - Görsel */}
-            <div className="w-full">
+            <div 
+              className={`w-full transition-all duration-1000 ease-out delay-200 ${
+                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
+              }`}
+            >
               <img
-                src="/images/oran-1.jpg"
-                alt="Ankara"
+                src="/images/yalikavak-1.jpg"
+                alt="Yalıkavak"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -101,31 +134,26 @@ export default function Oran() {
                   Yaşam Biçimi:
                 </p>
                 <p className="font-gotham-book uppercase text-xl md:text-3xl text-white">
-                  şehirli & prestijli
+                  Şehirli & Dingin
                 </p>
               </div>
             </div>
-            {/* Sağ 70% - Slider */}
+            {/* Sağ 70% - Resim */}
             <div className="lg:col-span-7">
-              <SimpleImageSlider 
-                image1="/images/oran-2.jpg"
-                image2="/images/oran-3.jpg"
-                alt1="Yaşam 1"
-                alt2="Yaşam 2"
+              <img
+                src="/images/yalikavak-2.jpg"
+                alt="Yaşam 1"
+                className="w-full h-[200px] md:h-[300px] lg:h-[400px] object-cover"
+                loading="lazy"
               />
             </div>
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Ankara’nın en seçkin bölgelerinden birinde yer alan Evart Oran, şehrin dinamizmini yüksek yaşam kalitesiyle buluşturuyor.<br></br>
-              • 1+1 ve 2+1 esnek daire seçenekleri<br></br>
-              • Farklı yaşam tarzlarına uyumlu<br></br>
-              • Modern rezidans konsepti ferah, işlevsel ve şık yaşam alanları<br></br>
-              • Üniversitelere, alışveriş merkezlerine ve sosyal yaşama yakınlık<br></br>
-              • konforlu şehir yaşamı<br></br><br></br>
-
-              Atakule’ye 5 dakika, Kuzu Effect AVM’ye 1 dakika, ODTÜ’ye 10 dakika mesafede olan Evart Oran, konumu itibarıyla hem genç profesyoneller hem de yatırımcılar için ideal bir tercihtir.
+              Burada yalnızca bir daireye değil; şehrin hızını Bodrum’un dinginliğiyle buluşturan özgün bir yaşam kültürüne sahip oluyorsunuz. Bahçe dubleksleri sabah uyandığınızda doğrudan havuza açılırken, çatı dubleksleri yüksek tavanlarıyla modern rezidans ferahlığını sunuyor.
+              <br></br><br></br>
+              Her daire 43–45 m² aralığında kompakt ama fonksiyonel 1+1 planlarda tasarlandı. Modüler mimari sayesinde birleştirme imkânı ile büyüyebilen, esnek yaşam alanları oluşturmak mümkün.<br></br><br></br>
             </p>
           </div>
         </div>
@@ -138,8 +166,8 @@ export default function Oran() {
             {/* Sol 70% - Slider */}
             <div className="lg:col-span-7 order-2 lg:order-1">
               <SimpleImageSlider 
-                image1="/images/oran-4.jpg"
-                image2="/images/oran-5.jpg"
+                image1="/images/yalikavak-3.jpg"
+                image2="/images/yalikavak-4.jpg"
                 alt1="Yaşam 3"
                 alt2="Yaşam 4"
               />
@@ -151,7 +179,7 @@ export default function Oran() {
                   Sosyal Alanlar:
                 </p>
                 <p className="font-gotham-book uppercase text-xl md:text-3xl text-white">
-                  Konfor & Güven
+                  Birlikte Yaşama Sanatı
                 </p>
               </div>
             </div>
@@ -159,9 +187,11 @@ export default function Oran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Evart Oran, yalnızca dairelerden ibaret değil; sosyal yaşamı zenginleştiren alanlarıyla öne çıkar. Modern mimarisi, estetik detayları ve konfor odaklı yaklaşımıyla şehir yaşamına yeni bir soluk getirir.<br></br><br></br>
-                <br></br>
-              <b>Evart Oran’da sizi, ayrıcalıklı bir sosyal yaşam deneyimi bekliyor.</b>
+              Evart Yalıkavak’ta ortak alanlar sıradan değil, yaşamın merkezi:<br></br>
+              • Ortak havuz: Gün boyu serinleme, akşamları sosyalleşme imkânı<br></br>
+              • Geniş sosyal bahçe: Sabah kahveleri, akşam sohbetleri ve yeni dostlukların<br></br>
+              doğduğu alan<br></br>
+              • Kapalı garaj: Konfor ve güvenliği aynı anda sunar
             </p>
           </div>
         </div>
@@ -182,23 +212,25 @@ export default function Oran() {
                 </p>
               </div>
             </div>
-            {/* Sağ 70% - Slider */}
+            {/* Sağ 70% - Resim */}
             <div className="lg:col-span-7">
-              <SimpleImageSlider
-                image1="/images/oran-6.jpg"
-                image2="/images/oran-7.jpg"
-                alt1="Yaşam 5"
-                alt2="Yaşam 6"
+              <img
+                src="/images/yalikavak-5.jpg"
+                alt="Yaşam 5"
+                className="w-full h-[200px] md:h-[300px] lg:h-[400px] object-cover"
+                loading="lazy"
               />
             </div>
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Çankaya Oran, Ankara’nın en hızlı değer kazanan bölgelerinden biridir.<br></br>
-              • Yüksek kira getirisi potansiyeli<br></br>
-              • Prestijli büyükelçilik bölgesi avantajı<br></br>
-              • Hem kısa vadede kazandıran hem uzun vadede değerini artıran yatırım modeli
+              Evart Yalıkavak, Bodrum’un en yüksek kira getirisi potansiyeline sahip bölgelerinden birinde konumlanıyor.<br></br>
+              • Profesyonel kiralama yönetimi<br></br>
+              • Şeffaf gelir modeli ve merkezi kontrol<br></br>
+              • Turistik kısa dönem kiralamalarla hızlanan yatırım geri dönüşü<br></br><br></br>
+
+              Bodrum’da ortalama ROI 12 yıl iken, Evart Yalıkavak’ta bu süre turistik kiralamalarla 6–10 yıla kadar düşüyor.
             </p>
           </div>
         </div>
@@ -211,8 +243,8 @@ export default function Oran() {
             {/* Sol 70% - Slider */}
             <div className="lg:col-span-7 order-2 lg:order-1">
               <SimpleImageSlider
-                image1="/images/oran-8.jpg"
-                image2="/images/oran-9.jpg"
+                image1="/images/yalikavak-6.jpg"
+                image2="/images/yalikavak-7.jpg"
                 alt1="Yaşam 7"
                 alt2="Yaşam 8"
               />
@@ -224,7 +256,7 @@ export default function Oran() {
                   Yaşam + Yatırım:
                 </p>
                 <p className="font-gotham-book uppercase text-xl md:text-2xl text-white">
-                  Çift Kazanç
+                  Çift Değer
                 </p>
               </div>
             </div>
@@ -232,7 +264,7 @@ export default function Oran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Evart Oran, hem sakinlerine huzurlu bir yaşam sunar hem de yatırımcısına güçlü bir değer kazandırır. Esnek daire tipolojileri ve merkezi konumu sayesinde, geleceğe güvenle bakan bir yatırımın kapılarını açar.<br></br><br></br>
+              Tüm birimler ticari bağımsız bölüm tapusu ile teslim ediliyor. Bu sayede evinizi ister yaşam alanı, ister ofis, isterse yatırım amaçlı kullanabilirsiniz. Home-office kültürünün yükselişiyle birleştiğinde, Evart Yalıkavak çok yönlü bir yatırım fırsatına dönüşüyor.
             </p>
           </div>
         </div>

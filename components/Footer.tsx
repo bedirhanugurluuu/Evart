@@ -1,8 +1,45 @@
 'use client';
 
+import { useState } from "react";
 import Link from "next/link";
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) {
+      setSubmitStatus('error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setEmail('');
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <>
       <footer className="py-16 md:py-32" style={{ backgroundColor: "#869e9e" }}>
@@ -17,11 +54,11 @@ export default function Footer() {
 
               {/* Sabit Hat */}
               <div className="flex items-center gap-2">
-                <svg 
-                  className="w-5 h-5 flex-shrink-0" 
-                  style={{ color: "white" }} 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "white" }}
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -31,11 +68,11 @@ export default function Footer() {
 
               {/* Telefon */}
               <div className="flex items-center gap-2">
-                <svg 
-                  className="w-5 h-5 flex-shrink-0" 
-                  style={{ color: "white" }} 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "white" }}
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -45,11 +82,11 @@ export default function Footer() {
 
               {/* Adres */}
               <div className="flex items-center gap-2">
-                <svg 
-                  className="w-5 h-5 mt-1 flex-shrink-0" 
-                  style={{ color: "white" }} 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-5 h-5 mt-1 flex-shrink-0"
+                  style={{ color: "white" }}
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -65,59 +102,73 @@ export default function Footer() {
 
             {/* Orta Taraf - Menü */}
             <div className="flex flex-col space-y-3 border-t border-white/20 pt-4 md:border-none md:pt-0">
-              <Link href="/" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              <Link href="/" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
                 ANASAYFA
               </Link>
-              <Link href="/about" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              <Link href="/about" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
                 HAKKIMIZDA
               </Link>
-              <Link href="/oran" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              <Link href="/evart-oran" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
                 EVART ORAN
               </Link>
-              <Link href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              <Link href="/evart-yalikavak" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
                 EVART YALIKAVAK
               </Link>
-              <Link href="#" className="font-gotham-book text-lg lg:text-2xl text-white hover:opacity-80 transition-opacity">
+              <Link href="/iletisim" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
                 İLETİŞİM
               </Link>
             </div>
 
               {/* Sağ Taraf - Mail Form */}
               <div className="border-t border-white/20 pt-4 md:border-none md:pt-0">
-                <p className="font-gotham-bold text-3xl text-white mb-3">MAİL</p>
-                <div className="flex items-center gap-2">
+                <p className="font-gotham-bold text-2xl text-white mb-3">MAİL</p>
+                <form onSubmit={handleNewsletterSubmit} className="flex items-center gap-2">
                   <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="E-MAIL"
+                    required
                     className="w-48 px-0 py-2 font-gotham-book text-sm focus:outline-none bg-transparent border-b-2 border-white"
                     style={{
                       color: "white",
                     }}
                   />
-                <button
-                  type="button"
-                  className="flex-shrink-0"
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                    transform: "rotate(45deg)",
-                  }}
-                >
-                  <svg 
-                    className="w-6 h-6" 
-                    style={{ color: "white" }} 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      cursor: "pointer",
+                      transform: "rotate(45deg)",
+                    }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                </button>
+                    <svg 
+                      className="w-6 h-6" 
+                      style={{ color: "white" }} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
+                </form>
+                {submitStatus === 'success' && (
+                  <p className="font-gotham-book text-xs text-white mt-2 opacity-80">
+                    Başarıyla kaydedildi!
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="font-gotham-book text-xs text-white mt-2 opacity-80">
+                    Bir hata oluştu. Lütfen tekrar deneyin.
+                  </p>
+                )}
               </div>
             </div>
           </div>
-        </div>
       </footer>
 
       {/* Copyright */}

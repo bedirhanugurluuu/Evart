@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function ImageComparisonSlider() {
   const [sliderPosition, setSliderPosition] = useState(50); // 0-100 arası
@@ -225,7 +226,7 @@ export default function ImageComparisonSlider() {
           </defs>
           <text
             fontSize="14"
-            fill="#8c8c8c"
+            fill="#869e9e"
             letterSpacing="0.15em"
             fontFamily="Gotham, sans-serif"
             fontWeight="500"
@@ -242,7 +243,7 @@ export default function ImageComparisonSlider() {
             cx="100"
             cy="100"
             r="20"
-            fill="#8c8c8c"
+            fill="#869e9e"
             className="drop-shadow-lg"
           />
           {/* Güneş Işınları */}
@@ -259,7 +260,7 @@ export default function ImageComparisonSlider() {
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                stroke="#8c8c8c"
+                stroke="#869e9e"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
@@ -278,13 +279,13 @@ export default function ImageComparisonSlider() {
         </p>
 
         {/* Devamını Oku */}
-        <a 
-          href="#" 
+        <Link 
+          href="/evart-oran" 
           className="font-gotham-light italic text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >
           devamını oku
-        </a>
+        </Link>
       </div>
     </div>
   );

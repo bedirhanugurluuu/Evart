@@ -1,21 +1,25 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface ContactFormProps {
   projectName?: string;
+  absoluteOverlay?: boolean;
 }
 
-export default function ContactForm({ projectName = "Evart" }: ContactFormProps) {
+export default function ContactForm({ projectName = "Evart", absoluteOverlay = false }: ContactFormProps) {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     phone: '',
     subject: '',
     message: '',
+    website: '', // Honeypot field - botlar için
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const pageLoadTime = useRef<number>(Date.now());
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,6 +31,25 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Güvenlik Kontrolleri
+    // 1. Honeypot kontrolü - eğer website alanı doldurulmuşsa bot'tur
+    if (formData.website) {
+      console.warn('Bot detected: honeypot field filled');
+      setSubmitStatus('error');
+      return;
+    }
+
+    // 2. Form gönderim zamanlaması kontrolü - çok hızlı gönderimleri engelle
+    const timeSincePageLoad = Date.now() - pageLoadTime.current;
+    const minimumTime = 2000; // 2 saniye minimum bekleme süresi
+    
+    if (timeSincePageLoad < minimumTime) {
+      console.warn('Bot detected: form submitted too quickly');
+      setSubmitStatus('error');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -37,8 +60,13 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
           projectName,
+          timestamp: Date.now(), // Rate limiting için
         }),
       });
 
@@ -50,9 +78,14 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
           phone: '',
           subject: '',
           message: '',
+          website: '', // Honeypot'u da temizle
         });
+        // Sayfa yükleme zamanını sıfırla (başarılı gönderimden sonra)
+        pageLoadTime.current = Date.now();
       } else {
+        const errorData = await response.json().catch(() => ({}));
         setSubmitStatus('error');
+        console.error('Form submission error:', errorData.message || 'Unknown error');
       }
     } catch (error) {
       console.error('Form submission error:', error);
@@ -62,8 +95,8 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
     }
   };
   return (
-    <div>
-      <div className="grid items-end grid-cols-1 md:grid-cols-2 gap-12">
+    <div className={absoluteOverlay ? "relative z-20" : ""}>
+      <div className={`grid items-end grid-cols-1 md:grid-cols-2 gap-12 ${absoluteOverlay ? "md:gap-4" : ""} ${absoluteOverlay ? "bg-white p-4 md:p-12 lg:p-16 shadow-lg" : ""}`}>
           {/* Sol Taraf */}
           <div className="flex flex-col justify-center">
             <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl" style={{ color: "#414042" }}>
@@ -72,26 +105,36 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
             <p className="font-questa-regular text-3xl md:text-4xl mb-6" style={{ color: "#869e9e" }}>
               bir mesaj uzağınızda...
             </p>
-            
+
             <p className="font-gotham-book text-base md:text-xl mb-8 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-                Evart projeleriyle ilgili tüm detaylara <br></br>ulaşmak ve satış ekibimizden destek<br></br>
-                almak için bizimle iletişim kurun.
+                {projectName === "Yalıkavak" ? (
+                  <>Evart Yalıkavak ile ilgili tüm detaylara <br></br>ulaşmak ve satış ekibimizden <b style={{ fontWeight: 500 }}>destek<br></br>
+                  almak için bizimle iletişim kurun.</b></>
+                ) : (
+                  <>Evart projeleriyle ilgili tüm detaylara <br></br>ulaşmak ve satış ekibimizden <b style={{ fontWeight: 500 }}>destek<br></br>
+                  almak için bizimle iletişim kurun.</b></>
+                )}
             </p>
 
             {/* İletişim Bilgileri */}
             <div className="space-y-2">
               {/* Adres */}
-              <div className="flex items-center gap-2">
-                <svg 
-                  className="w-6 h-6 flex-shrink-0 transition-all duration-300 cursor-pointer" 
-                  style={{ 
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Dirmil,+İnönü+Cd.,+48400+Bodrum/Muğla"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                <svg
+                  className="w-6 h-6 flex-shrink-0 transition-all duration-300 cursor-pointer"
+                  style={{
                     color: "#869e9e",
                     border: "1px solid #869e9e",
                     borderRadius: "100%",
                     padding: "2px",
                   }}
-                  fill="none" 
-                  stroke="currentColor" 
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = "#869e9e";
@@ -112,20 +155,23 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
                     Dirmil, İnönü Cd., 48400 Bodrum/Muğla
                   </p>
                 </div>
-              </div>
+              </a>
 
               {/* Telefon */}
-              <div className="flex items-center gap-2">
-                <svg 
-                  className="w-6 h-6 flex-shrink-0 transition-all duration-300 cursor-pointer" 
-                  style={{ 
+              <a 
+                href="tel:+905325101231"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                <svg
+                  className="w-6 h-6 flex-shrink-0 transition-all duration-300 cursor-pointer"
+                  style={{
                     color: "#869e9e",
                     border: "1px solid #869e9e",
                     borderRadius: "100%",
                     padding: "2px",
                   }}
-                  fill="none" 
-                  stroke="currentColor" 
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = "#869e9e";
@@ -145,10 +191,13 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
                     0532 510 12 31
                   </p>
                 </div>
-              </div>
+              </a>
 
               {/* Mail */}
-              <div className="flex items-center gap-2">
+              <a 
+                href="mailto:info@evart.com"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
                 <svg 
                   className="w-6 h-6 flex-shrink-0 transition-all duration-300 cursor-pointer" 
                   style={{ 
@@ -174,17 +223,35 @@ export default function ContactForm({ projectName = "Evart" }: ContactFormProps)
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <div>
-                <p className="font-gotham-book text-sm" style={{ color: "#414042" }}>
+                  <p className="font-gotham-book text-sm" style={{ color: "#414042" }}>
                     info@evart.com
                   </p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
           {/* Sağ Taraf - Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot Field - Görünmez, botlar için */}
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  width: '1px',
+                  height: '1px',
+                  opacity: 0,
+                  pointerEvents: 'none',
+                }}
+                aria-hidden="true"
+              />
               {/* Ad ve Soyad - Yan Yana */}
               <div className="grid grid-cols-2 gap-4">
                 <div>

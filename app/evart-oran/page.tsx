@@ -1,16 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import SimpleImageSlider from "@/components/SimpleImageSlider";
 
-export default function Oran() {
+export default function EvartOran() {
   const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -38,11 +63,15 @@ export default function Oran() {
       </section>
 
       {/* Başlık Bölümü - Container içinde */}
-      <section className="py-20">
+      <section ref={sectionRef} className="py-20 overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Sol Taraf - Başlık ve Noktalar */}
-            <div className="text-center md:text-left">
+            <div 
+              className={`text-center md:text-left transition-all duration-1000 ease-out ${
+                isVisible ? 'translate-x-0 opacity-100' : '-translate-x-12 opacity-0'
+              }`}
+            >
               <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl mb-2" style={{ color: "#414042" }}>
                 Ankara'nın kalbinde
               </h2>
@@ -74,11 +103,15 @@ export default function Oran() {
                 ></div>
               </div>
               <p className="font-gotham-book text-base md:text-lg mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
-                Evart Oran, yalnızca bir konut projesi değil; geleceğin yaşam standartlarını bugünden inşa eden bir vizyonun yansımasıdır. Çankaya Oran’da, büyükelçiliklerin ve prestijli kurumların merkezinde konumlanan proje; modern mimarisi, yüksek kira potansiyeli ve yatırım değeriyle öne çıkıyor.
+                Evart Oran, yalnızca bir konut projesi değil; geleceğin yaşam standartlarını bugünden inşa eden bir vizyonun yansımasıdır. Çankaya Oran'da, büyükelçiliklerin ve prestijli kurumların merkezinde konumlanan proje; modern mimarisi, yüksek kira potansiyeli ve yatırım değeriyle öne çıkıyor.
               </p>
             </div>
             {/* Sağ Taraf - Görsel */}
-            <div className="w-full">
+            <div 
+              className={`w-full transition-all duration-1000 ease-out delay-200 ${
+                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
+              }`}
+            >
               <img
                 src="/images/oran-1.jpg"
                 alt="Ankara"
@@ -118,14 +151,14 @@ export default function Oran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Ankara’nın en seçkin bölgelerinden birinde yer alan Evart Oran, şehrin dinamizmini yüksek yaşam kalitesiyle buluşturuyor.<br></br>
+              Ankara'nın en seçkin bölgelerinden birinde yer alan Evart Oran, şehrin dinamizmini yüksek yaşam kalitesiyle buluşturuyor.<br></br>
               • 1+1 ve 2+1 esnek daire seçenekleri<br></br>
               • Farklı yaşam tarzlarına uyumlu<br></br>
               • Modern rezidans konsepti ferah, işlevsel ve şık yaşam alanları<br></br>
               • Üniversitelere, alışveriş merkezlerine ve sosyal yaşama yakınlık<br></br>
               • konforlu şehir yaşamı<br></br><br></br>
 
-              Atakule’ye 5 dakika, Kuzu Effect AVM’ye 1 dakika, ODTÜ’ye 10 dakika mesafede olan Evart Oran, konumu itibarıyla hem genç profesyoneller hem de yatırımcılar için ideal bir tercihtir.
+              Atakule'ye 5 dakika, Kuzu Effect AVM'ye 1 dakika, ODTÜ'ye 10 dakika mesafede olan Evart Oran, konumu itibarıyla hem genç profesyoneller hem de yatırımcılar için ideal bir tercihtir.
             </p>
           </div>
         </div>
@@ -161,7 +194,7 @@ export default function Oran() {
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               Evart Oran, yalnızca dairelerden ibaret değil; sosyal yaşamı zenginleştiren alanlarıyla öne çıkar. Modern mimarisi, estetik detayları ve konfor odaklı yaklaşımıyla şehir yaşamına yeni bir soluk getirir.<br></br><br></br>
                 <br></br>
-              <b>Evart Oran’da sizi, ayrıcalıklı bir sosyal yaşam deneyimi bekliyor.</b>
+              <b>Evart Oran'da sizi, ayrıcalıklı bir sosyal yaşam deneyimi bekliyor.</b>
             </p>
           </div>
         </div>
@@ -195,7 +228,7 @@ export default function Oran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Çankaya Oran, Ankara’nın en hızlı değer kazanan bölgelerinden biridir.<br></br>
+              Çankaya Oran, Ankara'nın en hızlı değer kazanan bölgelerinden biridir.<br></br>
               • Yüksek kira getirisi potansiyeli<br></br>
               • Prestijli büyükelçilik bölgesi avantajı<br></br>
               • Hem kısa vadede kazandıran hem uzun vadede değerini artıran yatırım modeli

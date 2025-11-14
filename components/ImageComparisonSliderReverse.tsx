@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function ImageComparisonSliderReverse() {
   const [sliderPosition, setSliderPosition] = useState(50); // 0-100 arası
@@ -137,13 +138,13 @@ export default function ImageComparisonSliderReverse() {
         </p>
 
         {/* Devamını Oku */}
-        <a 
-          href="#" 
+        <Link 
+          href="/evart-yalikavak" 
           className="font-gotham-light italic text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >
           devamını oku
-        </a>
+        </Link>
       </div>
 
       {/* Sağ Taraf - %65 - Resimler */}

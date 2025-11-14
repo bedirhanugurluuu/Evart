@@ -33,17 +33,17 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu - Kalan genişliğin tam ortasında */}
-          <div className="hidden md:flex flex-1 items-center justify-center space-x-8">
-            <Link href="/about" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
+          <div className="hidden md:flex flex-1 items-center uppercase justify-center space-x-8">
+            <Link href="/about" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
               Hakkımızda
             </Link>
-            <Link href="/oran" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
+            <Link href="/evart-oran" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
               Evart Oran
             </Link>
-            <Link href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
+            <Link href="/evart-yalikavak" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
               Evart Yalıkavak
             </Link>
-            <Link href="#" className="hover:text-gray-900 text-lg transition font-gotham-regular nav-link">
+            <Link href="/iletisim" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
               İletişim
             </Link>
           </div>
@@ -119,21 +119,21 @@ export default function Header() {
                 Hakkımızda
               </Link>
               <Link 
-                href="/oran" 
+                href="/evart-oran" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >
                 Evart Oran
               </Link>
               <Link 
-                href="#" 
+                href="/evart-yalikavak" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >
                 Evart Yalıkavak
               </Link>
               <Link 
-                href="#" 
+                href="/iletisim" 
                 onClick={() => setIsMenuOpen(false)}
                 className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
               >

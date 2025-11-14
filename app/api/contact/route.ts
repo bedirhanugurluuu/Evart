@@ -1,10 +1,101 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+// Basit in-memory rate limiting (Production'da Redis kullanılabilir)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 dakika
+const MAX_REQUESTS_PER_WINDOW = 5; // 15 dakikada maksimum 5 istek
+
+function getRateLimitKey(request: NextRequest): string {
+  // IP adresini al (Vercel'de x-forwarded-for header'ından)
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ip = forwardedFor ? forwardedFor.split(',')[0].trim() : 
+             request.headers.get('x-real-ip') || 
+             'unknown';
+  return ip;
+}
+
+function checkRateLimit(ip: string): { allowed: boolean; remaining: number; resetTime: number } {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (!record || now > record.resetTime) {
+    // Yeni pencere başlat
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - 1, resetTime: now + RATE_LIMIT_WINDOW };
+  }
+
+  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
+    return { allowed: false, remaining: 0, resetTime: record.resetTime };
+  }
+
+  // İsteği artır
+  record.count++;
+  rateLimitMap.set(ip, record);
+  return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - record.count, resetTime: record.resetTime };
+}
+
+// Eski kayıtları temizle (memory leak önleme)
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of Array.from(rateLimitMap.entries())) {
+    if (now > record.resetTime) {
+      rateLimitMap.delete(ip);
+    }
+  }
+}, 60 * 1000); // Her dakika temizle
+
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting kontrolü
+    const ip = getRateLimitKey(request);
+    const rateLimit = checkRateLimit(ip);
+
+    if (!rateLimit.allowed) {
+      const resetSeconds = Math.ceil((rateLimit.resetTime - Date.now()) / 1000);
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: `Çok fazla istek gönderdiniz. Lütfen ${Math.ceil(resetSeconds / 60)} dakika sonra tekrar deneyin.` 
+        },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': MAX_REQUESTS_PER_WINDOW.toString(),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': rateLimit.resetTime.toString(),
+          }
+        }
+      );
+    }
+
     const body = await request.json();
-    const { firstName, lastName, phone, subject, message, projectName } = body;
+    const { firstName, lastName, phone, subject, message, projectName, timestamp } = body;
+
+    // Güvenlik Kontrolleri
+    // 1. Timestamp kontrolü - çok eski veya gelecek tarihli istekleri engelle
+    if (timestamp) {
+      const requestTime = Date.now();
+      const timeDiff = Math.abs(requestTime - timestamp);
+      const maxTimeDiff = 5 * 60 * 1000; // 5 dakika tolerans
+
+      if (timeDiff > maxTimeDiff) {
+        console.warn('Suspicious request: timestamp mismatch', { requestTime, timestamp, timeDiff });
+        return NextResponse.json(
+          { success: false, message: 'Geçersiz istek. Lütfen sayfayı yenileyip tekrar deneyin.' },
+          { status: 400 }
+        );
+      }
+    }
+
+    // 2. Honeypot kontrolü (eğer gönderilmişse)
+    if (body.website) {
+      console.warn('Bot detected: honeypot field filled');
+      return NextResponse.json(
+        { success: false, message: 'Geçersiz istek.' },
+        { status: 400 }
+      );
+    }
 
     // Validasyon
     if (!firstName || !lastName || !phone || !subject || !message) {
@@ -33,8 +124,8 @@ export async function POST(request: NextRequest) {
     const recipientEmail = process.env.CONTACT_EMAIL || 'bedirhanugurlu@aof.anadolu.edu.tr';
     
     const { data, error } = await resend.emails.send({
-      from: 'Evart İletişim <onboarding@resend.dev>', // Resend'de doğrulanmış domain kullanılmalı
-      to: [recipientEmail], // Environment variable'dan alınacak veya varsayılan olarak doğrulanmış email
+      from: 'onboarding@resend.dev', // Resend test modunda bu adresi kullanın
+      to: [recipientEmail], // Test modunda sadece doğrulanmış email adresine gönderebilirsiniz
       subject: `${projectName || 'Evart'} - ${subject}`,
       html: `
         <!DOCTYPE html>
@@ -111,8 +202,18 @@ Gönderim Zamanı: ${new Date().toLocaleString('tr-TR')}
 
     if (error) {
       console.error('Resend error:', error);
+      // Resend test modu hatası için özel mesaj
+      if (error.message && error.message.includes('testing emails')) {
+        return NextResponse.json(
+          { 
+            success: false, 
+            message: 'Test modunda sadece doğrulanmış email adresine gönderim yapılabilir. Lütfen Resend\'de domain doğrulaması yapın veya production ortamına geçin.' 
+          },
+          { status: 500 }
+        );
+      }
       return NextResponse.json(
-        { success: false, message: 'Email gönderilirken bir hata oluştu.' },
+        { success: false, message: 'Email gönderilirken bir hata oluştu: ' + (error.message || 'Bilinmeyen hata') },
         { status: 500 }
       );
     }
@@ -121,7 +222,14 @@ Gönderim Zamanı: ${new Date().toLocaleString('tr-TR')}
 
     return NextResponse.json(
       { success: true, message: 'Mesajınız başarıyla gönderildi!' },
-      { status: 200 }
+      { 
+        status: 200,
+        headers: {
+          'X-RateLimit-Limit': MAX_REQUESTS_PER_WINDOW.toString(),
+          'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-RateLimit-Reset': rateLimit.resetTime.toString(),
+        }
+      }
     );
   } catch (error) {
     console.error('Contact form error:', error);

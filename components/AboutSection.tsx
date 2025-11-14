@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -73,13 +74,13 @@ export default function AboutSection() {
           </p>
 
           {/* Devamını Oku */}
-          <a 
-            href="#" 
+          <Link 
+            href="/about" 
             className="font-gotham-light italic text-base md:text-lg inline-block relative read-more-link"
             style={{ color: "#414042" }}
           >
             devamını oku
-          </a>
+          </Link>
         </div>
       </div>
     </section>
