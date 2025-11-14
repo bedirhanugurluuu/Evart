@@ -14,9 +14,7 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const handleRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
-  const isDraggingRef = useRef(false);
   const isDraggingFromHandleRef = useRef(false);
 
   const updateSliderPosition = (clientX: number) => {
@@ -29,20 +27,18 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     setSliderPosition(clampedPercentage);
   };
 
-  const handleMouseDown = (e: MouseEvent) => {
+  const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    isDraggingRef.current = true;
     setIsDragging(true);
     updateSliderPosition(e.clientX);
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDraggingRef.current) return;
+    if (!isDragging) return;
     updateSliderPosition(e.clientX);
   };
 
   const handleMouseUp = () => {
-    isDraggingRef.current = false;
     setIsDragging(false);
   };
 
@@ -89,29 +85,6 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
   };
 
   useEffect(() => {
-    const container = containerRef.current;
-    const handle = handleRef.current;
-    if (!container) return;
-
-    // Handle'a mouse event listener'ları ekle (sadece handle'dan tutulduğunda)
-    const handleMouseDownNative = (e: MouseEvent) => {
-      e.preventDefault();
-      handleMouseDown(e);
-    };
-
-    // Handle'a mouse event listener ekle
-    if (handle) {
-      handle.addEventListener('mousedown', handleMouseDownNative);
-    }
-
-    return () => {
-      if (handle) {
-        handle.removeEventListener('mousedown', handleMouseDownNative);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
@@ -127,7 +100,6 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     <div
       ref={containerRef}
       className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] overflow-hidden cursor-col-resize"
-      style={{ touchAction: 'none' }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -163,13 +135,13 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
 
       {/* Slider Handle */}
       <div
-        ref={handleRef}
         data-slider-handle
         className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-10 touch-none"
         style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+        onMouseDown={handleMouseDown}
       >
         {/* Arrow İkonu */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
           <svg
             className="w-6 h-6 text-gray-800"
             fill="none"
@@ -201,4 +173,3 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     </div>
   );
 }
-
