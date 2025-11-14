@@ -47,7 +47,12 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
   };
 
   const handleTouchStartNative = (e: TouchEvent) => {
-    e.preventDefault();
+    // Sadece handle'dan tutulduğunda başlat
+    const target = e.target as HTMLElement;
+    const isHandle = target.closest('[data-slider-handle]');
+    
+    if (!isHandle) return;
+    
     isDraggingFromHandleRef.current = true;
     isDraggingRef.current = true;
     setIsDragging(true);
@@ -65,11 +70,12 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
     const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
     
-    // Yatay hareket varsa slider'ı güncelle
+    // Yatay hareket varsa scroll'u engelle ve slider'ı güncelle
     if (deltaX > 5 || (deltaX > deltaY && deltaX > 3)) {
       e.preventDefault();
       e.stopPropagation();
       updateSliderPosition(touch.clientX);
+      // Touch pozisyonunu güncelle ki sürekli hareket edebilsin
       touchStartRef.current = {
         x: touch.clientX,
         y: touch.clientY,
@@ -86,24 +92,31 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
 
   useEffect(() => {
     const container = containerRef.current;
+    const handle = handleRef.current;
     if (!container) return;
 
-    // Container'a mouse event listener'ları ekle
+    // Handle'a mouse event listener'ları ekle (sadece handle'dan tutulduğunda)
     const handleMouseDownNative = (e: MouseEvent) => {
+      e.preventDefault();
       handleMouseDown(e);
     };
 
-    container.addEventListener('mousedown', handleMouseDownNative);
+    // Handle'a touch event listener'ları ekle
+    if (handle) {
+      handle.addEventListener('mousedown', handleMouseDownNative);
+      handle.addEventListener('touchstart', handleTouchStartNative, { passive: false });
+    }
 
-    // Container'a touch event listener'ları ekle
-    container.addEventListener('touchstart', handleTouchStartNative, { passive: false });
+    // Container'a touchmove ve touchend ekle (handle'dan çıkınca da takip edebilmek için)
     container.addEventListener('touchmove', handleTouchMoveNative, { passive: false });
     container.addEventListener('touchend', handleTouchEndNative, { passive: false });
     container.addEventListener('touchcancel', handleTouchEndNative, { passive: false });
 
     return () => {
-      container.removeEventListener('mousedown', handleMouseDownNative);
-      container.removeEventListener('touchstart', handleTouchStartNative);
+      if (handle) {
+        handle.removeEventListener('mousedown', handleMouseDownNative);
+        handle.removeEventListener('touchstart', handleTouchStartNative);
+      }
       container.removeEventListener('touchmove', handleTouchMoveNative);
       container.removeEventListener('touchend', handleTouchEndNative);
       container.removeEventListener('touchcancel', handleTouchEndNative);
@@ -161,11 +174,11 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
       <div
         ref={handleRef}
         data-slider-handle
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-10 touch-none pointer-events-none"
+        className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-10 touch-none"
         style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
       >
         {/* Arrow İkonu */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg pointer-events-none">
           <svg
             className="w-6 h-6 text-gray-800"
             fill="none"
