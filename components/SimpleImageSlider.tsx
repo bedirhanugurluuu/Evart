@@ -46,7 +46,7 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     setIsDragging(false);
   };
 
-  const handleTouchStartNative = (e: TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     // Sadece handle'dan tutulduğunda başlat
     const target = e.target as HTMLElement;
     const isHandle = target.closest('[data-slider-handle]');
@@ -54,7 +54,6 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     if (!isHandle) return;
     
     isDraggingFromHandleRef.current = true;
-    isDraggingRef.current = true;
     setIsDragging(true);
     touchStartRef.current = {
       x: e.touches[0].clientX,
@@ -63,8 +62,8 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     updateSliderPosition(e.touches[0].clientX);
   };
 
-  const handleTouchMoveNative = (e: TouchEvent) => {
-    if (!isDraggingRef.current || !isDraggingFromHandleRef.current || !touchStartRef.current) return;
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !isDraggingFromHandleRef.current || !touchStartRef.current) return;
     
     const touch = e.touches[0];
     const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
@@ -83,8 +82,7 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
     }
   };
 
-  const handleTouchEndNative = () => {
-    isDraggingRef.current = false;
+  const handleTouchEnd = () => {
     setIsDragging(false);
     isDraggingFromHandleRef.current = false;
     touchStartRef.current = null;
@@ -101,25 +99,15 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
       handleMouseDown(e);
     };
 
-    // Handle'a touch event listener'ları ekle
+    // Handle'a mouse event listener ekle
     if (handle) {
       handle.addEventListener('mousedown', handleMouseDownNative);
-      handle.addEventListener('touchstart', handleTouchStartNative, { passive: false });
     }
-
-    // Container'a touchmove ve touchend ekle (handle'dan çıkınca da takip edebilmek için)
-    container.addEventListener('touchmove', handleTouchMoveNative, { passive: false });
-    container.addEventListener('touchend', handleTouchEndNative, { passive: false });
-    container.addEventListener('touchcancel', handleTouchEndNative, { passive: false });
 
     return () => {
       if (handle) {
         handle.removeEventListener('mousedown', handleMouseDownNative);
-        handle.removeEventListener('touchstart', handleTouchStartNative);
       }
-      container.removeEventListener('touchmove', handleTouchMoveNative);
-      container.removeEventListener('touchend', handleTouchEndNative);
-      container.removeEventListener('touchcancel', handleTouchEndNative);
     };
   }, []);
 
@@ -140,6 +128,9 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
       ref={containerRef}
       className="relative w-full h-[200px] md:h-[300px] lg:h-[400px] overflow-hidden cursor-col-resize"
       style={{ touchAction: 'none' }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* İlk Görsel - Arka Plan */}
       <div className="absolute inset-0">
