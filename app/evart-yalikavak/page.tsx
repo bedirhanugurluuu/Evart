@@ -112,7 +112,7 @@ export default function EvartYalikavak() {
             </div>
             {/* Sağ Taraf - Görsel */}
             <div 
-              className={`relative w-full h-full transition-all duration-1000 ease-out delay-200 ${
+              className={`relative w-full h-[400px] lg:h-[650px] transition-all duration-1000 ease-out delay-200 ${
                 isVisible ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
               }`}
             >

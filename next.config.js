@@ -13,6 +13,14 @@ const nextConfig = {
   compress: true,
   // Production optimizations
   swcMinify: true,
+  // Modern tarayıcıları hedefle - eski JavaScript polyfill'lerini kaldır
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Modern ES6+ kodunu çevirme - modern tarayıcılar için
+  experimental: {
+    optimizePackageImports: ['@/components'],
+  },
   // Experimental features for better performance
   // optimizeCss kaldırıldı - critters dependency gerektiriyor ve build hatası veriyor
   // experimental: {

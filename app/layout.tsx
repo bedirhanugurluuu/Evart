@@ -73,6 +73,12 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
+        {/* DNS Preconnect - Vercel ve CDN için */}
+        <link rel="dns-prefetch" href="https://evart.vercel.app" />
+        <link rel="preconnect" href="https://evart.vercel.app" crossOrigin="anonymous" />
+        {/* Google Fonts için preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Preload kritik görsel - LCP için */}
         <link
           rel="preload"

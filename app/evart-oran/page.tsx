@@ -112,7 +112,7 @@ export default function EvartOran() {
             </div>
             {/* Sağ Taraf - Görsel */}
             <div 
-              className={`w-full transition-all duration-1000 ease-out delay-200 ${
+              className={`relative w-full h-[400px] lg:h-[600px] transition-all duration-1000 ease-out delay-200 ${
                 isVisible ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
               }`}
             >
