@@ -172,7 +172,8 @@ export default function ImageComparisonSliderReverse() {
             style={{
               borderRadius: '142px 0 0 142px',
             }}
-            quality={85}
+            quality={70}
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
@@ -194,7 +195,8 @@ export default function ImageComparisonSliderReverse() {
             style={{
               borderRadius: '142px 0 0 142px',
             }}
-            quality={85}
+            quality={70}
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>

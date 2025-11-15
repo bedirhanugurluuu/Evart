@@ -8,26 +8,8 @@
 @font-face {
   font-family: 'Futura PT';
   src: 
-       url('/fonts/FuturaPT-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura PT';
-  src: 
        url('/fonts/FuturaPT-Book.woff') format('woff');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura PT';
-  src: 
-       url('/fonts/FuturaPT-Medium.woff') format('woff');
-  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -41,50 +23,7 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Futura PT';
-  src: 
-       url('/fonts/FuturaPT-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura PT';
-  src: 
-       url('/fonts/FuturaPT-Heavy.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura PT';
-  src: 
-       url('/fonts/FuturaPT-ExtraBold.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Gotham Font Family */
-@font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Gotham-Thin.woff2') format('woff2');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Gotham-XLight.woff2') format('woff2');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
 @font-face {
   font-family: 'Gotham';
   src: url('/fonts/Gotham-Light.woff2') format('woff2');
@@ -103,24 +42,8 @@
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/fonts/Gotham-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gotham';
   src: url('/fonts/Gotham-Bold.woff2') format('woff2');
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Gotham-Black.woff2') format('woff2');
-  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
@@ -193,16 +116,6 @@ body::after {
   }
 
   /* Gotham Font Utilities */
-  .font-gotham-thin {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 100;
-  }
-  
-  .font-gotham-xlight {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 200;
-  }
-  
   .font-gotham-light {
     font-family: 'Gotham', sans-serif;
     font-weight: 300;
@@ -213,55 +126,20 @@ body::after {
     font-weight: 400;
   }
   
-  .font-gotham-medium {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 500;
-  }
-  
   .font-gotham-bold {
     font-family: 'Gotham', sans-serif;
     font-weight: 700;
   }
-  
-  .font-gotham-black {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 900;
-  }
 
   /* Futura PT Font Utilities */
-  .font-futura-light {
-    font-family: 'Futura PT', sans-serif;
-    font-weight: 300;
-  }
-  
   .font-futura-book {
     font-family: 'Futura PT', sans-serif;
     font-weight: 400;
   }
   
-  .font-futura-medium {
-    font-family: 'Futura PT', sans-serif;
-    font-weight: 500;
-  }
-  
   .font-futura-demi {
     font-family: 'Futura PT', sans-serif;
     font-weight: 600;
-  }
-  
-  .font-futura-bold {
-    font-family: 'Futura PT', sans-serif;
-    font-weight: 700;
-  }
-  
-  .font-futura-heavy {
-    font-family: 'Futura PT', sans-serif;
-    font-weight: 800;
-  }
-  
-  .font-futura-extrabold {
-    font-family: 'Futura PT', sans-serif;
-    font-weight: 900;
   }
 
   /* Questa Grande Font Utilities */  

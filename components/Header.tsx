@@ -38,16 +38,16 @@ export default function Header() {
 
           {/* Desktop Menu - Kalan genişliğin tam ortasında */}
           <div className="hidden md:flex flex-1 items-center uppercase justify-center space-x-8">
-            <Link href="/about" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
+            <Link href="/about" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
               Hakkımızda
             </Link>
-            <Link href="/evart-oran" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
+            <Link href="/evart-oran" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
               Evart Oran
             </Link>
-            <Link href="/evart-yalikavak" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
+            <Link href="/evart-yalikavak" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
               Evart Yalıkavak
             </Link>
-            <Link href="/iletisim" className="hover:text-gray-900 text-base transition font-gotham-regular nav-link">
+            <Link href="/iletisim" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
               İletişim
             </Link>
           </div>

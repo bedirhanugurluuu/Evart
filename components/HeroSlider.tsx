@@ -142,7 +142,7 @@ export default function HeroSlider() {
   return (
     <>
     <section 
-      className="relative hero-slider max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] w-full overflow-hidden cursor-grab active:cursor-grabbing"
+      className="relative hero-slider w-full overflow-hidden cursor-grab active:cursor-grabbing"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -169,11 +169,16 @@ export default function HeroSlider() {
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
                 width={1920}
-                height={1200}
-                className="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[1200px] object-contain pointer-events-none select-none"
+                height={800}
+                className="w-full h-auto object-contain pointer-events-none select-none"
                 priority={index === 0}
-                quality={85}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                loading={index === 0 ? "eager" : "lazy"}
+                quality={index === 0 ? 80 : 75}
                 sizes="100vw"
+                style={{
+                  aspectRatio: '16/7.58',
+                }}
               />
             </div>
           ))}
@@ -186,7 +191,7 @@ export default function HeroSlider() {
           <div className="flex justify-end pointer-events-none">
             <div className="text-left max-w- pointer-events-auto">
               <p 
-                className={`font-futura uppercase font-regular text-2xl md:text-4xl lg:text-6xl mb-2 transition-all duration-1000 ${
+                className={`font-futura-book uppercase text-2xl md:text-4xl lg:text-6xl mb-2 transition-all duration-1000 ${
                   isMounted 
                     ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-8'

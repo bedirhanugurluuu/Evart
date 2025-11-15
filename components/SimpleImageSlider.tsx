@@ -111,7 +111,8 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
           alt={alt1}
           fill
           className="object-cover"
-          quality={85}
+          quality={70}
+          loading="lazy"
           sizes="(max-width: 768px) 100vw, 70vw"
         />
       </div>
@@ -128,7 +129,8 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
           alt={alt2}
           fill
           className="object-cover"
-          quality={85}
+          quality={70}
+          loading="lazy"
           sizes="(max-width: 768px) 100vw, 70vw"
         />
       </div>

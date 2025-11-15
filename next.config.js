@@ -58,6 +58,11 @@ const nextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
           },
+          // Video dosyaları için range request desteği
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
+          },
         ],
       },
     ];

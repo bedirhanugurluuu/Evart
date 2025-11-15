@@ -149,7 +149,8 @@ export default function ImageComparisonSlider() {
             style={{
               borderRadius: '0 142px 142px 0',
             }}
-            quality={85}
+            quality={70}
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
@@ -171,7 +172,8 @@ export default function ImageComparisonSlider() {
             style={{
               borderRadius: '0 142px 142px 0',
             }}
-            quality={85}
+            quality={70}
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>

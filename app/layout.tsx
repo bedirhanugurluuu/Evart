@@ -73,6 +73,13 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
+        {/* Preload kritik görsel - LCP için */}
+        <link
+          rel="preload"
+          href="/images/Slider.png"
+          as="image"
+          fetchPriority="high"
+        />
         {/* Preload kritik font dosyaları */}
         <link
           rel="preload"
@@ -104,10 +111,24 @@ export default function RootLayout({
         />
         <link
           rel="preload"
-          href="/fonts/Questa_Grande_Regular.woff"
+          href="/fonts/Gotham-Light.woff2"
           as="font"
-          type="font/woff"
+          type="font/woff2"
           crossOrigin="anonymous"
+        />
+        {/* Service Worker 206 hatası için - Video dosyalarını cache'den hariç tut */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for(let registration of registrations) {
+                    registration.unregister();
+                  }
+                });
+              }
+            `,
+          }}
         />
       </head>
       <body>
