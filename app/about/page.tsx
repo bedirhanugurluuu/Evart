@@ -17,7 +17,7 @@ export default function About() {
       <Header />
       
       {/* Ana Banner */}
-      <section className="relative w-full h-[400px] md:h-[600px] lg:h-[800px] overflow-hidden about-banner">
+      <section className="relative w-full h-[400px] md:h-[600px] lg:h-[650px] overflow-hidden about-banner">
         {/* Banner Görseli */}
         <Image
           src="/images/about-banner.jpg"
@@ -59,12 +59,8 @@ export default function About() {
       {/* İlk Paragraf - Banner Altı */}
       <section className="py-12 md:py-16">
         <div className="container-custom">
-          <p className="font-gotham-book text-center text-lg lg:text-xl text-gray-700 leading-relaxed">
-            2014 yılından bu yana inşaat, gayrimenkul, enerji ve dış ticaret alanlarında faaliyet <br></br>
-            gösteren Yapıtek ANKA İnşaat, her projesinde güven, kalite ve sürdürülebilirliği<br></br>
-            öncelik haline getirmiştir. Yalnızca sağlam yapılar inşa etmekle kalmayan Yapıtek, <br></br>
-            aynı zamanda enerji verimliliği yüksek, çevreye duyarlı ve teknolojiyle uyumlu<br></br>
-            yaşam alanları tasarlayarak sektörde farklı bir konum elde etmiştir.
+          <p className="font-gotham-book text-center text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+            2014 yılından bu yana inşaat, gayrimenkul, enerji ve dış ticaret alanlarında faaliyet gösteren Yapıtek ANKA İnşaat, her projesinde güven, kalite ve sürdürülebilirliği öncelik haline getirmiştir. Yalnızca sağlam yapılar inşa etmekle kalmayan Yapıtek, aynı zamanda enerji verimliliği yüksek, çevreye duyarlı ve teknolojiyle uyumlu yaşam alanları tasarlayarak sektörde farklı bir konum elde etmiştir.
           </p>
         </div>
       </section>
@@ -75,19 +71,12 @@ export default function About() {
       {/* İki Paragraf */}
       <section className="py-12 md:py-16">
         <div className="container-custom space-y-6 text-center">
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed">
-            Enerji sektöründe yönlü sondaj ve saha kurulumlarıyla ülkemizin altyapısına <br></br>
-            katkı sunan, güçlü ithalat–ihracat ağıyla da uluslararası pazarda etkin rol oynayan <br></br>
-            Yapıtek, mühendislik deneyimini global vizyonla birleştirmektedir.
+          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+            Enerji sektöründe yönlü sondaj ve saha kurulumlarıyla ülkemizin altyapısına katkı sunan, güçlü ithalat–ihracat ağıyla da uluslararası pazarda etkin rol oynayan Yapıtek, mühendislik deneyimini global vizyonla birleştirmektedir.
           </p>
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed pt-8">
-            <b>Evart – Yapıdan Fazlası, Bir Yaşam Biçimi</b><br></br>
-            Yapıtek’in deneyiminden doğan Evart markası, yalnızca inşaat projeleri <br></br>
-            geliştirmek için değil; estetik, fonksiyon ve yatırım değerini bir araya getiren <br></br>
-            yaşam konseptleri yaratmak için tasarlanmıştır. Evart, her projesinde <br></br>
-            bulunduğu şehrin dokusunu modern mimariyle harmanlayarak, kullanıcılarına <br></br>
-            “sadece bir ev değil, bir yaşam biçimi” sunmayı hedefler.
-
+          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed pt-8 max-w-4xl mx-auto">
+            <b>Evart – Yapıdan Fazlası, Bir Yaşam Biçimi</b><br />
+            Yapıtek'in deneyiminden doğan Evart markası, yalnızca inşaat projeleri geliştirmek için değil; estetik, fonksiyon ve yatırım değerini bir araya getiren yaşam konseptleri yaratmak için tasarlanmıştır. Evart, her projesinde bulunduğu şehrin dokusunu modern mimariyle harmanlayarak, kullanıcılarına "sadece bir ev değil, bir yaşam biçimi" sunmayı hedefler.
           </p>
         </div>
       </section>
@@ -119,22 +108,14 @@ export default function About() {
       {/* Üç Paragraf */}
       <section className="py-12 md:py-16">
         <div className="container-custom space-y-6 text-center">
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed">
-            <b>Evart Oran:</b> Ankara’nın prestijli Çankaya bölgesinde, büyükelçiliklere komşu<br></br>
-            konumuyla şehrin merkezinde seçkin bir yaşam sunar. Modern rezidans<br></br>
-            konsepti, yüksek kira potansiyeli ve esnek daire tipolojileriyle hem yaşam hem<br></br>
-            de yatırım değeri yaratır.
+          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+            <b>Evart Oran:</b> Ankara'nın prestijli Çankaya bölgesinde, büyükelçiliklere komşu konumuyla şehrin merkezinde seçkin bir yaşam sunar. Modern rezidans konsepti, yüksek kira potansiyeli ve esnek daire tipolojileriyle hem yaşam hem de yatırım değeri yaratır.
           </p>
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed">
-            <b>Evart Yalıkavak:</b> Bodrum’un ilk rezidans projesi olarak şehrin enerjisini, denizin<br></br>
-            ve doğanın huzuruyla buluşturur. Bahçe ve çatı dubleksleri, sosyal yaşam<br></br>
-            alanları ve profesyonel yatırım modeliyle Türkiye’de benzersiz bir konsepttir.
+          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+            <b>Evart Yalıkavak:</b> Bodrum'un ilk rezidans projesi olarak şehrin enerjisini, denizin ve doğanın huzuruyla buluşturur. Bahçe ve çatı dubleksleri, sosyal yaşam alanları ve profesyonel yatırım modeliyle Türkiye'de benzersiz bir konsepttir.
           </p>
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed">
-            Yapıtek ANKA İnşaat, sağlamlığı ve güveni temsil ederken; Evart markası bu<br></br>
-            sağlam temeli estetik, yenilikçi mimari ve yatırım bilinciyle taçlandırır. İşte bu<br></br>
-            ayrışma sayesinde Evart projeleri yalnızca bugünün ihtiyaçlarını karşılamakla kalmaz,<br></br>
-            geleceğin beklentilerini de şekillendirir.
+          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+            Yapıtek ANKA İnşaat, sağlamlığı ve güveni temsil ederken; Evart markası bu sağlam temeli estetik, yenilikçi mimari ve yatırım bilinciyle taçlandırır. İşte bu ayrışma sayesinde Evart projeleri yalnızca bugünün ihtiyaçlarını karşılamakla kalmaz, geleceğin beklentilerini de şekillendirir.
           </p>
         </div>
       </section>

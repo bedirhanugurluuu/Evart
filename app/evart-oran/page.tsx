@@ -44,7 +44,7 @@ export default function EvartOran() {
       <Header />
 
       {/* Ana Banner - About sayfasındaki gibi ama absolute yazı yok */}
-      <section className="relative w-full h-[800px] md:h-[600px] lg:h-[800px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
+      <section className="relative w-full h-[800px] md:h-[600px] lg:h-[650px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
         {/* Banner Görseli */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -76,37 +76,37 @@ export default function EvartOran() {
                 isVisible ? 'translate-x-0 opacity-100' : '-translate-x-12 opacity-0'
               }`}
             >
-              <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl mb-2" style={{ color: "#414042" }}>
+              <h2 className="font-gotham-bold uppercase text-xl md:text-2xl mb-2" style={{ color: "#414042" }}>
                 Ankara'nın kalbinde
               </h2>
-              <p className="font-questa-regular text-3xl md:text-4xl mb-4" style={{ color: "#414042" }}>
+              <p className="font-questa-regular text-2xl md:text-3xl mb-4" style={{ color: "#414042" }}>
                 Seçkin Bir Yaşam
               </p>
               {/* 3 Yuvarlak */}
               <div className="flex justify-center md:justify-start items-center gap-2">
                 <div 
-                  className="md:w-4 md:h-4 w-3 h-3 rounded-full dot-bounce"
+                  className="md:w-3 md:h-3 rounded-full dot-bounce"
                   style={{ 
                     backgroundColor: "#869e9e",
                     animationDelay: '0s'
                   }}
                 ></div>
                 <div 
-                  className="md:w-4 md:h-4 w-3 h-3 rounded-full dot-bounce"
+                  className="md:w-3 md:h-3 rounded-full dot-bounce"
                   style={{ 
                     backgroundColor: "#869e9e",
                     animationDelay: '0.15s'
                   }}
                 ></div>
                 <div 
-                  className="md:w-4 md:h-4 w-3 h-3 rounded-full dot-bounce"
+                  className="md:w-3 md:h-3 rounded-full dot-bounce"
                   style={{ 
                     backgroundColor: "#869e9e",
                     animationDelay: '0.3s'
                   }}
                 ></div>
               </div>
-              <p className="font-gotham-book text-base md:text-lg mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
+              <p className="font-gotham-book text-base mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
                 Evart Oran, yalnızca bir konut projesi değil; geleceğin yaşam standartlarını bugünden inşa eden bir vizyonun yansımasıdır. Çankaya Oran'da, büyükelçiliklerin ve prestijli kurumların merkezinde konumlanan proje; modern mimarisi, yüksek kira potansiyeli ve yatırım değeriyle öne çıkıyor.
               </p>
             </div>
@@ -136,10 +136,10 @@ export default function EvartOran() {
             {/* Sol 30% - Yazı */}
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
               <div>
-                <p className="font-questa-regular text-3xl md:text-5xl mb-2 text-white">
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
                   Yaşam Biçimi:
                 </p>
-                <p className="font-gotham-book uppercase text-xl md:text-3xl text-white">
+                <p className="font-gotham-book uppercase text-xl md:text-2xl text-white">
                   şehirli & prestijli
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               Ankara'nın en seçkin bölgelerinden birinde yer alan Evart Oran, şehrin dinamizmini yüksek yaşam kalitesiyle buluşturuyor.<br></br>
               • 1+1 ve 2+1 esnek daire seçenekleri<br></br>
               • Farklı yaşam tarzlarına uyumlu<br></br>
@@ -186,10 +186,10 @@ export default function EvartOran() {
             {/* Sağ 30% - Yazı */}
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
               <div className="text-center">
-                <p className="font-questa-regular text-3xl md:text-5xl mb-2 text-white">
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
                   Sosyal Alanlar:
                 </p>
-                <p className="font-gotham-book uppercase text-xl md:text-3xl text-white">
+                <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
                   Konfor & Güven
                 </p>
               </div>
@@ -197,7 +197,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               Evart Oran, yalnızca dairelerden ibaret değil; sosyal yaşamı zenginleştiren alanlarıyla öne çıkar. Modern mimarisi, estetik detayları ve konfor odaklı yaklaşımıyla şehir yaşamına yeni bir soluk getirir.<br></br><br></br>
                 <br></br>
               <b>Evart Oran'da sizi, ayrıcalıklı bir sosyal yaşam deneyimi bekliyor.</b>
@@ -213,10 +213,10 @@ export default function EvartOran() {
             {/* Sol 30% - Yazı */}
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
               <div>
-                <p className="font-questa-regular text-3xl md:text-5xl mb-2 text-white">
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
                   Yatırım Fırsatları:
                 </p>
-                <p className="font-gotham-book uppercase text-xl md:text-2xl text-white">
+                <p className="font-gotham-book uppercase text-lg md:text-xl text-white">
                   Gücünü Konumdan Alır!
                 </p>
               </div>
@@ -233,7 +233,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               Çankaya Oran, Ankara'nın en hızlı değer kazanan bölgelerinden biridir.<br></br>
               • Yüksek kira getirisi potansiyeli<br></br>
               • Prestijli büyükelçilik bölgesi avantajı<br></br>
@@ -259,10 +259,10 @@ export default function EvartOran() {
             {/* Sağ 30% - Yazı */}
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
               <div className="text-center">
-                <p className="font-questa-regular text-3xl md:text-5xl mb-2 text-white">
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
                   Yaşam + Yatırım:
                 </p>
-                <p className="font-gotham-book uppercase text-xl md:text-2xl text-white">
+                <p className="font-gotham-book uppercase text-lg md:text-xl text-white">
                   Çift Kazanç
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               Evart Oran, hem sakinlerine huzurlu bir yaşam sunar hem de yatırımcısına güçlü bir değer kazandırır. Esnek daire tipolojileri ve merkezi konumu sayesinde, geleceğe güvenle bakan bir yatırımın kapılarını açar.<br></br><br></br>
             </p>
           </div>

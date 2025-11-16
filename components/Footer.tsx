@@ -50,7 +50,7 @@ export default function Footer() {
             <div className="space-y-4">
               {/* Logo */}
               <div className="mb-6">
-                <Image src="/logo.png" alt="Evart Logo" width={120} height={60} className="h-15 w-auto brightness-0 invert" priority quality={90} />
+                <Image src="/logo.png" alt="Evart Logo" width={120} height={60} className="h-16 w-auto brightness-0 invert" priority quality={90} />
               </div>
 
               {/* Sabit Hat */}
@@ -103,26 +103,26 @@ export default function Footer() {
 
             {/* Orta Taraf - Menü */}
             <div className="flex flex-col space-y-3 border-t border-white/20 pt-4 md:border-none md:pt-0">
-              <Link href="/" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
+              <Link href="/" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 ANASAYFA
               </Link>
-              <Link href="/about" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
+              <Link href="/about" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 HAKKIMIZDA
               </Link>
-              <Link href="/evart-oran" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
+              <Link href="/evart-oran" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 EVART ORAN
               </Link>
-              <Link href="/evart-yalikavak" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
+              <Link href="/evart-yalikavak" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 EVART YALIKAVAK
               </Link>
-              <Link href="/iletisim" className="font-gotham-book text-md lg:text-lg text-white hover:opacity-80 transition-opacity">
+              <Link href="/iletisim" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 İLETİŞİM
               </Link>
             </div>
 
               {/* Sağ Taraf - Mail Form */}
               <div className="border-t border-white/20 pt-4 md:border-none md:pt-0">
-                <p className="font-gotham-bold text-2xl text-white mb-3">MAİL</p>
+                <p className="font-gotham-bold text-xl text-white mb-3">MAİL</p>
                 <form onSubmit={handleNewsletterSubmit} className="flex items-center gap-2">
                   <input
                     type="email"
@@ -130,7 +130,7 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="E-MAIL"
                     required
-                    className="w-48 px-0 py-2 font-gotham-book text-sm focus:outline-none bg-transparent border-b-2 border-white"
+                    className="w-48 px-0 py-2 font-gotham-book text-xs focus:outline-none bg-transparent border-b-2 border-white"
                     style={{
                       color: "white",
                     }}

@@ -128,7 +128,7 @@ export default function ImageComparisonSlider() {
       {/* Sol Taraf - %70 */}
       <div 
         ref={containerRef}
-        className={`relative image-comparison-slider w-[100%] lg:w-[65%] h-[500px] md:h-[690px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
+        className={`relative image-comparison-slider w-[100%] lg:w-[65%] h-[500px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
           isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-70'
         }`}
         style={{
@@ -278,12 +278,12 @@ export default function ImageComparisonSlider() {
         </svg>
       </div>
         {/* Başlık */}
-        <h2 className="font-gotham-bold uppercase text-xl md:text-3xl mb-6" style={{ color: "#414042" }}>
+        <h2 className="font-gotham-bold uppercase text-lg md:text-2xl mb-6" style={{ color: "#414042" }}>
           evart oran - ankara
         </h2>
 
         {/* Uzun Yazı */}
-        <p className="font-gotham-book text-lg md:text-xl mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+        <p className="font-gotham-book text-base md:text-lg mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
           Evart Oran, Ankara'nın kalbinde modern yaşamın ve konforun buluştuğu özel bir projedir. Şehrin en prestijli lokasyonlarında konumlanan bu proje, çağdaş mimari anlayışı ile dikkat çekerken, aynı zamanda sürdürülebilir ve çevre dostu bir yaşam alanı sunmaktadır. Geniş yeşil alanları, modern sosyal tesisleri ve teknolojik altyapısı ile Evart Oran, yaşam kalitesini en üst seviyeye taşıyan bir projedir.
         </p>
 

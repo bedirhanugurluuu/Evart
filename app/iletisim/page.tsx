@@ -92,8 +92,8 @@ export default function Iletisim() {
       {/* İletişim Bilgileri Detaylı */}
       <section className="py-16 bg-gray-50">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {/* Adres */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+            {/* Adres 1 - Bodrum */}
             <div 
               className={`text-center transition-all duration-1000 ease-out ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
@@ -125,7 +125,7 @@ export default function Iletisim() {
                   </div>
                 </div>
                 <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
-                  Adres
+                  Adres - Bodrum
                 </h3>
                 <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
                   Dirmil, İnönü Cd., 48400<br />
@@ -134,9 +134,51 @@ export default function Iletisim() {
               </a>
             </div>
 
-            {/* Telefon */}
+            {/* Adres 2 - Ankara */}
             <div 
               className={`text-center transition-all duration-1000 ease-out delay-200 ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
+            >
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=İlkbahar+Mahallesi,+Galip+Erdem+Caddesi,+Güney+Park+Evleri+Karşısı,+06550+Çankaya+/+Ankara"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:opacity-80 transition-opacity"
+              >
+                <div className="flex justify-center mb-4">
+                  <div 
+                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#869e9e] hover:scale-110"
+                    style={{ 
+                      border: "2px solid #869e9e",
+                    }}
+                  >
+                    <svg
+                      className="w-8 h-8"
+                      style={{ color: "#869e9e" }}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
+                  Adres - Ankara
+                </h3>
+                <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
+                  İlkbahar Mahallesi, Galip Erdem Caddesi,<br />
+                  Güney Park Evleri Karşısı,<br />
+                  06550 Çankaya / Ankara
+                </p>
+              </a>
+            </div>
+
+            {/* Telefon */}
+            <div 
+              className={`text-center transition-all duration-1000 ease-out delay-400 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
             >
@@ -174,7 +216,7 @@ export default function Iletisim() {
 
             {/* E-posta */}
             <div 
-              className={`text-center transition-all duration-1000 ease-out delay-400 ${
+              className={`text-center transition-all duration-1000 ease-out delay-600 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
             >

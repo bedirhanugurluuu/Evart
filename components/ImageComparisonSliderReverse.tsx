@@ -129,12 +129,12 @@ export default function ImageComparisonSliderReverse() {
         isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-70'
       }`}>
         {/* Başlık */}
-        <h2 className="font-gotham-bold uppercase text-xl md:text-3xl mb-6" style={{ color: "#414042" }}>
+        <h2 className="font-gotham-bold uppercase text-lg md:text-2xl mb-6" style={{ color: "#414042" }}>
           evart yalıkavak - bodrum
         </h2>
 
         {/* Uzun Yazı */}
-        <p className="font-gotham-book text-lg md:text-xl mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+        <p className="font-gotham-book text-base md:text-lg mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
           Evart Yalıkavak, Bodrum'un en gözde lokasyonlarından birinde, denize sıfır konumda yer alan lüks bir yaşam projesidir. Ege'nin büyüleyici manzarasına sahip bu özel proje, modern mimari tasarımı ve premium yaşam alanları ile dikkat çekmektedir. Geniş terasları, özel plajı ve dünya standartlarında sosyal tesisleri ile Evart Yalıkavak, hayalinizdeki yaşamı sunmaktadır.
         </p>
 
@@ -151,7 +151,7 @@ export default function ImageComparisonSliderReverse() {
       {/* Sağ Taraf - %65 - Resimler */}
       <div 
         ref={containerRef}
-        className={`relative image-comparison-slider order-1 lg:order-2 image-comparison-slider w-[100%] lg:w-[65%] h-[500px] md:h-[690px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out delay-300 ${
+        className={`relative image-comparison-slider order-1 lg:order-2 image-comparison-slider w-[100%] lg:w-[65%] h-[500px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out delay-300 ${
           isVisible ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-70'
         }`}
         style={{

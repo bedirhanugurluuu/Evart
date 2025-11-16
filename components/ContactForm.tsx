@@ -96,17 +96,17 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
   };
   return (
     <div className={absoluteOverlay ? "relative z-20" : ""}>
-      <div className={`grid items-end grid-cols-1 md:grid-cols-2 gap-12 ${absoluteOverlay ? "md:gap-4" : ""} ${absoluteOverlay ? "bg-white p-4 md:p-12 lg:p-16 shadow-lg" : ""}`}>
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 ${absoluteOverlay ? "md:gap-4" : ""} ${absoluteOverlay ? "bg-white p-4 md:p-5 lg:p-8 shadow-lg max-w-4xl mx-auto" : ""}`}>
           {/* Sol Taraf */}
           <div className="flex flex-col justify-center">
-            <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl" style={{ color: "#414042" }}>
+            <h2 className="font-gotham-bold uppercase text-xl md:text-2xl" style={{ color: "#414042" }}>
               yaşam hayaliniz
             </h2>
-            <p className="font-questa-regular text-3xl md:text-4xl mb-6" style={{ color: "#869e9e" }}>
+            <p className="font-questa-regular text-2xl md:text-3xl mb-4" style={{ color: "#869e9e" }}>
               bir mesaj uzağınızda...
             </p>
 
-            <p className="font-gotham-book text-base md:text-xl mb-8 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base mb-4 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
                 {projectName === "Yalıkavak" ? (
                   <>Evart Yalıkavak ile ilgili tüm detaylara <br></br>ulaşmak ve satış ekibimizden <b style={{ fontWeight: 500 }}>destek<br></br>
                   almak için bizimle iletişim kurun.</b></>
@@ -151,7 +151,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <div>
-                  <p className="font-gotham-book text-sm" style={{ color: "#414042" }}>
+                  <p className="font-gotham-book text-xs" style={{ color: "#414042" }}>
                     Dirmil, İnönü Cd., 48400 Bodrum/Muğla
                   </p>
                 </div>
@@ -187,7 +187,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <div>
-                  <p className="font-gotham-book text-sm" style={{ color: "#414042" }}>
+                  <p className="font-gotham-book text-xs" style={{ color: "#414042" }}>
                     0532 510 12 31
                   </p>
                 </div>
@@ -223,7 +223,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <div>
-                  <p className="font-gotham-book text-sm" style={{ color: "#414042" }}>
+                  <p className="font-gotham-book text-xs" style={{ color: "#414042" }}>
                     info@evart.com
                   </p>
                 </div>
@@ -262,7 +262,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                     onChange={handleChange}
                     placeholder="Adınız"
                     required
-                    className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
+                    className="w-full px-0 py-2 font-gotham-book font-medium text-sm focus:outline-none bg-transparent"
                     style={{
                       border: "none",
                       borderBottom: "3px solid #869e9e",
@@ -278,7 +278,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                     onChange={handleChange}
                     placeholder="Soyadınız"
                     required
-                    className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
+                    className="w-full px-0 py-2 font-gotham-book font-medium text-sm focus:outline-none bg-transparent"
                     style={{
                       border: "none",
                       borderBottom: "3px solid #869e9e",
@@ -298,7 +298,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                     onChange={handleChange}
                     placeholder="Telefon"
                     required
-                    className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
+                    className="w-full px-0 py-2 font-gotham-book font-medium text-sm focus:outline-none bg-transparent"
                     style={{
                       border: "none",
                       borderBottom: "3px solid #869e9e",
@@ -314,7 +314,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                     onChange={handleChange}
                     placeholder="Konu"
                     required
-                    className="w-full px-0 py-3 font-gotham-book font-medium text-base focus:outline-none bg-transparent"
+                    className="w-full px-0 py-2 font-gotham-book font-medium text-sm focus:outline-none bg-transparent"
                     style={{
                       border: "none",
                       borderBottom: "3px solid #869e9e",
@@ -331,9 +331,9 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Bir mesaj yazın"
-                  rows={4}
+                  rows={3}
                   required
-                  className="w-full px-0 py-3 font-gotham-book font-medium text-base resize-none focus:outline-none bg-transparent"
+                  className="w-full px-0 py-2 font-gotham-book font-medium text-sm resize-none focus:outline-none bg-transparent"
                   style={{
                     border: "none",
                     borderBottom: "3px solid #869e9e",
@@ -358,7 +358,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-block font-gotham-bold text-white uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-block font-gotham-bold text-white uppercase text-xs transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   backgroundColor: "#869e9e",
                   padding: "5px 10px",
