@@ -6,8 +6,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import SimpleImageSlider from "@/components/SimpleImageSlider";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function EvartOran() {
+  const { t } = useTranslations();
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -44,7 +46,7 @@ export default function EvartOran() {
       <Header />
 
       {/* Ana Banner - About sayfasındaki gibi ama absolute yazı yok */}
-      <section className="relative w-full h-[800px] md:h-[600px] lg:h-[650px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
+      <section className="relative w-full h-[660px] md:h-[600px] lg:h-[650px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
         {/* Banner Görseli */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -53,7 +55,8 @@ export default function EvartOran() {
             fill
             className="object-cover"
             priority
-            quality={85}
+            quality={100}
+            unoptimized
             sizes="100vw"
           />
         </div>
@@ -77,10 +80,10 @@ export default function EvartOran() {
               }`}
             >
               <h2 className="font-gotham-bold uppercase text-xl md:text-2xl mb-2" style={{ color: "#414042" }}>
-                Ankara'nın kalbinde
+                {t('evartOran.banner.title')}
               </h2>
               <p className="font-questa-regular text-2xl md:text-3xl mb-4" style={{ color: "#414042" }}>
-                Seçkin Bir Yaşam
+                {t('evartOran.banner.subtitle')}
               </p>
               {/* 3 Yuvarlak */}
               <div className="flex justify-center md:justify-start items-center gap-2">
@@ -107,7 +110,7 @@ export default function EvartOran() {
                 ></div>
               </div>
               <p className="font-gotham-book text-base mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
-                Evart Oran, yalnızca bir konut projesi değil; geleceğin yaşam standartlarını bugünden inşa eden bir vizyonun yansımasıdır. Çankaya Oran'da, büyükelçiliklerin ve prestijli kurumların merkezinde konumlanan proje; modern mimarisi, yüksek kira potansiyeli ve yatırım değeriyle öne çıkıyor.
+                {t('evartOran.description')}
               </p>
             </div>
             {/* Sağ Taraf - Görsel */}
@@ -121,7 +124,7 @@ export default function EvartOran() {
                 alt="Ankara"
                 fill
                 className="object-cover"
-                quality={85}
+                quality={95}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -137,10 +140,10 @@ export default function EvartOran() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
               <div>
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Yaşam Biçimi:
+                  {t('evartOran.section1.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-xl md:text-2xl text-white">
-                  şehirli & prestijli
+                  {t('evartOran.section1.subtitle')}
                 </p>
               </div>
             </div>
@@ -157,14 +160,7 @@ export default function EvartOran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Ankara'nın en seçkin bölgelerinden birinde yer alan Evart Oran, şehrin dinamizmini yüksek yaşam kalitesiyle buluşturuyor.<br></br>
-              • 1+1 ve 2+1 esnek daire seçenekleri<br></br>
-              • Farklı yaşam tarzlarına uyumlu<br></br>
-              • Modern rezidans konsepti ferah, işlevsel ve şık yaşam alanları<br></br>
-              • Üniversitelere, alışveriş merkezlerine ve sosyal yaşama yakınlık<br></br>
-              • konforlu şehir yaşamı<br></br><br></br>
-
-              Atakule'ye 5 dakika, Kuzu Effect AVM'ye 1 dakika, ODTÜ'ye 10 dakika mesafede olan Evart Oran, konumu itibarıyla hem genç profesyoneller hem de yatırımcılar için ideal bir tercihtir.
+              <span dangerouslySetInnerHTML={{ __html: t('evartOran.section1.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
@@ -187,10 +183,10 @@ export default function EvartOran() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
               <div className="text-center">
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Sosyal Alanlar:
+                  {t('evartOran.section2.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
-                  Konfor & Güven
+                  {t('evartOran.section2.subtitle')}
                 </p>
               </div>
             </div>
@@ -198,9 +194,7 @@ export default function EvartOran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Evart Oran, yalnızca dairelerden ibaret değil; sosyal yaşamı zenginleştiren alanlarıyla öne çıkar. Modern mimarisi, estetik detayları ve konfor odaklı yaklaşımıyla şehir yaşamına yeni bir soluk getirir.<br></br><br></br>
-                <br></br>
-              <b>Evart Oran'da sizi, ayrıcalıklı bir sosyal yaşam deneyimi bekliyor.</b>
+              <span dangerouslySetInnerHTML={{ __html: t('evartOran.section2.description').replace(/<br>/g, '<br />').replace(/<b>/g, '<b style="font-weight: 500">') }} />
             </p>
           </div>
         </div>
@@ -214,10 +208,10 @@ export default function EvartOran() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
               <div>
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Yatırım Fırsatları:
+                  {t('evartOran.section3.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-xl text-white">
-                  Gücünü Konumdan Alır!
+                  {t('evartOran.section3.subtitle')}
                 </p>
               </div>
             </div>
@@ -234,10 +228,7 @@ export default function EvartOran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Çankaya Oran, Ankara'nın en hızlı değer kazanan bölgelerinden biridir.<br></br>
-              • Yüksek kira getirisi potansiyeli<br></br>
-              • Prestijli büyükelçilik bölgesi avantajı<br></br>
-              • Hem kısa vadede kazandıran hem uzun vadede değerini artıran yatırım modeli
+              <span dangerouslySetInnerHTML={{ __html: t('evartOran.section3.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
@@ -260,10 +251,10 @@ export default function EvartOran() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
               <div className="text-center">
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Yaşam + Yatırım:
+                  {t('evartOran.section4.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-xl text-white">
-                  Çift Kazanç
+                  {t('evartOran.section4.subtitle')}
                 </p>
               </div>
             </div>
@@ -271,12 +262,83 @@ export default function EvartOran() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Evart Oran, hem sakinlerine huzurlu bir yaşam sunar hem de yatırımcısına güçlü bir değer kazandırır. Esnek daire tipolojileri ve merkezi konumu sayesinde, geleceğe güvenle bakan bir yatırımın kapılarını açar.<br></br><br></br>
+              <span dangerouslySetInnerHTML={{ __html: t('evartOran.section4.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
       </section>
 
+      {/* Section 5 - 30% Sol (Yazı) / 70% Sağ (Slider) */}
+      <section className="py-8">
+        <div className="w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-10">
+            {/* Sol 30% - Yazı */}
+            <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
+              <div>
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
+                  {t('evartOran.section5.title')}
+                </p>
+                <p className="font-gotham-book uppercase text-lg md:text-xl text-white">
+                  {t('evartOran.section5.subtitle')}
+                </p>
+              </div>
+            </div>
+            {/* Sağ 70% - Slider */}
+            <div className="lg:col-span-7">
+              <SimpleImageSlider
+                image1="/images/oran-10.jpg"
+                image2="/images/oran-11.jpg"
+                alt1="Yaşam 9"
+                alt2="Yaşam 10"
+              />
+            </div>
+          </div>
+          {/* Altında Yazı */}
+          <div className="container-custom mt-16">
+            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+              <span dangerouslySetInnerHTML={{ __html: t('evartOran.section5.description').replace(/<br>/g, '<br />') }} />
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3 - 30% Sağ (Yazı) / 70% sol (Resim) */}
+      <section className="py-8 pb-16">
+        <div className="w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-10">
+            {/* Sağ 70% - Resim */}
+            <div className="lg:col-span-7 relative h-[200px] md:h-[300px] lg:h-[400px] lg:order-1 order-2">
+              <Image
+                src="/images/oran-12.jpg"
+                alt="Yaşam 11"
+                fill
+                className="object-cover"
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 70vw"
+              />
+            </div>
+            
+            {/* Sol 30% - Yazı */}
+            <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 lg:order-2 order-1" style={{ backgroundColor: "#9dc4c2" }}>
+              <div>
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
+                  {t('evartOran.section6.title')}
+                </p>
+                <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
+                  {t('evartOran.section6.subtitle')}
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Altında Yazı */}
+          <div className="container-custom mt-16">
+            <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+              <span dangerouslySetInnerHTML={{ __html: t('evartOran.section6.description').replace(/<br>/g, '<br />') }} />
+            </p>
+          </div>
+        </div>
+      </section>
+      
       <Footer />
     </main>
   );

@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function ImageComparisonSliderReverse() {
+  const { t, locale } = useTranslations();
   const [sliderPosition, setSliderPosition] = useState(50); // 0-100 arası
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -130,21 +132,21 @@ export default function ImageComparisonSliderReverse() {
       }`}>
         {/* Başlık */}
         <h2 className="font-gotham-bold uppercase text-lg md:text-2xl mb-6" style={{ color: "#414042" }}>
-          evart yalıkavak - bodrum
+          {t('home.imageComparisonSliderReverse.title')}
         </h2>
 
         {/* Uzun Yazı */}
         <p className="font-gotham-book text-base md:text-lg mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-          Evart Yalıkavak, Bodrum'un en gözde lokasyonlarından birinde, denize sıfır konumda yer alan lüks bir yaşam projesidir. Ege'nin büyüleyici manzarasına sahip bu özel proje, modern mimari tasarımı ve premium yaşam alanları ile dikkat çekmektedir. Geniş terasları, özel plajı ve dünya standartlarında sosyal tesisleri ile Evart Yalıkavak, hayalinizdeki yaşamı sunmaktadır.
+          {t('home.imageComparisonSliderReverse.description')}
         </p>
 
         {/* Devamını Oku */}
         <Link 
-          href="/evart-yalikavak" 
+          href={`/${locale}/evart-yalikavak`} 
           className="font-gotham-light italic text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >
-          devamını oku
+          {t('home.imageComparisonSliderReverse.readMore')}
         </Link>
       </div>
 
@@ -172,9 +174,10 @@ export default function ImageComparisonSliderReverse() {
             style={{
               borderRadius: '142px 0 0 142px',
             }}
-            quality={70}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={100}
+            priority
+            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 65vw, 50vw"
           />
         </div>
 
@@ -195,9 +198,10 @@ export default function ImageComparisonSliderReverse() {
             style={{
               borderRadius: '142px 0 0 142px',
             }}
-            quality={70}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={100}
+            priority
+            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 65vw, 50vw"
           />
         </div>
 

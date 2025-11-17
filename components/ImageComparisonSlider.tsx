@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function ImageComparisonSlider() {
+  const { t, locale } = useTranslations();
   const [sliderPosition, setSliderPosition] = useState(50); // 0-100 arası
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -149,9 +151,10 @@ export default function ImageComparisonSlider() {
             style={{
               borderRadius: '0 142px 142px 0',
             }}
-            quality={70}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={100}
+            priority
+            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 65vw, 50vw"
           />
         </div>
 
@@ -172,9 +175,10 @@ export default function ImageComparisonSlider() {
             style={{
               borderRadius: '0 142px 142px 0',
             }}
-            quality={70}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={100}
+            priority
+            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 65vw, 50vw"
           />
         </div>
 
@@ -279,21 +283,21 @@ export default function ImageComparisonSlider() {
       </div>
         {/* Başlık */}
         <h2 className="font-gotham-bold uppercase text-lg md:text-2xl mb-6" style={{ color: "#414042" }}>
-          evart oran - ankara
+          {t('home.imageComparisonSlider.title')}
         </h2>
 
         {/* Uzun Yazı */}
         <p className="font-gotham-book text-base md:text-lg mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-          Evart Oran, Ankara'nın kalbinde modern yaşamın ve konforun buluştuğu özel bir projedir. Şehrin en prestijli lokasyonlarında konumlanan bu proje, çağdaş mimari anlayışı ile dikkat çekerken, aynı zamanda sürdürülebilir ve çevre dostu bir yaşam alanı sunmaktadır. Geniş yeşil alanları, modern sosyal tesisleri ve teknolojik altyapısı ile Evart Oran, yaşam kalitesini en üst seviyeye taşıyan bir projedir.
+          {t('home.imageComparisonSlider.description')}
         </p>
 
         {/* Devamını Oku */}
         <Link 
-          href="/evart-oran" 
+          href={`/${locale}/evart-oran`} 
           className="font-gotham-light italic text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >
-          devamını oku
+          {t('home.imageComparisonSlider.readMore')}
         </Link>
       </div>
     </div>

@@ -1,0 +1,222 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "evartOran": "Evart Oran",
+    "evartYalikavak": "Evart Yalıkavak",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Home",
+    "heroSlider": {
+      "slide1": {
+        "line1": "where the energy",
+        "line2": "of the city",
+        "line3": "meets bodrum's spirit",
+        "button": "Discover Now"
+      },
+      "slide2": {
+        "line1": "life meets",
+        "line2": "in the heart",
+        "line3": "of ankara",
+        "button": "Discover Now"
+      }
+    },
+    "aboutSection": {
+      "title": "Yapıtek ANKA Construction",
+      "subtitle": "A Future Built on Trust",
+      "description": "Since 2014, Yapıtek ANKA Construction has been active in construction, real estate, energy, and international trade prioritizing trust, quality, and sustainability in every project it delivers. Beyond constructing durable buildings, Yapıtek designs energy-efficient, environmentally conscious, and technologically integrated living spaces, securing a distinguished position within the sector.",
+      "readMore": "read more"
+    },
+    "projectsSection": {
+      "discover": "discover",
+      "discoverLine2": "our projects",
+      "evartOran": "evart oran",
+      "evartYalikavak": "evart yalıkavak"
+    },
+    "imageComparisonSlider": {
+      "title": "evart oran - ankara",
+      "description": "Evart Oran is a distinguished project where modern living and comfort meet in the heart of Ankara. Located in one of the city’s most prestigious areas, the project stands out with its contemporary architectural approach while offering a sustainable, eco-friendly living environment. With expansive green landscapes, modern social facilities, and advanced technological infrastructure, Evart Oran elevates the quality of life to the highest level.",
+      "readMore": "read more"
+    },
+    "imageComparisonSliderReverse": {
+      "title": "evart yalıkavak - bodrum",
+      "description": "Evart Yalıkavak is a luxury residential project located in one of Bodrum’s most sought-after locations, positioned directly on the seafront. Overlooking the enchanting Aegean landscape, this exclusive development stands out with its modern architectural design and premium living spaces. With expansive terraces, a private beach, and world-class social amenities, Evart Yalıkavak offers the lifestyle you’ve always imagined.",
+      "readMore": "read more"
+    },
+    "contactForm": {
+      "projectName": "Evart Homepage Form"
+    }
+  },
+  "about": {
+    "title": "About",
+    "banner": {
+      "title": "Yapıtek ANKA Construction",
+      "subtitle": "A Future Built on Trust"
+    },
+    "paragraph1": "Since 2014, Yapıtek ANKA Construction has been active in construction, real estate, energy, and international trade prioritizing trust, quality, and sustainability in every project it delivers. Beyond constructing durable buildings, Yapıtek designs energy-efficient, environmentally conscious, and technologically integrated living spaces, securing a distinguished position within the sector.",
+    "paragraph2": "In the energy field, the company contributes to Turkey’s infrastructure with directional drilling and field installations, while its strong import–export network enables it to play an influential role in global markets. Yapıtek seamlessly blends engineering expertise with a forward-looking international vision.",
+    "paragraph3": "Evart – More Than a Structure, A Way of Living",
+    "paragraph4": "Born from Yapıtek’s engineering experience, the Evart brand was created not merely to develop construction projects, but to craft lifestyle concepts that unite aesthetics, functionality, and investment value. In every development, Evart harmonizes the spirit of its city with contemporary architecture, aiming to offer residents “not just a home, but a way of life.”",
+    "paragraph5": "Evart Oran:",
+    "paragraph6": "Located in Ankara’s prestigious Çankaya district, neighboring embassies and the urban core, it offers a refined residential experience. With its modern residence concept, high rental potential, and flexible apartment typologies, it offers both strong living comfort and investment value.",
+    "paragraph7": "Evart Yalıkavak:",
+    "paragraph8": " As Bodrum’s first residence-style development, it blends the city’s vibrant atmosphere with the tranquility of the sea and nature. Its garden and rooftop duplexes, social living areas, and professional investment model create a uniquely distinguished concept in Turkey.",
+    "paragraph9": "While Yapıtek ANKA Construction represents strength and reliability, the Evart brand crowns this foundation with aesthetic vision, innovative architecture, and a strong investment mindset.Thanks to this synergy, Evart projects not only meet today’s expectations but also shape the living standards of the future."
+  },
+  "evartOran": {
+    "title": "Evart Oran",
+    "banner": {
+      "title": "An Exclusive Life",
+      "subtitle": "In the Heart of Ankara."
+    },
+    "description": "Evart Oran is more than a residential project; it is the embodiment of a vision that builds the living standards of the future today. Located in Çankaya Oran—surrounded by embassies and prestigious institutions—the project stands out with its modern architecture, strong rental potential, and solid investment value.",
+    "section1": {
+      "title": "Lifestyle:",
+      "subtitle": "urban & Prestigious",
+      "description": "Situated in one of Ankara’s most distinguished districts, Evart Oran blends the city’s dynamism with elevated living standards.<br><br><b>• 1+1 and 2+1 flexible apartment options</b> → designed for diverse lifestyles<br><b>• Modern residence concept</b> → spacious, functional, and refined living<br><b>• Proximity to universities, shopping centers, and social venues</b> → effortless urban life<br><br>With a location just 5 minutes from Atakule, 1 minute from Kuzu Effect Mall, and 10 minutes from METU, Evart Oran is an ideal choice for young professionals, diplomats, academics, and investors alike."
+    },
+    "section2": {
+      "title": "Social Spaces:",
+      "subtitle": "Comfort & Security",
+      "description": "Evart Oran is not limited to private residences—it shines with thoughtfully curated common areas that enhance quality of life:<br><br>• Indoor parking & advanced security systems <br>• Landscape design that complements modern architecture<br>• Communal spaces that encourage connection and neighborhood culture "
+    },
+    "section3": {
+      "title": "Investment Opportunities:",
+      "subtitle": "Powered by Location",
+      "description": "Çankaya Oran is one of Ankara’s fastest-appreciating neighborhoods.<br><br>• High rental income potential<br>• Strategic advantage of being in the embassy zone<br>• An investment model that generates returns in the short term and preserves value in the long term"
+    },
+    "section4": {
+      "title": "Living + Investment:",
+      "subtitle": "Dual Advantage",
+      "description": "Evart Oran offers a peaceful lifestyle to its residents while providing strong value to its investors. Flexible apartment typologies and its extremely central location open the door to a secure investment with long-term potential."
+    },
+    "section5": {
+      "title": "A Life",
+      "subtitle": "Immersed in Art",
+      "description": "At Evart Oran, life goes beyond architecture—art becomes a natural part of daily living. The project hosts:<br><br>• Walkable terraces<br>• Open and closed art studios<br>• Artist-in-residence spaces used periodically<br>• A gallery-inspired exhibition concept<br><br>All crafted to offer an inspiring ambiance for residents and visitors.<br>Special workshop areas designed for children support artistic development across many disciplines—from painting and ceramics to digital arts and sculpture. At Evart Oran, creativity is central at every age."
+    },
+    "section6": {
+      "title": "360° Comfort with",
+      "subtitle": "Smart Home Systems",
+      "description": "All residences in Evart Oran are equipped with fully integrated smart home technologies designed to enhance comfort and security.<br>With a single touch or via mobile app, residents can control:<br><br>• Lighting<br>• Heating & cooling<br>• Security & camera integrations<br>• Smart lock system<br>• Curtain & shutter automation<br>• Energy-efficiency tracking<br><br>Smart home infrastructure not only elevates daily living but also increases long-term property value. Here, technology, design, and functionality merge seamlessly."
+    }
+  },
+  "evartYalikavak": {
+    "title": "Evart Yalıkavak",
+    "banner": {
+      "title": "Where the energy of the city",
+      "subtitle": "Meets the spirit of Bodrum"
+    },
+    "description": "As Bodrum’s first true residence-style development, Evart Yalıkavak offers not just a living space, but an entirely new way of life. Blending traditional Bodrum architecture with a contemporary urban approach, the project promises both a rewarding investment model and a privileged lifestyle experience.",
+    "section1": {
+      "title": "Lifestyle:",
+      "subtitle": "Urban & Serene",
+      "description": "Here, you’re not simply owning an apartment—you’re embracing a unique living culture that merges the pace of the city with the tranquility of Bodrum.<br><br><b>• Garden duplexes</b> open directly to the pool when you wake up.<br><b>• Rooftop duplexes</b> offer high ceilings and the spacious comfort of modern residence living.<br><br>Each unit is designed as a compact yet functional 1+1 layout ranging between 43–45 m². Thanks to modular architecture, units can be combined to create larger, flexible living spaces."
+    },
+    "section2": {
+      "title": "Social Spaces:",
+      "subtitle": "The Art of Living Together",
+      "description": "At Evart Yalıkavak, common areas are not an afterthought—they are the heart of daily life:<br><br><b>• Central pool:</b> A place to cool off by day, connect and socialize by night.<br><b>• Expansive social garden:</b> Morning coffees, evening conversations, and new friendships all flourish here.<br><b>• Indoor parking:</b> Providing both convenience and security."
+    },
+    "section3": {
+      "title": "Investment Opportunities:",
+      "subtitle": "Live While You Earn",
+      "description": "Evart Yalıkavak is located in one of Bodrum’s highest rental-yield regions.<br><br>• Professional rental management<br>• Transparent income model with centralized control<br>• Accelerated investment return through short-term tourist rentals<br><br>While the average ROI in Bodrum is <b>12 years</b>, at Evart Yalıkavak this can decrease to <b>6–10 years</b> with touristic rentals."
+    },
+    "section4": {
+      "title": "Living + Investment:",
+      "subtitle": "Dual Value",
+      "description": "All units are delivered with commercial deed titles, allowing you full flexibility: <br>Use your property as a home, an office, or a pure investment asset. Combined with the rise of home-office culture, Evart Yalıkavak becomes a versatile and high-value investment opportunity."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "banner": {
+      "title": "Contact",
+      "subtitle": "Get in Touch with Us"
+    },
+    "info": {
+      "title": "Contact Information",
+      "description": "You can use the following information to get information about Evart projects and contact our sales team.",
+      "bodrum": {
+        "title": "Bodrum Office",
+        "address": "Dirmil, İnönü St., 48400 Bodrum/Muğla"
+      },
+      "ankara": {
+        "title": "Ankara Office",
+        "address": "İlkbahar Neighborhood, Galip Erdem Street, Opposite Güney Park Residences, 06550 Çankaya / Ankara"
+      },
+      "phone": {
+        "title": "Phone",
+        "number": "0532 510 12 31"
+      },
+      "email": {
+        "title": "Email",
+        "address": "info@evart.com"
+      }
+    },
+    "form": {
+      "projectName": "Evart Contact Form"
+    },
+    "address": {
+      "title": "Address",
+      "bodrum": {
+        "title": "Address - Bodrum",
+        "line1": "Dirmil, İnönü St., 48400",
+        "line2": "Bodrum/Muğla"
+      },
+      "ankara": {
+        "title": "Address - Ankara",
+        "line1": "İlkbahar Neighborhood, Galip Erdem Street,",
+        "line2": "Opposite Güney Park Residences,",
+        "line3": "06550 Çankaya / Ankara"
+      }
+    },
+    "phone": {
+      "title": "Phone"
+    },
+    "email": {
+      "title": "Email"
+    }
+  },
+  "contactForm": {
+    "title": "your life dream",
+    "subtitle": "is just a message away...",
+    "description": "Contact us to get all the details <br>about Evart projects and get <b>support<br>from our sales team.</b>",
+    "descriptionYalikavak": "Contact us to get all the details <br>about Evart Yalıkavak and get <b>support<br>from our sales team.</b>",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "subject": "Subject",
+    "message": "Message",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "success": "Your message has been sent successfully!",
+    "error": "An error occurred. Please try again."
+  },
+  "footer": {
+    "menu": {
+      "home": "HOME",
+      "about": "ABOUT",
+      "evartOran": "EVART ORAN",
+      "evartYalikavak": "EVART YALIKAVAK",
+      "contact": "CONTACT"
+    },
+    "newsletter": {
+      "title": "MAIL",
+      "placeholder": "E-MAIL",
+      "success": "Successfully registered!",
+      "error": "An error occurred. Please try again."
+    },
+    "copyright": "© {year} Evart. All rights reserved."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Page Not Found",
+    "description": "The page you are looking for could not be found.",
+    "backHome": "Back to Home",
+    "popularPages": "Popular Pages"
+  }
+}
+

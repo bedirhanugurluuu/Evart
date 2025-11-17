@@ -5,8 +5,10 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { useTranslations } from "@/hooks/useTranslations";
 
-export default function Iletisim() {
+export default function Contact() {
+  const { t } = useTranslations();
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -51,7 +53,8 @@ export default function Iletisim() {
           fill
           className="object-cover"
           priority
-          quality={85}
+          quality={100}
+          unoptimized
           sizes="100vw"
         />
         
@@ -66,7 +69,7 @@ export default function Iletisim() {
               }`}
               style={{ transitionDelay: '200ms' }}
             >
-              İletişim
+              {t('contact.banner.title')}
             </h1>
             <p 
               className={`font-questa-regular text-4xl md:text-5xl lg:text-6xl text-white transition-all duration-1000 ${
@@ -76,7 +79,7 @@ export default function Iletisim() {
               }`}
               style={{ transitionDelay: '400ms' }}
             >
-              Bizimle İletişime Geçin
+              {t('contact.banner.subtitle')}
             </p>
           </div>
         </div>
@@ -125,11 +128,11 @@ export default function Iletisim() {
                   </div>
                 </div>
                 <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
-                  Adres - Bodrum
+                  {t('contact.address.bodrum.title')}
                 </h3>
                 <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
-                  Dirmil, İnönü Cd., 48400<br />
-                  Bodrum/Muğla
+                  {t('contact.address.bodrum.line1')}<br />
+                  {t('contact.address.bodrum.line2')}
                 </p>
               </a>
             </div>
@@ -166,12 +169,12 @@ export default function Iletisim() {
                   </div>
                 </div>
                 <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
-                  Adres - Ankara
+                  {t('contact.address.ankara.title')}
                 </h3>
                 <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
-                  İlkbahar Mahallesi, Galip Erdem Caddesi,<br />
-                  Güney Park Evleri Karşısı,<br />
-                  06550 Çankaya / Ankara
+                  {t('contact.address.ankara.line1')}<br />
+                  {t('contact.address.ankara.line2')}<br />
+                  {t('contact.address.ankara.line3')}
                 </p>
               </a>
             </div>
@@ -201,7 +204,7 @@ export default function Iletisim() {
                 </div>
               </div>
               <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
-                Telefon
+                {t('contact.phone.title')}
               </h3>
               <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
                 <a href="tel:+905325101231" className="hover:text-[#869e9e] transition-colors">
@@ -239,7 +242,7 @@ export default function Iletisim() {
                 </div>
               </div>
               <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
-                E-posta
+                {t('contact.email.title')}
               </h3>
               <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
                 <a href="mailto:info@evart.com" className="hover:text-[#869e9e] transition-colors">
@@ -272,4 +275,3 @@ export default function Iletisim() {
     </main>
   );
 }
-

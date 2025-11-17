@@ -3,9 +3,22 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "@/hooks/useTranslations";
+import LocaleSwitcher from "./LocaleSwitcher";
 
 export default function Header() {
+  const { t, locale } = useTranslations();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Aktif sayfa kontrolü
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === `/${locale}` || pathname === '/tr' || pathname === '/en';
+    }
+    return pathname === `/${locale}${path}` || pathname === path;
+  };
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -24,13 +37,13 @@ export default function Header() {
       <nav className="container-custom py-2">
         <div className="flex items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href={`/${locale}`} className="flex items-center">
             <Image
               src="/logo.png"
               alt="Evart Logo"
               width={120}
               height={64}
-              className="h-16 w-auto"
+              className="h-12 md:h-16 w-auto"
               priority
               quality={90}
             />
@@ -38,18 +51,35 @@ export default function Header() {
 
           {/* Desktop Menu - Kalan genişliğin tam ortasında */}
           <div className="hidden md:flex flex-1 items-center uppercase justify-center space-x-8">
-            <Link href="/about" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
-              Hakkımızda
+            <Link 
+              href={`/${locale}/about`} 
+              className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}
+            >
+              {t('nav.about')}
             </Link>
-            <Link href="/evart-oran" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
-              Evart Oran
+            <Link 
+              href={`/${locale}/evart-oran`} 
+              className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/evart-oran') ? 'nav-link-active' : ''}`}
+            >
+              {t('nav.evartOran')}
             </Link>
-            <Link href="/evart-yalikavak" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
-              Evart Yalıkavak
+            <Link 
+              href={`/${locale}/evart-yalikavak`} 
+              className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/evart-yalikavak') ? 'nav-link-active' : ''}`}
+            >
+              {t('nav.evartYalikavak')}
             </Link>
-            <Link href="/iletisim" className="hover:text-gray-900 text-base transition font-gotham-book nav-link">
-              İletişim
+            <Link 
+              href={`/${locale}/contact`} 
+              className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}
+            >
+              {t('nav.contact')}
             </Link>
+          </div>
+
+          {/* Locale Switcher */}
+          <div className="hidden md:flex items-center ml-4">
+            <LocaleSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
@@ -116,34 +146,39 @@ export default function Header() {
             {/* Menu Items */}
             <nav className="flex flex-col space-y-6">
               <Link 
-                href="/about" 
+                href={`/${locale}/about`} 
                 onClick={() => setIsMenuOpen(false)}
-                className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
+                className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}
               >
-                Hakkımızda
+                {t('nav.about')}
               </Link>
               <Link 
-                href="/evart-oran" 
+                href={`/${locale}/evart-oran`} 
                 onClick={() => setIsMenuOpen(false)}
-                className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
+                className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/evart-oran') ? 'nav-link-active' : ''}`}
               >
-                Evart Oran
+                {t('nav.evartOran')}
               </Link>
               <Link 
-                href="/evart-yalikavak" 
+                href={`/${locale}/evart-yalikavak`} 
                 onClick={() => setIsMenuOpen(false)}
-                className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
+                className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/evart-yalikavak') ? 'nav-link-active' : ''}`}
               >
-                Evart Yalıkavak
+                {t('nav.evartYalikavak')}
               </Link>
               <Link 
-                href="/iletisim" 
+                href={`/${locale}/contact`} 
                 onClick={() => setIsMenuOpen(false)}
-                className="font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors"
+                className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}
               >
-                İletişim
+                {t('nav.contact')}
               </Link>
             </nav>
+
+            {/* Locale Switcher - Mobile */}
+            <div className="mt-8 pt-8 border-t border-gray-200">
+              <LocaleSwitcher />
+            </div>
           </div>
         </div>
 

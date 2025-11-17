@@ -6,8 +6,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import SimpleImageSlider from "@/components/SimpleImageSlider";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function EvartYalikavak() {
+  const { t } = useTranslations();
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -44,7 +46,7 @@ export default function EvartYalikavak() {
       <Header />
 
       {/* Ana Banner - About sayfasındaki gibi ama absolute yazı yok */}
-      <section className="relative w-full h-[800px] md:h-[600px] lg:h-[650px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
+      <section className="relative w-full h-[660px] md:h-[600px] lg:h-[650px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
         {/* Banner Görseli */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -53,7 +55,8 @@ export default function EvartYalikavak() {
             fill
             className="object-cover"
             priority
-            quality={85}
+            quality={100}
+            unoptimized
             sizes="100vw"
           />
         </div>
@@ -77,10 +80,10 @@ export default function EvartYalikavak() {
               }`}
             >
               <h2 className="font-gotham-bold uppercase text-xl md:text-2xl mb-2" style={{ color: "#414042" }}>
-                Şehrin Enerjisiyle
+                {t('evartYalikavak.banner.title')}
               </h2>
               <p className="font-questa-regular text-2xl md:text-3xl mb-4" style={{ color: "#414042" }}>
-                Bodrum’un ruhu buluşuyor
+                {t('evartYalikavak.banner.subtitle')}
               </p>
               {/* 3 Yuvarlak */}
               <div className="flex justify-center md:justify-start items-center gap-2">
@@ -107,7 +110,7 @@ export default function EvartYalikavak() {
                 ></div>
               </div>
               <p className="font-gotham-book text-base mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
-                Evart Yalıkavak, Bodrum’un ilk rezidans projesi olarak yalnızca bir yaşam alanı değil, aynı zamanda yeni bir yaşam biçimi sunuyor. Geleneksel Bodrum mimarisini modern şehirli bir yaklaşımla harmanlayan proje, hem kazandıran bir yatırım modeli hem de ayrıcalıklı bir yaşam deneyimi vaat ediyor.
+                {t('evartYalikavak.description')}
               </p>
             </div>
             {/* Sağ Taraf - Görsel */}
@@ -121,7 +124,7 @@ export default function EvartYalikavak() {
                 alt="Yalıkavak"
                 fill
                 className="object-cover"
-                quality={85}
+                quality={95}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -129,7 +132,7 @@ export default function EvartYalikavak() {
         </div>
       </section>
 
-      {/* Section 1 - 30% Sol (Yazı) / 70% Sağ (Slider) */}
+      {/* Section 1 - 30% Sol (Yazı) / 70% Sağ (Resim) */}
       <section className="py-8">
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-10">
@@ -137,10 +140,10 @@ export default function EvartYalikavak() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
               <div>
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Yaşam Biçimi:
+                  {t('evartYalikavak.section1.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
-                  Şehirli & Dingin
+                  {t('evartYalikavak.section1.subtitle')}
                 </p>
               </div>
             </div>
@@ -159,9 +162,7 @@ export default function EvartYalikavak() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Burada yalnızca bir daireye değil; şehrin hızını Bodrum’un dinginliğiyle buluşturan özgün bir yaşam kültürüne sahip oluyorsunuz. Bahçe dubleksleri sabah uyandığınızda doğrudan havuza açılırken, çatı dubleksleri yüksek tavanlarıyla modern rezidans ferahlığını sunuyor.
-              <br></br><br></br>
-              Her daire 43–45 m² aralığında kompakt ama fonksiyonel 1+1 planlarda tasarlandı. Modüler mimari sayesinde birleştirme imkânı ile büyüyebilen, esnek yaşam alanları oluşturmak mümkün.<br></br><br></br>
+              <span dangerouslySetInnerHTML={{ __html: t('evartYalikavak.section1.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
@@ -184,10 +185,10 @@ export default function EvartYalikavak() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
               <div className="text-center">
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Sosyal Alanlar:
+                  {t('evartYalikavak.section2.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
-                  Birlikte Yaşama Sanatı
+                  {t('evartYalikavak.section2.subtitle')}
                 </p>
               </div>
             </div>
@@ -195,17 +196,13 @@ export default function EvartYalikavak() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Evart Yalıkavak’ta ortak alanlar sıradan değil, yaşamın merkezi:<br></br>
-              • Ortak havuz: Gün boyu serinleme, akşamları sosyalleşme imkânı<br></br>
-              • Geniş sosyal bahçe: Sabah kahveleri, akşam sohbetleri ve yeni dostlukların<br></br>
-              doğduğu alan<br></br>
-              • Kapalı garaj: Konfor ve güvenliği aynı anda sunar
+              <span dangerouslySetInnerHTML={{ __html: t('evartYalikavak.section2.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
       </section>
 
-      {/* Section 3 - 30% Sol (Yazı) / 70% Sağ (Slider) */}
+      {/* Section 3 - 30% Sol (Yazı) / 70% Sağ (Resim) */}
       <section className="py-8">
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-10">
@@ -213,10 +210,10 @@ export default function EvartYalikavak() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1" style={{ backgroundColor: "#9dc4c2" }}>
               <div>
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Yatırım Fırsatları:
+                  {t('evartYalikavak.section3.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
-                  Gücünü Konumdan Alır!
+                  {t('evartYalikavak.section3.subtitle')}
                 </p>
               </div>
             </div>
@@ -235,12 +232,7 @@ export default function EvartYalikavak() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Evart Yalıkavak, Bodrum’un en yüksek kira getirisi potansiyeline sahip bölgelerinden birinde konumlanıyor.<br></br>
-              • Profesyonel kiralama yönetimi<br></br>
-              • Şeffaf gelir modeli ve merkezi kontrol<br></br>
-              • Turistik kısa dönem kiralamalarla hızlanan yatırım geri dönüşü<br></br><br></br>
-
-              Bodrum’da ortalama ROI 12 yıl iken, Evart Yalıkavak’ta bu süre turistik kiralamalarla 6–10 yıla kadar düşüyor.
+              <span dangerouslySetInnerHTML={{ __html: t('evartYalikavak.section3.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
@@ -263,10 +255,10 @@ export default function EvartYalikavak() {
             <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
               <div className="text-center">
                 <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
-                  Yaşam + Yatırım:
+                  {t('evartYalikavak.section4.title')}
                 </p>
                 <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
-                  Çift Değer
+                  {t('evartYalikavak.section4.subtitle')}
                 </p>
               </div>
             </div>
@@ -274,12 +266,12 @@ export default function EvartYalikavak() {
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
             <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-              Tüm birimler ticari bağımsız bölüm tapusu ile teslim ediliyor. Bu sayede evinizi ister yaşam alanı, ister ofis, isterse yatırım amaçlı kullanabilirsiniz. Home-office kültürünün yükselişiyle birleştiğinde, Evart Yalıkavak çok yönlü bir yatırım fırsatına dönüşüyor.
+              <span dangerouslySetInnerHTML={{ __html: t('evartYalikavak.section4.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
         </div>
       </section>
-
+      
       <Footer />
     </main>
   );

@@ -1,0 +1,222 @@
+{
+  "nav": {
+    "home": "Anasayfa",
+    "about": "Hakkımızda",
+    "evartOran": "Evart Oran",
+    "evartYalikavak": "Evart Yalıkavak",
+    "contact": "İletişim"
+  },
+  "home": {
+    "title": "Ana Sayfa",
+    "heroSlider": {
+      "slide1": {
+        "line1": "şehrin enerjisiyle",
+        "line2": "bodrum'un",
+        "line3": "ruhu buluşuyor",
+        "button": "Şimdi keşfet"
+      },
+      "slide2": {
+        "line1": "ankara'nın",
+        "line2": "kalbinde",
+        "line3": "yaşam buluşuyor",
+        "button": "Şimdi keşfet"
+      }
+    },
+    "aboutSection": {
+      "title": "Yapıtek ANKA İnşaat",
+      "subtitle": "Güvenle Yükselen Bir Gelecek",
+      "description": "2014 yılından bu yana inşaat, gayrimenkul, enerji ve dış ticaret alanlarında faaliyet gösteren Yapıtek ANKA İnşaat, her projesinde güven, kalite ve sürdürülebilirliği öncelik haline getirmiştir. Yalnızca sağlam yapılar inşa etmekle kalmayan Yapıtek, aynı zamanda enerji verimliliği yüksek, çevreye duyarlı ve teknolojiyle uyumlu yaşam alanları tasarlayarak sektörde farklı bir konum elde etmiştir.",
+      "readMore": "devamını oku"
+    },
+    "projectsSection": {
+      "discover": "projelerimizi",
+      "discoverLine2": "keşfedin",
+      "evartOran": "evart oran",
+      "evartYalikavak": "evart yalıkavak"
+    },
+    "imageComparisonSlider": {
+      "title": "evart oran - ankara",
+      "description": "Evart Oran, Ankara'nın kalbinde modern yaşamın ve konforun buluştuğu özel bir projedir. Şehrin en prestijli lokasyonlarında konumlanan bu proje, çağdaş mimari anlayışı ile dikkat çekerken, aynı zamanda sürdürülebilir ve çevre dostu bir yaşam alanı sunmaktadır. Geniş yeşil alanları, modern sosyal tesisleri ve teknolojik altyapısı ile Evart Oran, yaşam kalitesini en üst seviyeye taşıyan bir projedir.",
+      "readMore": "devamını oku"
+    },
+    "imageComparisonSliderReverse": {
+      "title": "evart yalıkavak - bodrum",
+      "description": "Evart Yalıkavak, Bodrum'un en gözde lokasyonlarından birinde, denize sıfır konumda yer alan lüks bir yaşam projesidir. Ege'nin büyüleyici manzarasına sahip bu özel proje, modern mimari tasarımı ve premium yaşam alanları ile dikkat çekmektedir. Geniş terasları, özel plajı ve dünya standartlarında sosyal tesisleri ile Evart Yalıkavak, hayalinizdeki yaşamı sunmaktadır.",
+      "readMore": "devamını oku"
+    },
+    "contactForm": {
+      "projectName": "Evart Anasayfa Form"
+    }
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "banner": {
+      "title": "Yapıtek ANKA İnşaat",
+      "subtitle": "Güvenle Yükselen Bir Gelecek"
+    },
+    "paragraph1": "2014 yılından bu yana inşaat, gayrimenkul, enerji ve dış ticaret alanlarında faaliyet gösteren Yapıtek ANKA İnşaat, her projesinde güven, kalite ve sürdürülebilirliği öncelik haline getirmiştir. Yalnızca sağlam yapılar inşa etmekle kalmayan Yapıtek, aynı zamanda enerji verimliliği yüksek, çevreye duyarlı ve teknolojiyle uyumlu yaşam alanları tasarlayarak sektörde farklı bir konum elde etmiştir.",
+    "paragraph2": "Enerji sektöründe yönlü sondaj ve saha kurulumlarıyla ülkemizin altyapısına katkı sunan, güçlü ithalat–ihracat ağıyla da uluslararası pazarda etkin rol oynayan Yapıtek, mühendislik deneyimini global vizyonla birleştirmektedir.",
+    "paragraph3": "Evart – Yapıdan Fazlası, Bir Yaşam Biçimi",
+    "paragraph4": "Yapıtek'in deneyiminden doğan Evart markası, yalnızca inşaat projeleri geliştirmek için değil; estetik, fonksiyon ve yatırım değerini bir araya getiren yaşam konseptleri yaratmak için tasarlanmıştır. Evart, her projesinde bulunduğu şehrin dokusunu modern mimariyle harmanlayarak, kullanıcılarına \"sadece bir ev değil, bir yaşam biçimi\" sunmayı hedefler.",
+    "paragraph5": "Evart Oran:",
+    "paragraph6": "Ankara'nın prestijli Çankaya bölgesinde, büyükelçiliklere komşu konumuyla şehrin merkezinde seçkin bir yaşam sunar. Modern rezidans konsepti, yüksek kira potansiyeli ve esnek daire tipolojileriyle hem yaşam hem de yatırım değeri yaratır.",
+    "paragraph7": "Evart Yalıkavak:",
+    "paragraph8": "Bodrum'un ilk rezidans projesi olarak şehrin enerjisini, denizin ve doğanın huzuruyla buluşturur. Bahçe ve çatı dubleksleri, sosyal yaşam alanları ve profesyonel yatırım modeliyle Türkiye'de benzersiz bir konsepttir.",
+    "paragraph9": "Yapıtek ANKA İnşaat, sağlamlığı ve güveni temsil ederken; Evart markası bu sağlam temeli estetik, yenilikçi mimari ve yatırım bilinciyle taçlandırır. İşte bu ayrışma sayesinde Evart projeleri yalnızca bugünün ihtiyaçlarını karşılamakla kalmaz, geleceğin beklentilerini de şekillendirir."
+  },
+  "evartOran": {
+    "title": "Evart Oran",
+    "banner": {
+      "title": "Ankara'nın kalbinde",
+      "subtitle": "Seçkin Bir Yaşam"
+    },
+    "description": "Evart Oran, yalnızca bir konut projesi değil; geleceğin yaşam standartlarını bugünden inşa eden bir vizyonun yansımasıdır. Çankaya Oran'da, büyükelçiliklerin ve prestijli kurumların merkezinde konumlanan proje; modern mimarisi, yüksek kira potansiyeli ve yatırım değeriyle öne çıkıyor.",
+    "section1": {
+      "title": "Yaşam Biçimi:",
+      "subtitle": "şehirli & prestijli",
+      "description": "Ankara'nın en seçkin bölgelerinden birinde yer alan Evart Oran, şehrin dinamizmini yüksek yaşam kalitesiyle buluşturuyor.<br>• 1+1 ve 2+1 esnek daire seçenekleri<br>• Farklı yaşam tarzlarına uyumlu<br>• Modern rezidans konsepti ferah, işlevsel ve şık yaşam alanları<br>• Üniversitelere, alışveriş merkezlerine ve sosyal yaşama yakınlık<br>• konforlu şehir yaşamı<br><br>Atakule'ye 5 dakika, Kuzu Effect AVM'ye 1 dakika, ODTÜ'ye 10 dakika mesafede olan Evart Oran, konumu itibarıyla hem genç profesyoneller hem de yatırımcılar için ideal bir tercihtir."
+    },
+    "section2": {
+      "title": "Sosyal Alanlar:",
+      "subtitle": "Konfor & Güven",
+      "description": "Evart Oran, yalnızca dairelerden ibaret değil; sosyal yaşamı zenginleştiren alanlarıyla öne çıkar. Modern mimarisi, estetik detayları ve konfor odaklı yaklaşımıyla şehir yaşamına yeni bir soluk getirir.<br><br><b>Evart Oran'da sizi, ayrıcalıklı bir sosyal yaşam deneyimi bekliyor.</b>"
+    },
+    "section3": {
+      "title": "Yatırım Fırsatları:",
+      "subtitle": "Gücünü Konumdan Alır!",
+      "description": "Çankaya Oran, Ankara'nın en hızlı değer kazanan bölgelerinden biridir.<br>• Yüksek kira getirisi potansiyeli<br>• Prestijli büyükelçilik bölgesi avantajı<br>• Hem kısa vadede kazandıran hem uzun vadede değerini artıran yatırım modeli"
+    },
+    "section4": {
+      "title": "Yaşam + Yatırım:",
+      "subtitle": "Çift Kazanç",
+      "description": "Evart Oran, hem sakinlerine huzurlu bir yaşam sunar hem de yatırımcısına güçlü bir değer kazandırır. Esnek daire tipolojileri ve merkezi konumu sayesinde, geleceğe güvenle bakan bir yatırımın kapılarını açar."
+    },
+    "section5": {
+      "title": "Sanatla İç İçe",
+      "subtitle": "Bir Yaşam",
+      "description": "Evart Oran’da yaşam, modern mimarinin ötesine geçerek sanatı günlük hayatın doğal bir parçası hâline getiriyor. Proje içinde yer alan gezilebilir teraslar, açık ve kapalı sanat stüdyoları, dönemsel olarak kullanılabilen sanatçı alanlarıve sanat galerisi kurgusu, hem sakinlere hem misafirlere ilham veren bir atmosfer sunar.<br><br>Çocuğunuzun sanatsal gelişimini desteklemek için tasarlanmış atölye ve kurs alanları, resimden seramiğe, dijital sanattan heykel çalışmalarına kadar geniş bir yelpazede yaratıcı deneyimler sağlar. Evart Oran’da her yaş için sanat, yaşamın merkezindedir."
+    },
+    "section6": {
+      "title": "Akıllı Ev Sistemleri",
+      "subtitle": "İle 360° Konfor",
+      "description": "Evart Oran’daki tüm daireler, yaşamı kolaylaştırmak ve güvenliği artırmak için tam entegre akıllı ev sistemleri ile donatılmıştır.<br>Tek dokunuşla ya da mobil uygulama üzerinden:<br><br>• Aydınlatma kontrolü<br>• Isıtma–soğutma yönetimi<br>• Güvenlik & kamera entegrasyonları<br>• Akıllı kilit sistemi<br>• Perde–panjur otomasyonu<br>• Enerji verimliliği takibi<br><br>gibi özellikler tek merkezden yönetilebilir.<br><br>Akıllı ev altyapısı, hem günlük yaşamı kolaylaştırır hem de yatırımınıza uzun vadeli değer katar. Evart Oran’da teknoloji, estetik ve fonksiyonellik aynı çizgide buluşur."
+    }
+  },
+  "evartYalikavak": {
+    "title": "Evart Yalıkavak",
+    "banner": {
+      "title": "Şehrin Enerjisiyle",
+      "subtitle": "Bodrum'un ruhu buluşuyor"
+    },
+    "description": "Evart Yalıkavak, Bodrum'un ilk rezidans projesi olarak yalnızca bir yaşam alanı değil, aynı zamanda yeni bir yaşam biçimi sunuyor. Geleneksel Bodrum mimarisini modern şehirli bir yaklaşımla harmanlayan proje, hem kazandıran bir yatırım modeli hem de ayrıcalıklı bir yaşam deneyimi vaat ediyor.",
+    "section1": {
+      "title": "Yaşam Biçimi:",
+      "subtitle": "Şehirli & Dingin",
+      "description": "Burada yalnızca bir daireye değil; şehrin hızını Bodrum'un dinginliğiyle buluşturan özgün bir yaşam kültürüne sahip oluyorsunuz. Bahçe dubleksleri sabah uyandığınızda doğrudan havuza açılırken, çatı dubleksleri yüksek tavanlarıyla modern rezidans ferahlığını sunuyor.<br><br>Her daire 43–45 m² aralığında kompakt ama fonksiyonel 1+1 planlarda tasarlandı. Modüler mimari sayesinde birleştirme imkânı ile büyüyebilen, esnek yaşam alanları oluşturmak mümkün."
+    },
+    "section2": {
+      "title": "Sosyal Alanlar:",
+      "subtitle": "Birlikte Yaşama Sanatı",
+      "description": "Evart Yalıkavak'ta ortak alanlar sıradan değil, yaşamın merkezi:<br>• Ortak havuz: Gün boyu serinleme, akşamları sosyalleşme imkânı<br>• Geniş sosyal bahçe: Sabah kahveleri, akşam sohbetleri ve yeni dostlukların<br>doğduğu alan<br>• Kapalı garaj: Konfor ve güvenliği aynı anda sunar"
+    },
+    "section3": {
+      "title": "Yatırım Fırsatları:",
+      "subtitle": "Gücünü Konumdan Alır!",
+      "description": "Evart Yalıkavak, Bodrum'un en yüksek kira getirisi potansiyeline sahip bölgelerinden birinde konumlanıyor.<br>• Profesyonel kiralama yönetimi<br>• Şeffaf gelir modeli ve merkezi kontrol<br>• Turistik kısa dönem kiralamalarla hızlanan yatırım geri dönüşü<br><br>Bodrum'da ortalama ROI 12 yıl iken, Evart Yalıkavak'ta bu süre turistik kiralamalarla 6–10 yıla kadar düşüyor."
+    },
+    "section4": {
+      "title": "Yaşam + Yatırım:",
+      "subtitle": "Çift Değer",
+      "description": "Tüm birimler ticari bağımsız bölüm tapusu ile teslim ediliyor. Bu sayede evinizi ister yaşam alanı, ister ofis, isterse yatırım amaçlı kullanabilirsiniz. Home-office kültürünün yükselişiyle birleştiğinde, Evart Yalıkavak çok yönlü bir yatırım fırsatına dönüşüyor."
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "banner": {
+      "title": "İletişim",
+      "subtitle": "Bizimle İletişime Geçin"
+    },
+    "info": {
+      "title": "İletişim Bilgileri",
+      "description": "Evart projeleri hakkında bilgi almak ve satış ekibimizle iletişime geçmek için aşağıdaki bilgileri kullanabilirsiniz.",
+      "bodrum": {
+        "title": "Bodrum Ofisi",
+        "address": "Dirmil, İnönü Cd., 48400 Bodrum/Muğla"
+      },
+      "ankara": {
+        "title": "Ankara Ofisi",
+        "address": "İlkbahar Mahallesi, Galip Erdem Caddesi, Güney Park Evleri Karşısı, 06550 Çankaya / Ankara"
+      },
+      "phone": {
+        "title": "Telefon",
+        "number": "0532 510 12 31"
+      },
+      "email": {
+        "title": "E-posta",
+        "address": "info@evart.com"
+      }
+    },
+    "form": {
+      "projectName": "Evart İletişim Formu"
+    },
+    "address": {
+      "title": "Adres",
+      "bodrum": {
+        "title": "Adres - Bodrum",
+        "line1": "Dirmil, İnönü Cd., 48400",
+        "line2": "Bodrum/Muğla"
+      },
+      "ankara": {
+        "title": "Adres - Ankara",
+        "line1": "İlkbahar Mahallesi, Galip Erdem Caddesi,",
+        "line2": "Güney Park Evleri Karşısı,",
+        "line3": "06550 Çankaya / Ankara"
+      }
+    },
+    "phone": {
+      "title": "Telefon"
+    },
+    "email": {
+      "title": "E-posta"
+    }
+  },
+  "contactForm": {
+    "title": "yaşam hayaliniz",
+    "subtitle": "bir mesaj uzağınızda...",
+    "description": "Evart projeleriyle ilgili tüm detaylara <br>ulaşmak ve satış ekibimizden <b>destek<br>almak için bizimle iletişim kurun.</b>",
+    "descriptionYalikavak": "Evart Yalıkavak ile ilgili tüm detaylara <br>ulaşmak ve satış ekibimizden <b>destek<br>almak için bizimle iletişim kurun.</b>",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "phone": "Telefon",
+    "subject": "Konu",
+    "message": "Mesaj",
+    "submit": "Gönder",
+    "submitting": "Gönderiliyor...",
+    "success": "Mesajınız başarıyla gönderildi!",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+  },
+  "footer": {
+    "menu": {
+      "home": "ANASAYFA",
+      "about": "HAKKIMIZDA",
+      "evartOran": "EVART ORAN",
+      "evartYalikavak": "EVART YALIKAVAK",
+      "contact": "İLETİŞİM"
+    },
+    "newsletter": {
+      "title": "MAİL",
+      "placeholder": "E-MAIL",
+      "success": "Başarıyla kaydedildi!",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "copyright": "© {year} Evart. Tüm hakları saklıdır."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Sayfa Bulunamadı",
+    "description": "Aradığınız sayfa bulunamadı.",
+    "backHome": "Ana Sayfaya Dön",
+    "popularPages": "Popüler Sayfalar"
+  }
+}
+

@@ -3,8 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function Footer() {
+  const { t, locale } = useTranslations();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -103,32 +105,32 @@ export default function Footer() {
 
             {/* Orta Taraf - Menü */}
             <div className="flex flex-col space-y-3 border-t border-white/20 pt-4 md:border-none md:pt-0">
-              <Link href="/" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
-                ANASAYFA
+              <Link href={`/${locale}`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+                {t('footer.menu.home')}
               </Link>
-              <Link href="/about" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
-                HAKKIMIZDA
+              <Link href={`/${locale}/about`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+                {t('footer.menu.about')}
               </Link>
-              <Link href="/evart-oran" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
-                EVART ORAN
+              <Link href={`/${locale}/evart-oran`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+                {t('footer.menu.evartOran')}
               </Link>
-              <Link href="/evart-yalikavak" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
-                EVART YALIKAVAK
+              <Link href={`/${locale}/evart-yalikavak`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+                {t('footer.menu.evartYalikavak')}
               </Link>
-              <Link href="/iletisim" className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
-                İLETİŞİM
+              <Link href={`/${locale}/contact`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+                {t('footer.menu.contact')}
               </Link>
             </div>
 
               {/* Sağ Taraf - Mail Form */}
               <div className="border-t border-white/20 pt-4 md:border-none md:pt-0">
-                <p className="font-gotham-bold text-xl text-white mb-3">MAİL</p>
+                <p className="font-gotham-bold text-xl text-white mb-3">{t('footer.newsletter.title')}</p>
                 <form onSubmit={handleNewsletterSubmit} className="flex items-center gap-2">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="E-MAIL"
+                    placeholder={t('footer.newsletter.placeholder')}
                     required
                     className="w-48 px-0 py-2 font-gotham-book text-xs focus:outline-none bg-transparent border-b-2 border-white"
                     style={{
@@ -159,12 +161,12 @@ export default function Footer() {
                 </form>
                 {submitStatus === 'success' && (
                   <p className="font-gotham-book text-xs text-white mt-2 opacity-80">
-                    Başarıyla kaydedildi!
+                    {t('footer.newsletter.success')}
                   </p>
                 )}
                 {submitStatus === 'error' && (
                   <p className="font-gotham-book text-xs text-white mt-2 opacity-80">
-                    Bir hata oluştu. Lütfen tekrar deneyin.
+                    {t('footer.newsletter.error')}
                   </p>
                 )}
               </div>
@@ -175,7 +177,7 @@ export default function Footer() {
       {/* Copyright */}
       <div className="w-full py-4 text-center" style={{ backgroundColor: "#869e9e" }}>
         <p className="font-gotham-book text-xs text-white opacity-80">
-          © {new Date().getFullYear()} Evart. Tüm hakları saklıdır.
+          {t('footer.copyright').replace('{year}', new Date().getFullYear().toString())}
         </p>
       </div>
     </>

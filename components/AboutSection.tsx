@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function AboutSection() {
+  const { t, locale } = useTranslations();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -35,12 +37,12 @@ export default function AboutSection() {
         <div className="text-center">
           {/* Başlık */}
           <h2 className="font-gotham-bold uppercase text-2xl md:text-3xl mb-2" style={{ color: "#414042" }}>
-            Yapıtek ANKA İnşaat
+            {t('home.aboutSection.title')}
           </h2>
 
           {/* Alt Başlık */}
           <p className="font-questa-regular text-4xl md:text-5xl mb-4" style={{ color: "#414042" }}>
-            Güvenle Yükselen Bir Gelecek
+            {t('home.aboutSection.subtitle')}
           </p>
 
           {/* 3 Yuvarlak */}
@@ -70,16 +72,16 @@ export default function AboutSection() {
 
           {/* Uzun Yazı */}
           <p className="font-gotham-book text-base md:text-lg mb-6 max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
-            2014 yılından bu yana inşaat, gayrimenkul, enerji ve dış ticaret alanlarında faaliyet gösteren Yapıtek ANKA İnşaat, her projesinde güven, kalite ve sürdürülebilirliği öncelik haline getirmiştir. Yalnızca sağlam yapılar inşa etmekle kalmayan Yapıtek, aynı zamanda enerji verimliliği yüksek, çevreye duyarlı ve teknolojiyle uyumlu yaşam alanları tasarlayarak sektörde farklı bir konum elde etmiştir.
+            {t('home.aboutSection.description')}
           </p>
 
           {/* Devamını Oku */}
           <Link 
-            href="/about" 
+            href={`/${locale}/about`} 
             className="font-gotham-light italic text-base md:text-lg inline-block relative read-more-link"
             style={{ color: "#414042" }}
           >
-            devamını oku
+            {t('home.aboutSection.readMore')}
           </Link>
         </div>
       </div>

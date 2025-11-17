@@ -220,6 +220,31 @@ body::after {
     width: 100%;
   }
 
+  .nav-link-active::after {
+    width: 100% !important;
+  }
+
+  /* Locale Switcher Link - Başlangıçta tam border, hover'da azalır */
+  .locale-switcher-link {
+    position: relative;
+    display: inline-block;
+    padding: 2px 8px;
+  }
+
+  .locale-switcher-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid #111827;
+    transition: clip-path 0.3s ease;
+    clip-path: inset(0 0 0 0);
+    pointer-events: none;
+  }
+
+  .locale-switcher-link:hover::before {
+    clip-path: inset(0 0 0 100%);
+  }
+
   /* About Section Dots Animation */
   @keyframes dot-bounce {
     0% {
@@ -278,8 +303,8 @@ body::after {
       height: auto !important;
     }
     .hero-slider img {
-      min-height: 400px !important;
-      max-height: 400px !important;
+      max-height: 650px !important;
+      height: auto !important;
       object-fit: cover !important;
     }
     .hero-discover-btn {
