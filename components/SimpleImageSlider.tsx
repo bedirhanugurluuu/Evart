@@ -110,7 +110,8 @@ export default function SimpleImageSlider({ image1, image2, alt1 = "Image 1", al
           src={image1}
           alt={alt1}
           fill
-          className="object-cover"
+          className={image1.includes('oran-4') ? '' : 'object-cover'}
+          style={image1.includes('oran-4') ? { objectFit: 'unset' } : undefined}
           quality={90}
           loading="lazy"
           sizes="(max-width: 768px) 100vw, 70vw"

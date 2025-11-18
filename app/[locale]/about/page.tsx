@@ -36,7 +36,7 @@ export default function About() {
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="container-custom text-center relative z-10">
             <h1
-              className={`font-gotham-bold uppercase text-2xl md:text-3xl lg:text-4xl text-white mb-4 transition-all duration-1000 ${
+              className={`font-gotham-bold uppercase text-xl md:text-3xl lg:text-4xl text-white mb-2 md:mb-4 transition-all duration-1000 ${
                 isMounted
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-8'
@@ -46,7 +46,7 @@ export default function About() {
               {t('about.banner.title')}
             </h1>
             <p 
-              className={`font-questa-regular text-4xl md:text-5xl lg:text-6xl text-white transition-all duration-1000 ${
+              className={`font-questa-regular text-3xl md:text-5xl lg:text-6xl text-white transition-all duration-1000 ${
                 isMounted 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
@@ -62,7 +62,7 @@ export default function About() {
       {/* İlk Paragraf - Banner Altı */}
       <section className="py-12 md:py-16">
         <div className="container-custom">
-          <p className="font-gotham-book text-center text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+          <p className="font-gotham-book text-center text-base lg:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
             {t('about.paragraph1')}
           </p>
         </div>
@@ -74,10 +74,10 @@ export default function About() {
       {/* İki Paragraf */}
       <section className="py-12 md:py-16">
         <div className="container-custom space-y-6 text-center">
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+          <p className="font-gotham-book text-base lg:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
             {t('about.paragraph2')}
           </p>
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed pt-8 max-w-4xl mx-auto">
+          <p className="font-gotham-book text-base lg:text-lg text-gray-700 leading-relaxed pt-8 max-w-4xl mx-auto">
             <b>{t('about.paragraph3')}</b><br />
             {t('about.paragraph4')}
           </p>
@@ -113,13 +113,13 @@ export default function About() {
       {/* Üç Paragraf */}
       <section className="py-12 md:py-16">
         <div className="container-custom space-y-6 text-center">
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+          <p className="font-gotham-book text-base lg:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
             <b>{t('about.paragraph5')}</b> {t('about.paragraph6')}
           </p>
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+          <p className="font-gotham-book text-base lg:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
             <b>{t('about.paragraph7')}</b> {t('about.paragraph8')}
           </p>
-          <p className="font-gotham-book text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+          <p className="font-gotham-book text-base lg:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
             {t('about.paragraph9')}
           </p>
         </div>

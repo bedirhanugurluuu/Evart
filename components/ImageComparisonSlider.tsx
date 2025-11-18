@@ -222,7 +222,7 @@ export default function ImageComparisonSlider() {
       </div>
 
       {/* Sağ Taraf - %30 */}
-      <div className={`w-[100%] lg:w-[35%] px-4 py-12 lg:px-12 flex flex-col justify-center relative transition-all duration-1000 ease-out delay-300 ${
+      <div className={`w-[100%] lg:w-[35%] px-4 py-12 lg:px-12 flex flex-col justify-center items-center md:items-start relative transition-all duration-1000 ease-out delay-300 ${
         isVisible ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-70'
       }`}>
         
@@ -282,19 +282,19 @@ export default function ImageComparisonSlider() {
         </svg>
       </div>
         {/* Başlık */}
-        <h2 className="font-gotham-bold uppercase text-lg md:text-2xl mb-6" style={{ color: "#414042" }}>
+        <h2 className="font-gotham-bold uppercase text-center md:text-left text-base md:text-2xl mb-4 md:mb-6" style={{ color: "#414042" }}>
           {t('home.imageComparisonSlider.title')}
         </h2>
 
         {/* Uzun Yazı */}
-        <p className="font-gotham-book text-base md:text-lg mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+        <p className="font-gotham-book text-center md:text-left text-sm md:text-lg mb-4 md:mb-6 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
           {t('home.imageComparisonSlider.description')}
         </p>
 
         {/* Devamını Oku */}
         <Link 
           href={`/${locale}/evart-oran`} 
-          className="font-gotham-light italic text-sm md:text-base inline-block relative read-more-link w-fit"
+          className="font-gotham-light italic text-center md:text-left text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >
           {t('home.imageComparisonSlider.readMore')}

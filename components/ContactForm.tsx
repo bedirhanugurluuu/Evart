@@ -129,17 +129,17 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
   };
   return (
     <div className={absoluteOverlay ? "relative z-20" : ""}>
-      <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 ${absoluteOverlay ? "md:gap-4" : ""} ${absoluteOverlay ? "bg-white p-4 md:p-5 lg:p-8 shadow-lg max-w-4xl mx-auto" : ""}`}>
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 ${absoluteOverlay ? "md:gap-4" : ""} ${absoluteOverlay ? "bg-white p-4 md:p-5 lg:p-8 shadow-lg max-w-4xl mx-auto" : ""}`}>
           {/* Sol Taraf */}
           <div className="flex flex-col justify-center">
-            <h2 className="font-gotham-bold uppercase text-xl md:text-2xl" style={{ color: "#414042" }}>
+            <h2 className="font-gotham-bold uppercase text-center md:text-left text-lg md:text-2xl" style={{ color: "#414042" }}>
               {t('contactForm.title')}
             </h2>
-            <p className="font-questa-regular text-2xl md:text-3xl mb-4" style={{ color: "#869e9e" }}>
+            <p className="font-questa-regular text-center md:text-left text-xl md:text-3xl mb-4" style={{ color: "#869e9e" }}>
               {t('contactForm.subtitle')}
             </p>
 
-            <p className="font-gotham-book text-base mb-4 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-center md:text-left text-sm md:text-base mb-4 leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
                 {projectName === "Yalıkavak" ? (
                   <span dangerouslySetInnerHTML={{ __html: t('contactForm.descriptionYalikavak').replace(/<br>/g, '<br />').replace(/<b>/g, '<b style="font-weight: 500">') }} />
                 ) : (
@@ -148,7 +148,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
             </p>
 
             {/* İletişim Bilgileri */}
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 items-center md:items-start">
               {/* Adres */}
               <div className="inline-flex items-center gap-2">
                 <svg

@@ -62,7 +62,7 @@ export default function Contact() {
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="container-custom text-center relative z-10">
             <h1 
-              className={`font-gotham-bold uppercase text-2xl md:text-3xl lg:text-4xl text-white mb-4 transition-all duration-1000 ${
+              className={`font-gotham-bold uppercase text-xl md:text-3xl lg:text-4xl text-white mb-1 md:mb-4 transition-all duration-1000 ${
                 isMounted 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
@@ -72,7 +72,7 @@ export default function Contact() {
               {t('contact.banner.title')}
             </h1>
             <p 
-              className={`font-questa-regular text-4xl md:text-5xl lg:text-6xl text-white transition-all duration-1000 ${
+              className={`font-questa-regular text-3xl md:text-5xl lg:text-6xl text-white transition-all duration-1000 ${
                 isMounted 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
@@ -127,10 +127,10 @@ export default function Contact() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
+                <h3 className="font-gotham-bold uppercase text-base md:text-xl mb-1 md:mb-3" style={{ color: "#414042" }}>
                   {t('contact.address.bodrum.title')}
                 </h3>
-                <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
+                <p className="font-gotham-book text-sm md:text-base leading-relaxed" style={{ color: "#414042" }}>
                   {t('contact.address.bodrum.line1')}<br />
                   {t('contact.address.bodrum.line2')}
                 </p>
@@ -168,10 +168,10 @@ export default function Contact() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
+                <h3 className="font-gotham-bold uppercase text-base md:text-xl mb-1 md:mb-3" style={{ color: "#414042" }}>
                   {t('contact.address.ankara.title')}
                 </h3>
-                <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
+                <p className="font-gotham-book text-sm md:text-base leading-relaxed" style={{ color: "#414042" }}>
                   {t('contact.address.ankara.line1')}<br />
                   {t('contact.address.ankara.line2')}<br />
                   {t('contact.address.ankara.line3')}
@@ -203,10 +203,10 @@ export default function Contact() {
                   </svg>
                 </div>
               </div>
-              <h3 className="font-gotham-bold uppercase text-xl mb-3" style={{ color: "#414042" }}>
+              <h3 className="font-gotham-bold uppercase text-base md:text-xl mb-1 md:mb-3" style={{ color: "#414042" }}>
                 {t('contact.phone.title')}
               </h3>
-              <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
+              <p className="font-gotham-book text-sm md:text-base leading-relaxed" style={{ color: "#414042" }}>
                 <a href="tel:+905325101231" className="hover:text-[#869e9e] transition-colors">
                   0532 510 12 31
                 </a>

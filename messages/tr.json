@@ -212,7 +212,7 @@
       "success": "Başarıyla kaydedildi!",
       "error": "Bir hata oluştu. Lütfen tekrar deneyin."
     },
-    "copyright": "© {year} Evart. Tüm hakları saklıdır."
+    "copyright": "Bu site W2W Ajansı tarafından hazırlanmıştır. © {year} Evart. Tüm hakları saklıdır."
   },
   "notFound": {
     "title": "404",

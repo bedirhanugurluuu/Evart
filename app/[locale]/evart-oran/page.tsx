@@ -8,14 +8,37 @@ import SimpleImageSlider from "@/components/SimpleImageSlider";
 import { useTranslations } from "@/hooks/useTranslations";
 
 export default function EvartOran() {
-  const { t } = useTranslations();
+  const { t, locale } = useTranslations();
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Banner görsel path'lerini dinamik olarak oluştur
+  const getBannerImageSrc = (device: 'desktop' | 'mobile') => {
+    const key = `banner-${device}`;
+    // Eğer bu görsel için hata varsa TR'yi kullan
+    const useFallback = imageErrors[key];
+    const currentLocale = useFallback ? 'tr' : locale;
+    return `/images/oran-about-${currentLocale}-${device}.png`;
+  };
+
+  // Görsel yükleme hatası durumunda TR'ye fallback yap
+  const handleImageError = (device: 'desktop' | 'mobile') => {
+    const key = `banner-${device}`;
+    if (!imageErrors[key]) {
+      setImageErrors(prev => ({ ...prev, [key]: true }));
+    }
+  };
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Locale değiştiğinde hata durumlarını sıfırla
+  useEffect(() => {
+    setImageErrors({});
+  }, [locale]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,10 +69,10 @@ export default function EvartOran() {
 
       {/* Ana Banner - About sayfasındaki gibi ama absolute yazı yok */}
       <section className="relative w-full h-[350px] md:h-[450px] lg:h-[700px] overflow-hidden">
-        {/* Banner Görseli */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Banner Görseli - Desktop */}
+        <div className="absolute inset-0 overflow-hidden hidden md:block">
           <Image
-            src="/images/oran-about.png"
+            src={getBannerImageSrc('desktop')}
             alt="Evart Oran Banner"
             fill
             className="object-cover"
@@ -57,12 +80,27 @@ export default function EvartOran() {
             quality={100}
             unoptimized
             sizes="100vw"
+            onError={() => handleImageError('desktop')}
+          />
+        </div>
+        {/* Banner Görseli - Mobile */}
+        <div className="absolute inset-0 overflow-hidden block md:hidden">
+          <Image
+            src={getBannerImageSrc('mobile')}
+            alt="Evart Oran Banner"
+            fill
+            className="object-cover"
+            priority
+            quality={100}
+            unoptimized
+            sizes="100vw"
+            onError={() => handleImageError('mobile')}
           />
         </div>
       </section>
 
       {/* Başlık Bölümü - Container içinde */}
-      <section ref={sectionRef} className="py-20 overflow-hidden">
+      <section ref={sectionRef} className="py-12 md:py-20 overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Sol Taraf - Başlık ve Noktalar */}
@@ -78,7 +116,7 @@ export default function EvartOran() {
                 {t('evartOran.banner.subtitle')}
               </p>
               {/* 3 Yuvarlak */}
-              <div className="flex justify-center md:justify-start items-center gap-2">
+              <div className="flex justify-center md:justify-start items-center gap-2 mb-6">
                 <div 
                   className="md:w-3 md:h-3 rounded-full dot-bounce"
                   style={{ 
@@ -101,7 +139,7 @@ export default function EvartOran() {
                   }}
                 ></div>
               </div>
-              <p className="font-gotham-book text-base mt-4" style={{ color: "#414042", lineHeight: "1.2" }}>
+              <p className="font-gotham-book text-base md:text-lg" style={{ color: "#414042", lineHeight: "1.2" }}>
                 {t('evartOran.description')}
               </p>
             </div>
@@ -151,7 +189,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               <span dangerouslySetInnerHTML={{ __html: t('evartOran.section1.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
@@ -185,7 +223,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               <span dangerouslySetInnerHTML={{ __html: t('evartOran.section2.description').replace(/<br>/g, '<br />').replace(/<b>/g, '<b style="font-weight: 500">') }} />
             </p>
           </div>
@@ -219,7 +257,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               <span dangerouslySetInnerHTML={{ __html: t('evartOran.section3.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
@@ -253,7 +291,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               <span dangerouslySetInnerHTML={{ __html: t('evartOran.section4.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
@@ -287,7 +325,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-2xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               <span dangerouslySetInnerHTML={{ __html: t('evartOran.section5.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>
@@ -324,7 +362,7 @@ export default function EvartOran() {
           </div>
           {/* Altında Yazı */}
           <div className="container-custom mt-16">
-            <p className="font-gotham-book text-base text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
               <span dangerouslySetInnerHTML={{ __html: t('evartOran.section6.description').replace(/<br>/g, '<br />') }} />
             </p>
           </div>

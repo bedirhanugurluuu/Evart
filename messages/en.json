@@ -212,7 +212,7 @@
       "success": "Successfully registered!",
       "error": "An error occurred. Please try again."
     },
-    "copyright": "© {year} Evart. All rights reserved."
+    "copyright": "This site is prepared by W2W Agency. © {year} Evart. All rights reserved."
   },
   "notFound": {
     "title": "404",
