@@ -130,7 +130,7 @@ export default function ImageComparisonSlider() {
       {/* Sol Taraf - %70 */}
       <div 
         ref={containerRef}
-        className={`relative image-comparison-slider w-[100%] lg:w-[65%] h-[500px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
+        className={`relative image-comparison-slider w-[100%] lg:w-[65%] h-[175px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
           isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-70'
         }`}
         style={{
@@ -147,7 +147,7 @@ export default function ImageComparisonSlider() {
             alt="Before"
             width={1092}
             height={875}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain md:object-cover"
             style={{
               borderRadius: '0 142px 142px 0',
             }}
@@ -171,7 +171,7 @@ export default function ImageComparisonSlider() {
             alt="After"
             width={1092}
             height={875}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain md:object-cover"
             style={{
               borderRadius: '0 142px 142px 0',
             }}

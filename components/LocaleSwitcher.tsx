@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { Locale, locales, localeNames } from '@/i18n';
 
@@ -21,17 +22,28 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <div className="flex items-center">
-      <button
-        onClick={() => {
-          // Aktif olmayan dile geç
-          const otherLocale = currentLocale === 'tr' ? 'en' : 'tr';
-          switchLocale(otherLocale);
-        }}
-        className="font-gotham-bold text-sm text-gray-900 locale-switcher-link uppercase"
-      >
-        {localeNames[currentLocale].toUpperCase()}
-      </button>
+    <div className="flex items-center gap-2">
+      {locales.map((locale, index) => (
+        <React.Fragment key={locale}>
+          <button
+            onClick={() => {
+              if (locale !== currentLocale) {
+                switchLocale(locale);
+              }
+            }}
+            className={`font-gotham-bold text-sm uppercase transition-colors ${
+              locale === currentLocale
+                ? 'text-gray-900 locale-switcher-link'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            {localeNames[locale].toUpperCase()}
+          </button>
+          {index < locales.length - 1 && (
+            <span className="text-gray-400 text-sm">-</span>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   );
 }
