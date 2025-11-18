@@ -68,7 +68,7 @@ export default function EvartYalikavak() {
       <Header />
 
       {/* Ana Banner - About sayfasındaki gibi ama absolute yazı yok */}
-      <section className="relative w-full h-[400px] md:h-[450px] lg:h-[700px] overflow-hidden">
+      <section className="relative w-full h-[400px] md:h-[400px] overflow-hidden">
         {/* Banner Görseli - Desktop */}
         <div className="absolute inset-0 overflow-hidden hidden md:block">
           <Image
