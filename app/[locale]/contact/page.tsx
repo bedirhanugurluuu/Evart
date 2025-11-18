@@ -103,7 +103,7 @@ export default function Contact() {
               }`}
             >
               <a 
-                href="https://www.google.com/maps/search/?api=1&query=Dirmil,+İnönü+Cd.,+48400+Bodrum/Muğla"
+                href="https://maps.app.goo.gl/yx9jgf11HdH7KZjz5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block hover:opacity-80 transition-opacity"
@@ -144,7 +144,7 @@ export default function Contact() {
               }`}
             >
               <a 
-                href="https://www.google.com/maps/search/?api=1&query=İlkbahar+Mahallesi,+Galip+Erdem+Caddesi,+Güney+Park+Evleri+Karşısı,+06550+Çankaya+/+Ankara"
+                href="https://maps.app.goo.gl/sa1BAq3YpXs3XXpG9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block hover:opacity-80 transition-opacity"

@@ -167,13 +167,13 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <a 
-                  href="https://www.google.com/maps/search/?api=1&query=Dirmil,+İnönü+Cd.,+48400+Bodrum/Muğla"
+                  href="https://maps.app.goo.gl/sa1BAq3YpXs3XXpG9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-gotham-book text-xs hover:opacity-70 transition-opacity"
                   style={{ color: "#414042" }}
                 >
-                  Dirmil, İnönü Cd., 48400 Bodrum/Muğla
+                  İlkbahar Mahallesi, Galip Erdem Caddesi, Çankaya / Ankara
                 </a>
               </div>
 

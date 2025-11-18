@@ -19,7 +19,7 @@ export default function About() {
       <Header />
 
       {/* Ana Banner */}
-      <section className="relative w-full h-[350px] md:h-[450px] lg:h-[700px] overflow-hidden about-banner">
+      <section className="relative w-full h-[350px] md:h-[400px] overflow-hidden about-banner">
         {/* Banner Görseli */}
         <Image
           src="/images/about-banner.jpg"

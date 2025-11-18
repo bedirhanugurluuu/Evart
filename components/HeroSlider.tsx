@@ -20,6 +20,7 @@ export default function HeroSlider() {
   const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
   const [isSwiperTouching, setIsSwiperTouching] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const videoRefs = useRef<{ desktop: HTMLVideoElement | null; mobile: HTMLVideoElement | null }>({ desktop: null, mobile: null });
 
@@ -29,7 +30,10 @@ export default function HeroSlider() {
     // EN görselleri yoksa direkt TR kullan (404 hatası önlemek için)
     const useFallback = imageErrors[key] || (locale === 'en');
     const currentLocale = useFallback ? 'tr' : locale;
-    return `/images/hero-slide${slideIndex + 1}-${currentLocale}-${device}.jpg`;
+    // Video slide index 0'da, görsel slide'lar index 1 ve 2'de
+    // slideIndex 1 -> hero-slide1, slideIndex 2 -> hero-slide2
+    const imageSlideNumber = slideIndex;
+    return `/images/hero-slide${imageSlideNumber}-${currentLocale}-${device}.jpg`;
   };
 
   // Görsel yükleme hatası durumunda TR'ye fallback yap
@@ -55,18 +59,18 @@ export default function HeroSlider() {
   const slides = [
     {
       id: 1,
-      type: 'image' as const,
-      link: (locale: string) => `/${locale}/evart-yalikavak`,
+      type: 'video' as const,
+      link: () => '',
     },
     {
       id: 2,
       type: 'image' as const,
-      link: (locale: string) => `/${locale}/evart-oran`,
+      link: (locale: string) => `/${locale}/evart-yalikavak`,
     },
     {
       id: 3,
-      type: 'video' as const,
-      link: () => '',
+      type: 'image' as const,
+      link: (locale: string) => `/${locale}/evart-oran`,
     },
   ];
 
@@ -106,12 +110,23 @@ export default function HeroSlider() {
     setVideoErrors({});
   }, [locale]);
 
-  const handleSlideClick = (e: React.MouseEvent, slideIndex: number) => {
-    // Swiper'ın drag işlemi varsa link'e gitme
-    if (isSwiperTouching) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
+  const handleSlideClick = (e: React.MouseEvent) => {
+    // Mouse tıklaması ise her zaman izin ver (touch event değilse)
+    if (!touchStartPos) {
+      return; // Normal tıklama, izin ver
+    }
+    
+    // Eğer gerçek bir swipe/drag işlemi varsa link'e gitme
+    if (isSwiperTouching && touchStartPos) {
+      const deltaX = Math.abs((e.clientX || 0) - touchStartPos.x);
+      const deltaY = Math.abs((e.clientY || 0) - touchStartPos.y);
+      // Eğer yatay hareket dikey hareketten fazlaysa ve 10px'den fazlaysa swipe'dır
+      const isSwipe = deltaX > 10 && deltaX > deltaY;
+      if (isSwipe) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
     }
   };
 
@@ -126,12 +141,31 @@ export default function HeroSlider() {
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.realIndex);
           }}
-          onTouchStart={() => {
-            setIsSwiperTouching(true);
+          onTouchStart={(swiper, event) => {
+            if (event instanceof TouchEvent) {
+              const touch = event.touches?.[0] || event.changedTouches?.[0];
+              if (touch) {
+                setTouchStartPos({ x: touch.clientX, y: touch.clientY });
+                setIsSwiperTouching(true);
+              }
+            }
           }}
-          onTouchEnd={() => {
+          onTouchEnd={(swiper, event) => {
+            if (event instanceof TouchEvent) {
+              const touch = event.changedTouches?.[0];
+              if (touch && touchStartPos) {
+                const deltaX = Math.abs(touch.clientX - touchStartPos.x);
+                const deltaY = Math.abs(touch.clientY - touchStartPos.y);
+                // Eğer yatay hareket dikey hareketten fazlaysa ve 10px'den fazlaysa swipe'dır
+                const isSwipe = deltaX > 10 && deltaX > deltaY;
+                if (!isSwipe) {
+                  setIsSwiperTouching(false);
+                }
+              }
+            }
             setTimeout(() => {
               setIsSwiperTouching(false);
+              setTouchStartPos(null);
             }, 100);
           }}
           modules={[Navigation, Pagination]}
@@ -167,8 +201,6 @@ export default function HeroSlider() {
                       className="hidden md:block w-full h-full relative"
                       style={{
                         height: 'calc(100vh - 80px)',
-                        transform: index === 0 && !isLoaded ? 'scale(1.05)' : 'scale(1)',
-                        transition: index === 0 && isLoaded ? 'transform 1.5s ease-out' : 'none',
                       }}
                     >
                       <Image
@@ -177,14 +209,14 @@ export default function HeroSlider() {
                         alt={`Slide ${index + 1}`}
                         fill
                         className="object-cover pointer-events-none select-none"
-                        priority={index === 0}
-                        fetchPriority={index === 0 ? "high" : "auto"}
-                        loading={index === 0 || index === activeIndex || index === (activeIndex + 1) % slides.length ? "eager" : "lazy"}
+                        priority={index === 1}
+                        fetchPriority={index === 1 ? "high" : "auto"}
+                        loading={index === 1 || index === activeIndex || index === (activeIndex + 1) % slides.length ? "eager" : "lazy"}
                         quality={95}
                         unoptimized
                         sizes="100vw"
                         onLoad={() => {
-                          if (index === 0 && !isLoaded) {
+                          if (index === 1 && !isLoaded) {
                             setTimeout(() => {
                               setIsLoaded(true);
                             }, 50);
@@ -196,10 +228,6 @@ export default function HeroSlider() {
                     {/* Mobile görsel - CSS ile gizlenir/gösterilir */}
                     <div
                       className="block md:hidden w-full relative"
-                      style={{
-                        transform: index === 0 && !isLoaded ? 'scale(1.05)' : 'scale(1)',
-                        transition: index === 0 && isLoaded ? 'transform 1.5s ease-out' : 'none',
-                      }}
                     >
                       <Image
                         key={`${locale}-mobile-${index}`}
@@ -208,14 +236,14 @@ export default function HeroSlider() {
                         width={768}
                         height={600}
                         className="w-full h-auto object-contain pointer-events-none select-none"
-                        priority={index === 0}
-                        fetchPriority={index === 0 ? "high" : "auto"}
-                        loading={index === 0 || index === activeIndex || index === (activeIndex + 1) % slides.length ? "eager" : "lazy"}
+                        priority={index === 1}
+                        fetchPriority={index === 1 ? "high" : "auto"}
+                        loading={index === 1 || index === activeIndex || index === (activeIndex + 1) % slides.length ? "eager" : "lazy"}
                         quality={95}
                         sizes="100vw"
                         unoptimized
                         onLoad={() => {
-                          if (index === 0 && !isLoaded) {
+                          if (index === 1 && !isLoaded) {
                             setTimeout(() => {
                               setIsLoaded(true);
                             }, 50);
@@ -237,7 +265,7 @@ export default function HeroSlider() {
                           muted
                           playsInline
                           preload="auto"
-                          className="w-full h-full object-cover pointer-events-none select-none"
+                          className="w-full h-full object-cover object-bottom pointer-events-none select-none"
                           style={{ height: '100%', width: '100%' }}
                           onError={() => handleVideoError('desktop')}
                         >
@@ -257,7 +285,7 @@ export default function HeroSlider() {
                           muted
                           playsInline
                           preload="auto"
-                          className="w-full h-auto object-cover pointer-events-none select-none"
+                          className="w-full h-auto object-cover object-bottom pointer-events-none select-none"
                           onError={() => handleVideoError('mobile')}
                         >
                           <source src={getVideoSrc('mobile')} type="video/mp4" />
@@ -285,7 +313,7 @@ export default function HeroSlider() {
               <SwiperSlide key={slide.id} className="md:h-[calc(100vh-80px)]">
                 <Link
                   href={linkHref}
-                  onClick={(e) => handleSlideClick(e, index)}
+                  onClick={handleSlideClick}
                   className="w-full md:h-full block"
                 >
                   {slideContent}
@@ -298,7 +326,7 @@ export default function HeroSlider() {
         {/* Custom Pagination Dots */}
         <div className="absolute bottom-[10px] md:bottom-[100px] left-0 right-0 z-20">
           <div className="container-custom">
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-3 flex items-center gap-2 w-fit">
+            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-3 flex items-center gap-2 w-fit ml-auto">
               {slides.map((_, index) => {
                 // Loop modunda aktif index'i hesapla
                 const realIndex = swiperRef.current?.realIndex ?? activeIndex;
