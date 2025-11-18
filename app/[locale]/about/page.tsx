@@ -17,9 +17,9 @@ export default function About() {
   return (
     <main className="min-h-screen">
       <Header />
-      
+
       {/* Ana Banner */}
-      <section className="relative w-full h-[400px] md:h-[600px] lg:h-[650px] overflow-hidden about-banner">
+      <section className="relative w-full h-[350px] md:h-[450px] lg:h-[700px] overflow-hidden about-banner">
         {/* Banner Görseli */}
         <Image
           src="/images/about-banner.jpg"
@@ -31,14 +31,14 @@ export default function About() {
           unoptimized
           sizes="100vw"
         />
-        
+
         {/* Absolute Yazılar */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="container-custom text-center relative z-10">
-            <h1 
+            <h1
               className={`font-gotham-bold uppercase text-2xl md:text-3xl lg:text-4xl text-white mb-4 transition-all duration-1000 ${
-                isMounted 
-                  ? 'opacity-100 translate-y-0' 
+                isMounted
+                  ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: '200ms' }}

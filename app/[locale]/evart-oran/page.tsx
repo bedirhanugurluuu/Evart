@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ContactForm from "@/components/ContactForm";
 import SimpleImageSlider from "@/components/SimpleImageSlider";
 import { useTranslations } from "@/hooks/useTranslations";
 
@@ -46,11 +45,11 @@ export default function EvartOran() {
       <Header />
 
       {/* Ana Banner - About sayfasındaki gibi ama absolute yazı yok */}
-      <section className="relative w-full h-[660px] md:h-[600px] lg:h-[650px] overflow-visible about-banner pb-32 md:pb-40 lg:pb-48">
+      <section className="relative w-full h-[350px] md:h-[450px] lg:h-[700px] overflow-hidden">
         {/* Banner Görseli */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/images/about-banner.jpg"
+            src="/images/oran-about.png"
             alt="Evart Oran Banner"
             fill
             className="object-cover"
@@ -59,13 +58,6 @@ export default function EvartOran() {
             unoptimized
             sizes="100vw"
           />
-        </div>
-
-        {/* Contact Form - Absolute position ile banner üzerinde */}
-        <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 z-10">
-          <div className="container-custom">
-            <ContactForm projectName="Evart Oran" absoluteOverlay={true} />
-          </div>
         </div>
       </section>
 

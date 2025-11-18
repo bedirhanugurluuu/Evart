@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "@/hooks/useTranslations";
 
 interface ContactFormProps {
@@ -20,8 +20,10 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pageLoadTime = useRef<number>(Date.now());
   const formRef = useRef<HTMLFormElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -31,8 +33,37 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
     }));
   };
 
+  const handleSubjectSelect = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      subject: value
+    }));
+    setIsDropdownOpen(false);
+  };
+
+  // Dropdown dışına tıklanınca kapat
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Form validasyonu - subject kontrolü
+    if (!formData.subject) {
+      setSubmitStatus('error');
+      setIsDropdownOpen(true); // Dropdown'u aç ki kullanıcı seçim yapsın
+      return;
+    }
     
     // Güvenlik Kontrolleri
     // 1. Honeypot kontrolü - eğer website alanı doldurulmuşsa bot'tur
@@ -273,21 +304,50 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
                     }}
                   />
                 </div>
-                <div>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder={t('contactForm.subject')}
-                    required
-                    className="w-full px-0 py-2 font-gotham-book font-medium text-sm focus:outline-none bg-transparent"
+                <div className="relative" ref={dropdownRef}>
+                  <div
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full px-0 py-2 font-gotham-book font-medium text-sm focus:outline-none bg-transparent cursor-pointer relative"
                     style={{
                       border: "none",
                       borderBottom: "3px solid #869e9e",
-                      color: "#414042",
+                      color: formData.subject ? "#414042" : "#869e9e",
                     }}
-                  />
+                  >
+                    {formData.subject || t('contactForm.subjectPlaceholder')}
+                    <svg
+                      className={`absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                      style={{ color: "#869e9e" }}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                  {isDropdownOpen && (
+                    <div
+                      className="absolute top-full left-0 right-0 z-50 bg-white shadow-lg border border-gray-200 mt-1"
+                      style={{ borderTop: "none" }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleSubjectSelect(t('contactForm.subjectOptionOran'))}
+                        className="w-full text-left px-4 py-3 font-gotham-book text-sm hover:bg-gray-50 transition-colors"
+                        style={{ color: "#414042" }}
+                      >
+                        {t('contactForm.subjectOptionOran')}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSubjectSelect(t('contactForm.subjectOptionYalikavak'))}
+                        className="w-full text-left px-4 py-3 font-gotham-book text-sm hover:bg-gray-50 transition-colors border-t border-gray-200"
+                        style={{ color: "#414042" }}
+                      >
+                        {t('contactForm.subjectOptionYalikavak')}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
