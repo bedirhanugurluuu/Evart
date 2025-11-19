@@ -45,7 +45,7 @@ export default function Contact() {
       <Header />
       
       {/* Ana Banner */}
-      <section className="relative w-full h-[400px] md:h-[600px] lg:h-[800px] overflow-hidden about-banner">
+      <section className="relative w-full h-[400px] md:h-[400px] overflow-hidden about-banner">
         {/* Banner Görseli */}
         <Image
           src="/images/about-banner.jpg"
