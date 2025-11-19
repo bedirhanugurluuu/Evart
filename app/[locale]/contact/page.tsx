@@ -208,7 +208,7 @@ export default function Contact() {
               </h3>
               <p className="font-gotham-book text-sm md:text-base leading-relaxed" style={{ color: "#414042" }}>
                 <a href="tel:+905325101231" className="hover:text-[#869e9e] transition-colors">
-                  0532 510 12 31
+                  0532 389 00 87
                 </a>
                 <br />
                 <a href="tel:4440456" className="hover:text-[#869e9e] transition-colors">

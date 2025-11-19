@@ -165,7 +165,7 @@ export default function LocaleLayout({
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+90-532-510-12-31",
+                "telephone": "+90-532-389-00-87",
                 "contactType": "customer service",
                 "areaServed": "TR",
                 "availableLanguage": ["Turkish", "English"]
