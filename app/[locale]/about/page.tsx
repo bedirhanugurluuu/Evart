@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Locale } from "@/i18n";
 import AboutClient from "./AboutClient";
 
-const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://evart.com').replace(/\/$/, '');
+const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://evartlife.com').replace(/\/$/, '');
 
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
   const isTr = params.locale === 'tr';

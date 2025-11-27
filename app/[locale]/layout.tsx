@@ -3,7 +3,7 @@ import "../globals.css";
 import type { ReactNode } from "react";
 import { Locale } from "@/i18n";
 
-const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://evart.com').replace(/\/$/, '');
+const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://evartlife.com').replace(/\/$/, '');
 
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
   return {
