@@ -121,26 +121,51 @@ export async function POST(request: NextRequest) {
     // Email gönderme
     // Resend test modunda sadece doğrulanmış email adresine gönderebilir
     // Production'da domain doğrulaması yapıldıktan sonra herhangi bir email adresine gönderebilirsiniz
-    const recipientEmail = process.env.CONTACT_EMAIL || 'bedirhanugurlu@aof.anadolu.edu.tr';
+    const recipientEmail = process.env.CONTACT_EMAIL || 'info@evartlife.com';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@evartlife.com';
+    
+    // HTML escape fonksiyonu (XSS koruması)
+    const escapeHtml = (text: string) => {
+      const map: Record<string, string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;',
+      };
+      return text.replace(/[&<>"']/g, (m) => map[m]);
+    };
+
+    // Güvenli HTML içerik
+    const safeProjectName = escapeHtml(projectName || 'Evart');
+    const safeFirstName = escapeHtml(firstName);
+    const safeLastName = escapeHtml(lastName);
+    const safePhone = escapeHtml(phone);
+    const safeSubject = escapeHtml(subject);
+    const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
     
     const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Resend test modunda bu adresi kullanın
-      to: [recipientEmail], // Test modunda sadece doğrulanmış email adresine gönderebilirsiniz
-      subject: `${projectName || 'Evart'} - ${subject}`,
+      from: fromEmail, // Domain doğrulaması yapıldıktan sonra evartlife.com domain'inden gönderebilirsiniz
+      to: [recipientEmail],
+      subject: `${safeProjectName} - ${safeSubject}`,
       html: `
         <!DOCTYPE html>
         <html>
           <head>
             <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
-              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-              .header { background-color: #869e9e; color: white; padding: 20px; text-align: center; }
-              .content { background-color: #f9f9f9; padding: 20px; }
-              .field { margin-bottom: 15px; }
-              .label { font-weight: bold; color: #414042; }
-              .value { margin-top: 5px; }
-              .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666; }
+              body { font-family: 'Gotham', Arial, sans-serif; line-height: 1.6; color: #414042; margin: 0; padding: 0; background-color: #f4f4f4; }
+              .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+              .header { background-color: #869e9e; color: white; padding: 30px 20px; text-align: center; }
+              .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+              .content { padding: 30px 20px; background-color: #ffffff; }
+              .field { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5e5e5; }
+              .field:last-child { border-bottom: none; }
+              .label { font-weight: bold; color: #869e9e; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; }
+              .value { color: #414042; font-size: 16px; margin-top: 5px; }
+              .footer { margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-top: 2px solid #869e9e; font-size: 12px; color: #666; text-align: center; }
+              .footer p { margin: 5px 0; }
             </style>
           </head>
           <body>
@@ -150,33 +175,34 @@ export async function POST(request: NextRequest) {
               </div>
               <div class="content">
                 <div class="field">
-                  <div class="label">Proje:</div>
-                  <div class="value">${projectName || 'Evart'}</div>
+                  <div class="label">Proje</div>
+                  <div class="value">${safeProjectName}</div>
                 </div>
                 <div class="field">
-                  <div class="label">Ad:</div>
-                  <div class="value">${firstName}</div>
+                  <div class="label">Ad</div>
+                  <div class="value">${safeFirstName}</div>
                 </div>
                 <div class="field">
-                  <div class="label">Soyad:</div>
-                  <div class="value">${lastName}</div>
+                  <div class="label">Soyad</div>
+                  <div class="value">${safeLastName}</div>
                 </div>
                 <div class="field">
-                  <div class="label">Telefon:</div>
-                  <div class="value">${phone}</div>
+                  <div class="label">Telefon</div>
+                  <div class="value">${safePhone}</div>
                 </div>
                 <div class="field">
-                  <div class="label">Konu:</div>
-                  <div class="value">${subject}</div>
+                  <div class="label">Konu</div>
+                  <div class="value">${safeSubject}</div>
                 </div>
                 <div class="field">
-                  <div class="label">Mesaj:</div>
-                  <div class="value">${message.replace(/\n/g, '<br>')}</div>
+                  <div class="label">Mesaj</div>
+                  <div class="value">${safeMessage}</div>
                 </div>
               </div>
               <div class="footer">
+                <p><strong>Evart İletişim Formu</strong></p>
                 <p>Bu email Evart web sitesinden gönderilmiştir.</p>
-                <p>Gönderim Zamanı: ${new Date().toLocaleString('tr-TR')}</p>
+                <p>Gönderim Zamanı: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' })}</p>
               </div>
             </div>
           </body>
@@ -195,8 +221,9 @@ Mesaj:
 ${message}
 
 ---
+Evart İletişim Formu
 Bu email Evart web sitesinden gönderilmiştir.
-Gönderim Zamanı: ${new Date().toLocaleString('tr-TR')}
+Gönderim Zamanı: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' })}
       `,
     });
 

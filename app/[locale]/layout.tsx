@@ -3,7 +3,7 @@ import "../globals.css";
 import type { ReactNode } from "react";
 import { Locale } from "@/i18n";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://evart.com';
+const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://evart.com').replace(/\/$/, '');
 
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
   return {
@@ -22,10 +22,17 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       address: false,
       telephone: false,
     },
+    alternates: {
+      languages: {
+        'tr': `${baseUrl}/tr`,
+        'en': `${baseUrl}/en`,
+        'x-default': `${baseUrl}/tr`, // Varsayılan dil TR
+      },
+    },
     openGraph: {
       type: "website",
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
-      url: baseUrl,
+      url: `${baseUrl}/${params.locale}`,
       siteName: "Evart",
       title: "Evart - Premium Gayrimenkul Çözümleri",
       description: "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri.",
@@ -157,9 +164,9 @@ export default function LocaleLayout({
               "description": "Premium gayrimenkul çözümleri ile hayalinizdeki eve kavuşun",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Dirmil, İnönü Cd.",
-                "addressLocality": "Bodrum",
-                "addressRegion": "Muğla",
+                "streetAddress": "İlkbahar Mahallesi, Galip Erdem Caddesi, Güney Park Evleri Karşısı,",
+                "addressLocality": "Çankaya",
+                "addressRegion": "Ankara",
                 "postalCode": "48400",
                 "addressCountry": "TR"
               },

@@ -9,19 +9,50 @@ import Header from "@/components/Header";
 import type { Metadata } from "next";
 import { Locale } from "@/i18n";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://evart.com';
+const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://evart.com').replace(/\/$/, '');
 
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const isTr = params.locale === 'tr';
+  
   return {
-    title: params.locale === 'tr' ? "Ana Sayfa" : "Home",
-    description: "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri. Evart Oran ve Evart Yalıkavak ile yaşam hayaliniz bir mesaj uzağınızda.",
+    title: isTr ? "Ana Sayfa" : "Home",
+    description: isTr 
+      ? "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri. Evart Oran ve Evart Yalıkavak ile yaşam hayaliniz bir mesaj uzağınızda."
+      : "Find your dream home with Evart. Premium residential projects in Ankara and Bodrum. Your dream life is just a message away with Evart Oran and Evart Yalıkavak.",
+    keywords: isTr
+      ? ["evart", "gayrimenkul", "konut", "ankara", "bodrum", "evart oran", "evart yalikavak", "ana sayfa"]
+      : ["evart", "real estate", "residential", "ankara", "bodrum", "evart oran", "evart yalikavak", "home"],
     alternates: {
       canonical: `${baseUrl}/${params.locale}`,
+      languages: {
+        'tr': `${baseUrl}/tr`,
+        'en': `${baseUrl}/en`,
+        'x-default': `${baseUrl}/tr`, // Varsayılan dil TR
+      },
     },
     openGraph: {
-      title: "Evart - Premium Gayrimenkul Çözümleri",
-      description: "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri.",
+      title: isTr ? "Evart - Premium Gayrimenkul Çözümleri" : "Evart - Premium Real Estate Solutions",
+      description: isTr 
+        ? "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri."
+        : "Find your dream home with Evart. Premium residential projects in Ankara and Bodrum.",
       url: `${baseUrl}/${params.locale}`,
+      locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
+      type: 'website',
+      images: [
+        {
+          url: `${baseUrl}/images/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Evart",
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: isTr ? "Evart - Premium Gayrimenkul Çözümleri" : "Evart - Premium Real Estate Solutions",
+      description: isTr 
+        ? "Evart ile hayalinizdeki eve kavuşun."
+        : "Find your dream home with Evart.",
       images: [`${baseUrl}/images/og-image.jpg`],
     },
   };
