@@ -338,43 +338,5 @@ body::after {
   .hero-slider .swiper-slide {
     height: auto !important;
   }
-
-  .image-comparison img {
-    object-fit: cover !important;
-  }
-}
-
-@media (max-width: 400px) {
-
-  .image-comparison img {
-    object-fit: contain !important;
-  }
-}
-
-/* Video kontrollerini gizle - iOS için */
-video::-webkit-media-controls {
-  display: none !important;
-}
-
-video::-webkit-media-controls-enclosure {
-  display: none !important;
-}
-
-video::-webkit-media-controls-panel {
-  display: none !important;
-}
-
-video::-webkit-media-controls-play-button {
-  display: none !important;
-}
-
-video::-webkit-media-controls-start-playback-button {
-  display: none !important;
-}
-
-/* Tüm video elementlerinde kontrolleri gizle */
-video {
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
 }
 

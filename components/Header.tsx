@@ -50,7 +50,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu - Kalan genişliğin tam ortasında */}
-          <div className="hidden lg:flex flex-1 items-center uppercase justify-center space-x-8">
+          <div className="hidden md:flex flex-1 items-center uppercase justify-center space-x-8">
             <Link 
               href={`/${locale}/about`} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}
@@ -78,13 +78,13 @@ export default function Header() {
           </div>
 
           {/* Locale Switcher */}
-          <div className="hidden lg:flex items-center ml-4">
+          <div className="hidden md:flex items-center ml-4">
             <LocaleSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-gray-700 ml-auto"
+            className="md:hidden text-gray-700 ml-auto"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Menu"
           >
@@ -185,7 +185,7 @@ export default function Header() {
         {/* Overlay */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
