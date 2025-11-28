@@ -20,6 +20,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pageLoadTime = useRef<number>(Date.now());
   const formRef = useRef<HTMLFormElement>(null);
@@ -58,9 +59,13 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('Form submit başladı', { formData, timeSincePageLoad: Date.now() - pageLoadTime.current });
+    
     // Form validasyonu - subject kontrolü
     if (!formData.subject) {
+      console.warn('Form validation failed: subject is empty');
       setSubmitStatus('error');
+      setErrorMessage('Lütfen bir konu seçin.');
       setIsDropdownOpen(true); // Dropdown'u aç ki kullanıcı seçim yapsın
       return;
     }
@@ -70,6 +75,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
     if (formData.website) {
       console.warn('Bot detected: honeypot field filled');
       setSubmitStatus('error');
+      setErrorMessage('Geçersiz istek.');
       return;
     }
 
@@ -78,13 +84,28 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
     const minimumTime = 2000; // 2 saniye minimum bekleme süresi
     
     if (timeSincePageLoad < minimumTime) {
-      console.warn('Bot detected: form submitted too quickly');
+      const remainingTime = Math.ceil((minimumTime - timeSincePageLoad) / 1000);
+      console.warn('Form submitted too quickly', { timeSincePageLoad, minimumTime, remainingTime });
       setSubmitStatus('error');
+      setErrorMessage(`Lütfen ${remainingTime} saniye bekleyip tekrar deneyin.`);
       return;
     }
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
+
+    const requestBody = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+      projectName,
+      timestamp: Date.now(), // Rate limiting için
+    };
+
+    console.log('API isteği gönderiliyor...', requestBody);
 
     try {
       const response = await fetch('/api/contact', {
@@ -92,20 +113,20 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-          projectName,
-          timestamp: Date.now(), // Rate limiting için
-        }),
+        body: JSON.stringify(requestBody),
+      });
+
+      console.log('API yanıtı alındı', { 
+        status: response.status, 
+        ok: response.ok,
+        headers: Object.fromEntries(response.headers.entries())
       });
 
       if (response.ok) {
         const responseData = await response.json().catch(() => ({}));
+        console.log('Form başarıyla gönderildi', responseData);
         setSubmitStatus('success');
+        setErrorMessage('');
         setFormData({
           firstName: '',
           lastName: '',
@@ -117,23 +138,34 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
         // Sayfa yükleme zamanını sıfırla (başarılı gönderimden sonra)
         pageLoadTime.current = Date.now();
       } else {
-        const errorData = await response.json().catch(() => ({ message: 'Bilinmeyen bir hata oluştu.' }));
-        setSubmitStatus('error');
-        // API'den gelen hata mesajını console'a yazdır
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch (jsonError) {
+          console.error('JSON parse hatası', jsonError);
+          errorData = { message: `Sunucu hatası (${response.status}). Lütfen tekrar deneyin.` };
+        }
+        
         console.error('Form submission error:', {
           status: response.status,
+          statusText: response.statusText,
           message: errorData.message || 'Unknown error',
           errorData
         });
-        // Hata mesajını state'e kaydet (gelecekte gösterilebilir)
-        if (errorData.message) {
-          // Şimdilik console'da göster, ileride UI'da gösterebiliriz
-          console.error('Hata detayı:', errorData.message);
-        }
+        
+        setSubmitStatus('error');
+        // API'den gelen hata mesajını göster
+        setErrorMessage(errorData.message || t('contactForm.error'));
       }
-    } catch (error) {
-      console.error('Form submission error:', error);
+    } catch (error: any) {
+      console.error('Form submission catch error:', error);
+      console.error('Error details:', {
+        name: error?.name,
+        message: error?.message,
+        stack: error?.stack
+      });
       setSubmitStatus('error');
+      setErrorMessage(error?.message || 'Bağlantı hatası. İnternet bağlantınızı kontrol edip tekrar deneyin.');
     } finally {
       setIsSubmitting(false);
     }
@@ -388,7 +420,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
               )}
               {submitStatus === 'error' && (
                 <p className="text-red-600 font-gotham-book text-sm">
-                  {t('contactForm.error')}
+                  {errorMessage || t('contactForm.error')}
                 </p>
               )}
 
