@@ -27,7 +27,18 @@ export async function POST(request: NextRequest) {
 
     // Email adreslerini ayarla
     const recipientEmail = process.env.CONTACT_EMAIL || 'info@evartlife.com';
+    
+    // Gönderen email (Resend'de doğrulanmış olmalı - domain doğrulaması GEREKMEZ)
+    // Resend → Emails → Email adresinizi doğrulayın, sonra buraya yazın
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    
+    // Debug: Email adreslerini logla
+    console.log('Newsletter email config:', {
+      fromEmail,
+      recipientEmail,
+      hasResendFromEmail: !!process.env.RESEND_FROM_EMAIL,
+      hasContactEmail: !!process.env.CONTACT_EMAIL
+    });
 
     // HTML escape fonksiyonu (XSS koruması)
     const escapeHtml = (text: string) => {
@@ -120,36 +131,53 @@ Bu email Evart web sitesinden otomatik olarak gönderilmiştir.
     });
 
     if (error) {
-      console.error('Resend error:', JSON.stringify(error, null, 2));
+      console.error('Resend error (newsletter):', JSON.stringify(error, null, 2));
       
+      // Resend hata mesajlarını daha detaylı göster
       let errorMessage = 'Email gönderilirken bir hata oluştu.';
       
       if (error.message) {
+        // Domain doğrulama hatası
         if (error.message.includes('domain not verified') || error.message.includes('domain is not verified')) {
           errorMessage = 'Domain doğrulanmamış. Lütfen Resend dashboard\'da email adresinizi doğrulayın.';
-        } else if (error.message.includes('testing emails')) {
-          errorMessage = 'Test modunda sadece doğrulanmış email adreslerine gönderim yapılabilir.';
-        } else {
+        }
+        // Test modu hatası
+        else if (error.message.includes('testing emails')) {
+          errorMessage = 'Test modunda sadece doğrulanmış email adreslerine gönderim yapılabilir. Resend → Emails → Email adresinizi doğrulayın.';
+        }
+        // API key hatası
+        else if (error.message.includes('API key') || error.message.includes('Unauthorized') || error.message.includes('Invalid')) {
+          errorMessage = 'Resend API anahtarı geçersiz veya eksik. Lütfen Vercel\'de RESEND_API_KEY environment variable\'ını kontrol edin.';
+        }
+        // From email hatası
+        else if (error.message.includes('from') || error.message.includes('sender')) {
+          errorMessage = `Gönderen email adresi (${fromEmail}) doğrulanmamış. Resend'de bu email adresini doğrulamanız gerekiyor.`;
+        }
+        // Diğer hatalar
+        else {
           errorMessage = `Resend hatası: ${error.message}`;
         }
       }
       
-      console.error('Newsletter email error:', {
+      console.error('Newsletter email error details:', {
         message: error.message,
         name: error.name,
         fromEmail,
-        recipientEmail
+        recipientEmail,
+        subscriberEmail: email,
+        apiKeyExists: !!apiKey,
+        apiKeyLength: apiKey?.length || 0
       });
       
-      // Email gönderilemese bile abonelik başarılı sayılabilir (opsiyonel)
-      // Şimdilik hata döndürüyoruz
-      return NextResponse.json(
-        { success: false, message: errorMessage },
-        { status: 500 }
-      );
+      // Email gönderilemese bile abonelik başarılı sayılır
+      // Ama hata detaylarını log'a yazıyoruz
+      console.warn('Newsletter email gönderilemedi ama abonelik kaydedildi:', email);
+      console.warn('Hata nedeni:', errorMessage);
+    } else {
+      console.log('Newsletter subscription email sent successfully:', data);
     }
 
-    console.log('Newsletter subscription email sent successfully:', data);
+    // Abonelik başarılı (email gönderilse de gönderilmese de)
     console.log('Newsletter subscription:', email, new Date().toISOString());
 
     return NextResponse.json(

@@ -31,9 +31,17 @@ export default function Footer() {
       });
 
       if (response.ok) {
+        const responseData = await response.json().catch(() => ({}));
         setSubmitStatus('success');
         setEmail('');
+        console.log('Newsletter subscription success:', responseData);
       } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Newsletter subscription error:', {
+          status: response.status,
+          message: errorData.message || 'Unknown error',
+          errorData
+        });
         setSubmitStatus('error');
       }
     } catch (error) {
