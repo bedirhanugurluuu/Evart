@@ -81,18 +81,55 @@ export default function HeroSlider() {
     const isVideoSlideActive = currentRealIndex === videoSlideIndex;
 
     if (isVideoSlideActive) {
+      // iOS için agresif video oynatma
+      const playVideo = (video: HTMLVideoElement | null, device: string) => {
+        if (!video) return;
+        
+        // iOS için webkit-playsinline attribute'u ekle
+        video.setAttribute('webkit-playsinline', 'true');
+        video.setAttribute('x5-playsinline', 'true');
+        
+        // Video zaten oynatılıyorsa tekrar başlatma
+        if (!video.paused) return;
+        
+        // Video yüklendiyse direkt oynat
+        if (video.readyState >= 2) {
+          video.play().catch(err => {
+            console.warn(`${device} video play error:`, err);
+          });
+        } else {
+          // Video henüz yüklenmediyse, yüklendikten sonra oynat
+          const onCanPlay = () => {
+            video.play().catch(err => {
+              console.warn(`${device} video play error:`, err);
+            });
+            video.removeEventListener('canplay', onCanPlay);
+          };
+          video.addEventListener('canplay', onCanPlay);
+          
+          // Fallback: 500ms sonra tekrar dene
+          setTimeout(() => {
+            if (video.readyState >= 2) {
+              video.play().catch(err => {
+                console.warn(`${device} video play error (retry):`, err);
+              });
+            }
+          }, 500);
+          
+          // İkinci fallback: 1 saniye sonra tekrar dene
+          setTimeout(() => {
+            if (video.readyState >= 1) {
+              video.play().catch(() => {});
+            }
+          }, 1000);
+        }
+      };
+
       // Desktop video oynat
-      if (videoRefs.current.desktop) {
-        videoRefs.current.desktop.play().catch(err => {
-          console.warn('Desktop video play error:', err);
-        });
-      }
+      playVideo(videoRefs.current.desktop, 'Desktop');
+      
       // Mobile video oynat
-      if (videoRefs.current.mobile) {
-        videoRefs.current.mobile.play().catch(err => {
-          console.warn('Mobile video play error:', err);
-        });
-      }
+      playVideo(videoRefs.current.mobile, 'Mobile');
     } else {
       // Video slide aktif değilse duraklat
       if (videoRefs.current.desktop) {
@@ -259,14 +296,38 @@ export default function HeroSlider() {
                     <div className="hidden md:block w-full h-full relative" style={{ height: 'calc(100vh - 80px)' }}>
                       {shouldLoadVideo ? (
                         <video
-                          ref={(el) => { videoRefs.current.desktop = el; }}
+                          ref={(el) => { 
+                            videoRefs.current.desktop = el;
+                            if (el) {
+                              // iOS için webkit-playsinline attribute'u ekle
+                              el.setAttribute('webkit-playsinline', 'true');
+                              el.setAttribute('x5-playsinline', 'true');
+                            }
+                          }}
                           autoPlay={isVideoSlideActive}
                           loop
                           muted
                           playsInline
-                          preload="auto"
+                          preload="none"
+                          controls={false}
+                          disablePictureInPicture
+                          disableRemotePlayback
                           className="w-full h-full object-cover object-bottom pointer-events-none select-none"
                           style={{ height: '100%', width: '100%' }}
+                          onLoadedData={(e) => {
+                            // iOS için: Video yüklendiğinde oynat
+                            if (isVideoSlideActive) {
+                              const video = e.currentTarget;
+                              video.play().catch(() => {});
+                            }
+                          }}
+                          onCanPlay={(e) => {
+                            // iOS için: Video oynatılabilir olduğunda oynat
+                            if (isVideoSlideActive) {
+                              const video = e.currentTarget;
+                              video.play().catch(() => {});
+                            }
+                          }}
                           onError={() => handleVideoError('desktop')}
                         >
                           <source src={getVideoSrc('desktop')} type="video/mp4" />
@@ -279,13 +340,37 @@ export default function HeroSlider() {
                     <div className="block md:hidden w-full relative">
                       {shouldLoadVideo ? (
                         <video
-                          ref={(el) => { videoRefs.current.mobile = el; }}
+                          ref={(el) => { 
+                            videoRefs.current.mobile = el;
+                            if (el) {
+                              // iOS için webkit-playsinline attribute'u ekle
+                              el.setAttribute('webkit-playsinline', 'true');
+                              el.setAttribute('x5-playsinline', 'true');
+                            }
+                          }}
                           autoPlay={isVideoSlideActive}
                           loop
                           muted
                           playsInline
-                          preload="auto"
+                          preload="none"
+                          controls={false}
+                          disablePictureInPicture
+                          disableRemotePlayback
                           className="w-full h-auto object-cover object-bottom pointer-events-none select-none"
+                          onLoadedData={(e) => {
+                            // iOS için: Video yüklendiğinde oynat
+                            if (isVideoSlideActive) {
+                              const video = e.currentTarget;
+                              video.play().catch(() => {});
+                            }
+                          }}
+                          onCanPlay={(e) => {
+                            // iOS için: Video oynatılabilir olduğunda oynat
+                            if (isVideoSlideActive) {
+                              const video = e.currentTarget;
+                              video.play().catch(() => {});
+                            }
+                          }}
                           onError={() => handleVideoError('mobile')}
                         >
                           <source src={getVideoSrc('mobile')} type="video/mp4" />
@@ -363,12 +448,33 @@ export default function HeroSlider() {
           }}
         >
           <video
+            ref={(el) => {
+              if (el) {
+                // iOS için webkit-playsinline attribute'u ekle
+                el.setAttribute('webkit-playsinline', 'true');
+                el.setAttribute('x5-playsinline', 'true');
+              }
+            }}
             autoPlay
             loop
             muted
             playsInline
+            preload="none"
+            controls={false}
+            disablePictureInPicture
+            disableRemotePlayback
             className="w-full h-full object-cover"
             style={{ pointerEvents: 'none' }}
+            onLoadedData={(e) => {
+              // iOS için: Video yüklendiğinde oynat
+              const video = e.currentTarget;
+              video.play().catch(() => {});
+            }}
+            onCanPlay={(e) => {
+              // iOS için: Video oynatılabilir olduğunda oynat
+              const video = e.currentTarget;
+              video.play().catch(() => {});
+            }}
             onError={() => console.warn('Waves video error')}
           >
             <source src="/images/waves.mp4" type="video/mp4" />
