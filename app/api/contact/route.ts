@@ -119,10 +119,15 @@ export async function POST(request: NextRequest) {
     const resend = new Resend(apiKey);
 
     // Email gönderme
-    // Resend test modunda sadece doğrulanmış email adresine gönderebilir
-    // Production'da domain doğrulaması yapıldıktan sonra herhangi bir email adresine gönderebilirsiniz
+    // FROM email: Doğrulanmış olmalı (Resend'de email doğrulaması yeterli, domain doğrulaması gerekmez)
+    // TO email: Herhangi bir email adresi olabilir (doğrulama gerekmez)
+    
+    // Alıcı email (form mesajlarının gönderileceği adres)
     const recipientEmail = process.env.CONTACT_EMAIL || 'info@evartlife.com';
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@evartlife.com';
+    
+    // Gönderen email (Resend'de doğrulanmış olmalı - domain doğrulaması GEREKMEZ)
+    // Resend → Emails → Email adresinizi doğrulayın, sonra buraya yazın
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
     
     // HTML escape fonksiyonu (XSS koruması)
     const escapeHtml = (text: string) => {
@@ -234,9 +239,13 @@ Gönderim Zamanı: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Ista
       let errorMessage = 'Email gönderilirken bir hata oluştu.';
       
       if (error.message) {
+        // Domain doğrulama hatası
+        if (error.message.includes('domain not verified') || error.message.includes('domain is not verified')) {
+          errorMessage = 'Domain doğrulanmamış. Lütfen Resend dashboard\'da (https://resend.com/domains) domain doğrulaması yapın. Test için: Resend → Emails → Email adresinizi doğrulayın.';
+        }
         // Test modu hatası
-        if (error.message.includes('testing emails') || error.message.includes('domain not verified')) {
-          errorMessage = 'Domain doğrulanmamış. Resend dashboard\'da domain doğrulaması yapmanız gerekiyor. Test modunda sadece doğrulanmış email adreslerine gönderim yapılabilir.';
+        else if (error.message.includes('testing emails')) {
+          errorMessage = 'Test modunda sadece doğrulanmış email adreslerine gönderim yapılabilir. Resend → Emails → Email adresinizi doğrulayın.';
         }
         // API key hatası
         else if (error.message.includes('API key') || error.message.includes('Unauthorized') || error.message.includes('Invalid')) {
