@@ -104,6 +104,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
       });
 
       if (response.ok) {
+        const responseData = await response.json().catch(() => ({}));
         setSubmitStatus('success');
         setFormData({
           firstName: '',
@@ -116,9 +117,19 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
         // Sayfa yükleme zamanını sıfırla (başarılı gönderimden sonra)
         pageLoadTime.current = Date.now();
       } else {
-        const errorData = await response.json().catch(() => ({}));
+        const errorData = await response.json().catch(() => ({ message: 'Bilinmeyen bir hata oluştu.' }));
         setSubmitStatus('error');
-        console.error('Form submission error:', errorData.message || 'Unknown error');
+        // API'den gelen hata mesajını console'a yazdır
+        console.error('Form submission error:', {
+          status: response.status,
+          message: errorData.message || 'Unknown error',
+          errorData
+        });
+        // Hata mesajını state'e kaydet (gelecekte gösterilebilir)
+        if (errorData.message) {
+          // Şimdilik console'da göster, ileride UI'da gösterebiliriz
+          console.error('Hata detayı:', errorData.message);
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);

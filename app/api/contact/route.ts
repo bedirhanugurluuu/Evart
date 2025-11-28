@@ -228,19 +228,42 @@ Gönderim Zamanı: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Ista
     });
 
     if (error) {
-      console.error('Resend error:', error);
-      // Resend test modu hatası için özel mesaj
-      if (error.message && error.message.includes('testing emails')) {
-        return NextResponse.json(
-          { 
-            success: false, 
-            message: 'Test modunda sadece doğrulanmış email adresine gönderim yapılabilir. Lütfen Resend\'de domain doğrulaması yapın veya production ortamına geçin.' 
-          },
-          { status: 500 }
-        );
+      console.error('Resend error:', JSON.stringify(error, null, 2));
+      
+      // Resend hata mesajlarını daha detaylı göster
+      let errorMessage = 'Email gönderilirken bir hata oluştu.';
+      
+      if (error.message) {
+        // Test modu hatası
+        if (error.message.includes('testing emails') || error.message.includes('domain not verified')) {
+          errorMessage = 'Domain doğrulanmamış. Resend dashboard\'da domain doğrulaması yapmanız gerekiyor. Test modunda sadece doğrulanmış email adreslerine gönderim yapılabilir.';
+        }
+        // API key hatası
+        else if (error.message.includes('API key') || error.message.includes('Unauthorized') || error.message.includes('Invalid')) {
+          errorMessage = 'Resend API anahtarı geçersiz veya eksik. Lütfen Vercel\'de RESEND_API_KEY environment variable\'ını kontrol edin.';
+        }
+        // From email hatası
+        else if (error.message.includes('from') || error.message.includes('sender')) {
+          errorMessage = `Gönderen email adresi (${fromEmail}) doğrulanmamış. Resend\'de bu email adresini doğrulamanız gerekiyor.`;
+        }
+        // Diğer hatalar
+        else {
+          errorMessage = `Resend hatası: ${error.message}`;
+        }
       }
+      
+      // Hata detaylarını logla (production'da da görünsün)
+      console.error('Resend error details:', {
+        message: error.message,
+        name: error.name,
+        fromEmail,
+        recipientEmail,
+        apiKeyExists: !!apiKey,
+        apiKeyLength: apiKey?.length || 0
+      });
+      
       return NextResponse.json(
-        { success: false, message: 'Email gönderilirken bir hata oluştu: ' + (error.message || 'Bilinmeyen hata') },
+        { success: false, message: errorMessage },
         { status: 500 }
       );
     }
@@ -258,10 +281,28 @@ Gönderim Zamanı: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Ista
         }
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Contact form error:', error);
+    console.error('Error stack:', error?.stack);
+    console.error('Error details:', {
+      message: error?.message,
+      name: error?.name,
+      apiKeyExists: !!process.env.RESEND_API_KEY
+    });
+    
+    // Daha detaylı hata mesajı
+    let errorMessage = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+    
+    if (error?.message) {
+      if (error.message.includes('JSON')) {
+        errorMessage = 'Geçersiz form verisi. Lütfen tüm alanları doğru şekilde doldurun.';
+      } else {
+        errorMessage = `Hata: ${error.message}`;
+      }
+    }
+    
     return NextResponse.json(
-      { success: false, message: 'Bir hata oluştu. Lütfen tekrar deneyin.' },
+      { success: false, message: errorMessage },
       { status: 500 }
     );
   }
