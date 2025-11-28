@@ -23,6 +23,7 @@ export default function HeroSlider() {
   const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const videoRefs = useRef<{ desktop: HTMLVideoElement | null; mobile: HTMLVideoElement | null }>({ desktop: null, mobile: null });
+  const wavesVideoRef = useRef<HTMLVideoElement | null>(null);
 
   // Görsel path'lerini dinamik olarak oluştur
   const getImageSrc = (slideIndex: number, device: 'desktop' | 'mobile') => {
@@ -109,6 +110,19 @@ export default function HeroSlider() {
         // iOS bazen play() çağrısı bekler
         desktopVideo.play().catch(() => {
           console.warn("Desktop video autoplay engellendi, kullanıcı dokunmalı");
+        });
+      }
+
+      // Waves video
+      const wavesVideo = wavesVideoRef.current;
+      if (wavesVideo) {
+        wavesVideo.muted = true;
+        wavesVideo.playsInline = true;
+        wavesVideo.autoplay = true;
+        wavesVideo.loop = true;
+        // iOS bazen play() çağrısı bekler
+        wavesVideo.play().catch(() => {
+          console.warn("Waves video autoplay engellendi, kullanıcı dokunmalı");
         });
       }
     };
@@ -388,17 +402,24 @@ export default function HeroSlider() {
       {/* Rotating Circle with Video - En altta, yarısı slider içinde */}
       <div className="relative flex justify-center -mt-[50px] left-1/2 transform -translate-x-1/2 z-20">
         <div 
-          className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-white shadow-lg circle-glow"
+          className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-white shadow-lg circle-glow cursor-pointer"
           style={{
             filter: 'drop-shadow(0px 4px 16px rgba(22, 149, 136, 0.4))',
           }}
+          onClick={() => {
+            // Kullanıcı tıklayınca waves video'yu başlat
+            if (wavesVideoRef.current) {
+              wavesVideoRef.current.play().catch(() => {});
+            }
+          }}
         >
           <video
+            ref={(el) => { wavesVideoRef.current = el; }}
             autoPlay
             loop
             muted
             playsInline
-            preload="none"
+            preload="auto"
             controls={false}
             disablePictureInPicture
             disableRemotePlayback
