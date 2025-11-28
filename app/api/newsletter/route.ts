@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { google } from 'googleapis';
+import { Resend } from 'resend';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,75 +13,157 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const GOOGLE_SHEETS_ID = process.env.GOOGLE_SHEETS_ID;
-    const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-    let GOOGLE_SHEET_NAME = (process.env.GOOGLE_SHEET_NAME || 'Sheet1').trim();
-    let GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY;
-
-    if (GOOGLE_PRIVATE_KEY) {
-      GOOGLE_PRIVATE_KEY = GOOGLE_PRIVATE_KEY.trim().replace(/^["']|["']$/g, '');
-      GOOGLE_PRIVATE_KEY = GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
-      if (!GOOGLE_PRIVATE_KEY.includes('-----BEGIN PRIVATE KEY-----')) {
-        GOOGLE_PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----\n${GOOGLE_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`;
-      }
+    // Resend API Key kontrolü
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error('RESEND_API_KEY environment variable is not set');
+      return NextResponse.json(
+        { success: false, message: 'Email servisi yapılandırılmamış.' },
+        { status: 500 }
+      );
     }
 
-    if (GOOGLE_SHEETS_ID && GOOGLE_SERVICE_ACCOUNT_EMAIL && GOOGLE_PRIVATE_KEY) {
-      try {
-        const auth = new google.auth.JWT({
-          email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
-          key: GOOGLE_PRIVATE_KEY.trim(),
-          scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-        });
+    const resend = new Resend(apiKey);
 
-        const sheets = google.sheets({ version: 'v4', auth });
+    // Email adreslerini ayarla
+    const recipientEmail = process.env.CONTACT_EMAIL || 'info@evartlife.com';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
 
-        // ----------------------------------------------------
-        // 1) Debug: Google Sheets içinde olan tüm sheet isimlerini oku
-        // ----------------------------------------------------
-        const meta = await sheets.spreadsheets.get({
-          spreadsheetId: GOOGLE_SHEETS_ID,
-        });
+    // HTML escape fonksiyonu (XSS koruması)
+    const escapeHtml = (text: string) => {
+      const map: Record<string, string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;',
+      };
+      return text.replace(/[&<>"']/g, (m) => map[m]);
+    };
 
-        console.log(
-          'Sheets inside spreadsheet:',
-          meta.data.sheets?.map((s) => s.properties?.title)
-        );
+    const safeEmail = escapeHtml(email);
+    const subscriptionTime = new Date().toLocaleString('tr-TR', { 
+      timeZone: 'Europe/Istanbul',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
 
-        // ----------------------------------------------------
-        // 2) Sheet adını güvenli hale getir (boşluk, özel karakterler için)
-        // ----------------------------------------------------
-        const safeSheetName = GOOGLE_SHEET_NAME.replace(/'/g, "''");
-        const range = `'${safeSheetName}'!A1`;
+    // Newsletter aboneliği bildirimi email'i gönder
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: [recipientEmail],
+      subject: '🎉 Yeni Newsletter Abonesi - Evart',
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+              body { font-family: 'Gotham', Arial, sans-serif; line-height: 1.6; color: #414042; margin: 0; padding: 0; background-color: #f4f4f4; }
+              .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+              .header { background-color: #869e9e; color: white; padding: 30px 20px; text-align: center; }
+              .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+              .content { padding: 30px 20px; background-color: #ffffff; }
+              .field { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5e5e5; }
+              .field:last-child { border-bottom: none; }
+              .label { font-weight: bold; color: #869e9e; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; }
+              .value { color: #414042; font-size: 16px; margin-top: 5px; }
+              .highlight { background-color: #f0f8f8; padding: 20px; border-left: 4px solid #869e9e; margin: 20px 0; }
+              .footer { margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-top: 2px solid #869e9e; font-size: 12px; color: #666; text-align: center; }
+              .footer p { margin: 5px 0; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>🎉 Yeni Newsletter Abonesi</h1>
+              </div>
+              <div class="content">
+                <div class="highlight">
+                  <p style="margin: 0; font-size: 18px; color: #414042;">
+                    <strong>Birisi newsletter aboneniz oldu!</strong>
+                  </p>
+                </div>
+                <div class="field">
+                  <div class="label">Email Adresi</div>
+                  <div class="value">${safeEmail}</div>
+                </div>
+                <div class="field">
+                  <div class="label">Abonelik Zamanı</div>
+                  <div class="value">${subscriptionTime}</div>
+                </div>
+              </div>
+              <div class="footer">
+                <p><strong>Evart Newsletter Sistemi</strong></p>
+                <p>Bu email Evart web sitesinden otomatik olarak gönderilmiştir.</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      text: `
+🎉 Yeni Newsletter Abonesi
 
-        console.log('Attempting to append to range:', range);
+Birisi newsletter aboneniz oldu!
 
-        // ----------------------------------------------------
-        // 3) Veriyi ekle
-        // ----------------------------------------------------
-        await sheets.spreadsheets.values.append({
-          spreadsheetId: GOOGLE_SHEETS_ID,
-          range,
-          valueInputOption: 'USER_ENTERED',
-          requestBody: {
-            values: [[email, new Date().toLocaleString('tr-TR')]],
-          },
-        });
+Email Adresi: ${email}
+Abonelik Zamanı: ${subscriptionTime}
 
-        console.log('Newsletter subscription saved to Google Sheets:', email);
-      } catch (sheetsError: any) {
-        console.error('Google Sheets error:', sheetsError?.response?.data || sheetsError);
+---
+Evart Newsletter Sistemi
+Bu email Evart web sitesinden otomatik olarak gönderilmiştir.
+      `,
+    });
+
+    if (error) {
+      console.error('Resend error:', JSON.stringify(error, null, 2));
+      
+      let errorMessage = 'Email gönderilirken bir hata oluştu.';
+      
+      if (error.message) {
+        if (error.message.includes('domain not verified') || error.message.includes('domain is not verified')) {
+          errorMessage = 'Domain doğrulanmamış. Lütfen Resend dashboard\'da email adresinizi doğrulayın.';
+        } else if (error.message.includes('testing emails')) {
+          errorMessage = 'Test modunda sadece doğrulanmış email adreslerine gönderim yapılabilir.';
+        } else {
+          errorMessage = `Resend hatası: ${error.message}`;
+        }
       }
+      
+      console.error('Newsletter email error:', {
+        message: error.message,
+        name: error.name,
+        fromEmail,
+        recipientEmail
+      });
+      
+      // Email gönderilemese bile abonelik başarılı sayılabilir (opsiyonel)
+      // Şimdilik hata döndürüyoruz
+      return NextResponse.json(
+        { success: false, message: errorMessage },
+        { status: 500 }
+      );
     }
 
+    console.log('Newsletter subscription email sent successfully:', data);
     console.log('Newsletter subscription:', email, new Date().toISOString());
 
     return NextResponse.json(
       { success: true, message: 'Newsletter kaydı başarıyla alındı!' },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Newsletter subscription error:', error);
+    console.error('Error details:', {
+      message: error?.message,
+      name: error?.name,
+      stack: error?.stack
+    });
+    
     return NextResponse.json(
       { success: false, message: 'Bir hata oluştu. Lütfen tekrar deneyin.' },
       { status: 500 }

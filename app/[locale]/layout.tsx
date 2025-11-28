@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "../globals.css";
 import type { ReactNode } from "react";
 import { Locale } from "@/i18n";
@@ -63,8 +64,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       },
     },
     verification: {
-      // Google Search Console verification code buraya eklenebilir
-      // google: 'your-verification-code',
+      google: 'XCfBCY3DsvFjlTJOZ1ip-exJpCpJeunzgtMoRUOppas',
     },
     icons: {
       icon: [
@@ -150,6 +150,19 @@ export default function LocaleLayout({
         />
       </head>
       <body>
+        {/* Google Analytics (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZHZ18CS43J"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-ZHZ18CS43J');
+          `}
+        </Script>
         {children}
         {/* Schema.org Structured Data */}
         <script
