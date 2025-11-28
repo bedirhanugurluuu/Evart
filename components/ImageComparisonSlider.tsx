@@ -227,7 +227,7 @@ export default function ImageComparisonSlider() {
       }`}>
         
       {/* Circular Text Animation - Üstte */}
-      <div className="absolute top-0 lg:top-[-20px] right-5 lg:left-12 transform z-30 w-16 h-16 md:w-32 md:h-32">
+      <div className="absolute top-0 lg:top-[-70px] right-5 lg:left-12 transform z-30 w-16 h-16 md:w-32 md:h-32">
         {/* Dönen Text SVG */}
         <svg className="w-full h-full animate-spin-slow absolute inset-0" viewBox="0 0 200 200" style={{ transformOrigin: 'center' }}>
           <defs>
