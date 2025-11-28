@@ -27,12 +27,15 @@ export default function HeroSlider() {
   // Görsel path'lerini dinamik olarak oluştur
   const getImageSrc = (slideIndex: number, device: 'desktop' | 'mobile') => {
     const key = `${slideIndex}-${device}`;
-    // EN görselleri yoksa direkt TR kullan (404 hatası önlemek için)
-    const useFallback = imageErrors[key] || (locale === 'en');
+    // EN görselleri yoksa (hata varsa) TR'ye fallback yap
+    // Önce mevcut locale'i kullan, hata olursa TR'ye geç
+    const useFallback = imageErrors[key];
     const currentLocale = useFallback ? 'tr' : locale;
     // Video slide index 0'da, görsel slide'lar index 1 ve 2'de
-    // slideIndex 1 -> hero-slide1, slideIndex 2 -> hero-slide2
-    const imageSlideNumber = slideIndex;
+    // slideIndex 1 -> Oran (hero-slide2 görselleri), slideIndex 2 -> Yalıkavak (hero-slide1 görselleri)
+    // Slide sırası değişti: 1. Video, 2. Oran, 3. Yalıkavak
+    // Görsel mapping: index 1 -> hero-slide2 (Oran), index 2 -> hero-slide1 (Yalıkavak)
+    const imageSlideNumber = slideIndex === 1 ? 2 : slideIndex === 2 ? 1 : slideIndex;
     return `/images/hero-slide${imageSlideNumber}-${currentLocale}-${device}.jpg`;
   };
 
@@ -63,14 +66,14 @@ export default function HeroSlider() {
       link: () => '',
     },
     {
-      id: 2,
-      type: 'image' as const,
-      link: (locale: string) => `/${locale}/evart-yalikavak`,
-    },
-    {
       id: 3,
       type: 'image' as const,
       link: (locale: string) => `/${locale}/evart-oran`,
+    },
+    {
+      id: 2,
+      type: 'image' as const,
+      link: (locale: string) => `/${locale}/evart-yalikavak`,
     },
   ];
 
@@ -81,18 +84,44 @@ export default function HeroSlider() {
     const isVideoSlideActive = currentRealIndex === videoSlideIndex;
 
     if (isVideoSlideActive) {
+      // iOS'ta video yüklendikten sonra oynatmak için timeout ekle
+      const playVideo = (video: HTMLVideoElement | null, device: string) => {
+        if (!video) return;
+        
+        // Video zaten oynatılıyorsa tekrar başlatma
+        if (!video.paused) return;
+        
+        // Video yüklendiyse direkt oynat
+        if (video.readyState >= 2) {
+          video.play().catch(err => {
+            console.warn(`${device} video play error:`, err);
+          });
+        } else {
+          // Video henüz yüklenmediyse, yüklendikten sonra oynat
+          const onCanPlay = () => {
+            video.play().catch(err => {
+              console.warn(`${device} video play error:`, err);
+            });
+            video.removeEventListener('canplay', onCanPlay);
+          };
+          video.addEventListener('canplay', onCanPlay);
+          
+          // Fallback: 500ms sonra tekrar dene
+          setTimeout(() => {
+            if (video.readyState >= 2) {
+              video.play().catch(err => {
+                console.warn(`${device} video play error (retry):`, err);
+              });
+            }
+          }, 500);
+        }
+      };
+
       // Desktop video oynat
-      if (videoRefs.current.desktop) {
-        videoRefs.current.desktop.play().catch(err => {
-          console.warn('Desktop video play error:', err);
-        });
-      }
+      playVideo(videoRefs.current.desktop, 'Desktop');
+      
       // Mobile video oynat
-      if (videoRefs.current.mobile) {
-        videoRefs.current.mobile.play().catch(err => {
-          console.warn('Mobile video play error:', err);
-        });
-      }
+      playVideo(videoRefs.current.mobile, 'Mobile');
     } else {
       // Video slide aktif değilse duraklat
       if (videoRefs.current.desktop) {
@@ -259,14 +288,37 @@ export default function HeroSlider() {
                     <div className="hidden md:block w-full h-full relative" style={{ height: 'calc(100vh - 80px)' }}>
                       {shouldLoadVideo ? (
                         <video
-                          ref={(el) => { videoRefs.current.desktop = el; }}
+                          ref={(el) => { 
+                            videoRefs.current.desktop = el;
+                            // iOS için: Video yüklendikten hemen sonra oynat
+                            if (el && isVideoSlideActive) {
+                              const tryPlay = () => {
+                                if (el.readyState >= 2) {
+                                  el.play().catch(() => {});
+                                } else {
+                                  el.addEventListener('canplay', tryPlay, { once: true });
+                                }
+                              };
+                              tryPlay();
+                            }
+                          }}
                           autoPlay={isVideoSlideActive}
                           loop
                           muted
                           playsInline
                           preload="auto"
+                          controls={false}
+                          disablePictureInPicture
+                          disableRemotePlayback
                           className="w-full h-full object-cover object-bottom pointer-events-none select-none"
                           style={{ height: '100%', width: '100%' }}
+                          onLoadedData={(e) => {
+                            // iOS için: Video yüklendiğinde oynat
+                            if (isVideoSlideActive) {
+                              const video = e.currentTarget;
+                              video.play().catch(() => {});
+                            }
+                          }}
                           onError={() => handleVideoError('desktop')}
                         >
                           <source src={getVideoSrc('desktop')} type="video/mp4" />
@@ -279,13 +331,36 @@ export default function HeroSlider() {
                     <div className="block md:hidden w-full relative">
                       {shouldLoadVideo ? (
                         <video
-                          ref={(el) => { videoRefs.current.mobile = el; }}
+                          ref={(el) => { 
+                            videoRefs.current.mobile = el;
+                            // iOS için: Video yüklendikten hemen sonra oynat
+                            if (el && isVideoSlideActive) {
+                              const tryPlay = () => {
+                                if (el.readyState >= 2) {
+                                  el.play().catch(() => {});
+                                } else {
+                                  el.addEventListener('canplay', tryPlay, { once: true });
+                                }
+                              };
+                              tryPlay();
+                            }
+                          }}
                           autoPlay={isVideoSlideActive}
                           loop
                           muted
                           playsInline
                           preload="auto"
+                          controls={false}
+                          disablePictureInPicture
+                          disableRemotePlayback
                           className="w-full h-auto object-cover object-bottom pointer-events-none select-none"
+                          onLoadedData={(e) => {
+                            // iOS için: Video yüklendiğinde oynat
+                            if (isVideoSlideActive) {
+                              const video = e.currentTarget;
+                              video.play().catch(() => {});
+                            }
+                          }}
                           onError={() => handleVideoError('mobile')}
                         >
                           <source src={getVideoSrc('mobile')} type="video/mp4" />
@@ -367,8 +442,17 @@ export default function HeroSlider() {
             loop
             muted
             playsInline
+            preload="auto"
+            controls={false}
+            disablePictureInPicture
+            disableRemotePlayback
             className="w-full h-full object-cover"
             style={{ pointerEvents: 'none' }}
+            onLoadedData={(e) => {
+              // iOS için: Video yüklendiğinde oynat
+              const video = e.currentTarget;
+              video.play().catch(() => {});
+            }}
             onError={() => console.warn('Waves video error')}
           >
             <source src="/images/waves.mp4" type="video/mp4" />

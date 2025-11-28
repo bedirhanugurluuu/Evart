@@ -153,7 +153,7 @@ export default function ImageComparisonSliderReverse() {
       {/* Sağ Taraf - %65 - Resimler */}
       <div 
         ref={containerRef}
-        className={`relative image-comparison-slider order-1 lg:order-2 image-comparison-slider w-[100%] lg:w-[65%] h-[175px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out delay-300 ${
+        className={`image-comparison relative image-comparison-slider order-1 lg:order-2 image-comparison-slider w-[100%] lg:w-[65%] h-[175px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out delay-300 ${
           isVisible ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-70'
         }`}
         style={{

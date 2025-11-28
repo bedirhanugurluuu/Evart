@@ -130,7 +130,7 @@ export default function ImageComparisonSlider() {
       {/* Sol Taraf - %70 */}
       <div 
         ref={containerRef}
-        className={`relative image-comparison-slider w-[100%] lg:w-[65%] h-[175px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
+        className={`image-comparison relative image-comparison-slider w-[100%] lg:w-[65%] h-[175px] md:h-[550px] overflow-hidden cursor-col-resize transition-all duration-1000 ease-out ${
           isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-70'
         }`}
         style={{
@@ -227,7 +227,7 @@ export default function ImageComparisonSlider() {
       }`}>
         
       {/* Circular Text Animation - Üstte */}
-      <div className="absolute top-2 right-5 lg:left-12 transform z-30 w-16 h-16 md:w-32 md:h-32">
+      <div className="absolute top-0 lg:top-[-20px] right-5 lg:left-12 transform z-30 w-16 h-16 md:w-32 md:h-32">
         {/* Dönen Text SVG */}
         <svg className="w-full h-full animate-spin-slow absolute inset-0" viewBox="0 0 200 200" style={{ transformOrigin: 'center' }}>
           <defs>
