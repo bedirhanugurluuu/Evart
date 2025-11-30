@@ -47,15 +47,21 @@ export default function HeroSlider() {
     }
   };
 
-  // Video path'lerini oluştur
+  // Video path'lerini dinamik olarak oluştur
   const getVideoSrc = (device: 'desktop' | 'mobile') => {
-    return `/images/hero-video-${device}.mp4`;
+    const key = device;
+    // EN videoları yoksa (hata varsa) TR'ye fallback yap
+    // Önce mevcut locale'i kullan, hata olursa TR'ye geç
+    const useFallback = videoErrors[key];
+    const currentLocale = useFallback ? 'tr' : locale;
+    return `/images/hero-video-${currentLocale}-${device}.mp4`;
   };
 
-  // Video yükleme hatası durumunda
+  // Video yükleme hatası durumunda TR'ye fallback yap
   const handleVideoError = (device: 'desktop' | 'mobile') => {
-    if (!videoErrors[device]) {
-      setVideoErrors(prev => ({ ...prev, [device]: true }));
+    const key = device;
+    if (!videoErrors[key]) {
+      setVideoErrors(prev => ({ ...prev, [key]: true }));
     }
   };
 
