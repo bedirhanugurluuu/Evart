@@ -180,8 +180,8 @@ export default function EvartOranClient() {
             {/* Sağ 70% - Slider */}
             <div className="lg:col-span-7">
               <SimpleImageSlider 
-                image1="/images/oran-2.jpg"
-                image2="/images/oran-3.jpg"
+                image1="/images/oran-2.png"
+                image2="/images/oran-3.png"
                 alt1="Yaşam 1"
                 alt2="Yaşam 2"
               />

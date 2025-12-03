@@ -199,6 +199,40 @@ export default function EvartYalikavakClient() {
         </div>
       </section>
 
+      {/* Section 5 - 70% Sol (Slider) / 30% Sağ (Yazı) */}
+      <section className="py-8">
+        <div className="w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-10">
+            {/* Sol 70% - Slider */}
+            <div className="lg:col-span-7 order-2 lg:order-1">
+              <SimpleImageSlider
+                image1="/images/yalikavak-8.png"
+                image2="/images/yalikavak-9.png"
+                alt1="Yaşam 9"
+                alt2="Yaşam 10"
+              />
+            </div>
+            {/* Sağ 30% - Yazı */}
+            <div className="lg:col-span-3 flex text-center items-center justify-center py-8 lg:py-0 px-1 order-1 lg:order-2" style={{ backgroundColor: "#9dc4c2" }}>
+              <div className="text-center">
+                <p className="font-questa-regular text-2xl md:text-4xl mb-2 text-white">
+                  {t('evartYalikavak.section5.title')}
+                </p>
+                <p className="font-gotham-book uppercase text-lg md:text-2xl text-white">
+                  {t('evartYalikavak.section5.subtitle')}
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Altında Yazı */}
+          <div className="container-custom mt-16">
+            <p className="font-gotham-book text-base md:text-lg text-left max-w-3xl mx-auto leading-relaxed" style={{ color: "#414042", lineHeight: "1.2" }}>
+              <span dangerouslySetInnerHTML={{ __html: t('evartYalikavak.section5.description').replace(/<br>/g, '<br />') }} />
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Section 2 - 70% Sol (Slider) / 30% Sağ (Yazı) */}
       <section className="py-8">
         <div className="w-full">

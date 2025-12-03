@@ -112,7 +112,7 @@
     "section1": {
       "title": "Yaşam Biçimi:",
       "subtitle": "Şehirli & Dingin",
-      "description": "Burada yalnızca bir daireye değil; şehrin hızını Bodrum'un dinginliğiyle buluşturan özgün bir minimal yaşam kültürünesahip oluyorsunuz. Toplam 132 konuttan oluşan bu proje, Bodrum’da sade, fonksiyonel ve sosyalleşmeye açık bir yaşam modeli sunuyor.<br><br>Bahçe dubleksleri sabah uyandığınızda doğrudan havuza açılırken, çatı dubleksleri yüksek tavanlarıyla modern rezidans ferahlığını sunuyor.<br><br>Her daire brüt 40 m² olarak kompakt ama fonksiyonel 1+1 planlarda tasarlandı. Modüler mimari sayesinde birleştirme imkânı sunarak büyüyebilen, esnek yaşam alanları oluşturmak mümkün."
+      "description": "Burada yalnızca bir daireye değil; şehrin hızını Bodrum'un dinginliğiyle buluşturan özgün bir minimal yaşam kültürünesahip oluyorsunuz. Toplam 132 konuttan oluşan bu proje, Bodrum’da sade, fonksiyonel ve sosyalleşmeye açık bir yaşam modeli sunuyor.<br><br>Bahçe dubleksleri sabah uyandığınızda doğrudan havuza açılırken, çatı dubleksleri yüksek tavanlarıyla modern rezidans ferahlığını sunuyor."
     },
     "section2": {
       "title": "Sosyal Alanlar:",
@@ -128,6 +128,11 @@
       "title": "Yaşam + Yatırım:",
       "subtitle": "Çift Değer",
       "description": "Tüm birimler ticari bağımsız bölüm tapusu ile teslim ediliyor. Bu sayede evinizi ister yaşam alanı, ister ofis, isterse yatırım amaçlı kullanabilirsiniz. Home-office kültürünün yükselişiyle birleştiğinde, Evart Yalıkavak çok yönlü bir yatırım fırsatına dönüşüyor."
+    },
+    "section5": {
+      "title": "Minimal Yaşam",
+      "subtitle": "Konfor & Güven",
+      "description": "Her daire brüt 40 m² olarak kompakt ama fonksiyonel 1+1 planlarda tasarlandı. Modüler mimari sayesinde birleştirme imkânı sunarak büyüyebilen, esnek yaşam alanları oluşturmak mümkün."
     }
   },
   "contact": {
