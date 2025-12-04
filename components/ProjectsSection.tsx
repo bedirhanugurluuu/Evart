@@ -1,9 +1,10 @@
 'use client';
 
 import { useTranslations } from '@/hooks/useTranslations';
+import Link from 'next/link';
 
 export default function ProjectsSection() {
-  const { t } = useTranslations();
+  const { t, locale } = useTranslations();
   
   return (
     <section className="w-full">
@@ -23,12 +24,18 @@ export default function ProjectsSection() {
 
             {/* Evart Oran ve Evart Yalıkavak - Yan Yana */}
             <div className="flex items-center gap-10 md:gap-40">
-              <div className="font-gotham-book uppercase text-white text-base md:text-xl">
+              <Link 
+                href={`/${locale}/evart-oran`}
+                className="font-gotham-book uppercase text-white text-base md:text-xl hover:opacity-80 transition-opacity cursor-pointer"
+              >
                 {t('home.projectsSection.evartOran')}
-              </div>
-              <div className="font-gotham-book uppercase text-white text-base md:text-xl">
+              </Link>
+              <Link 
+                href={`/${locale}/evart-yalikavak`}
+                className="font-gotham-book uppercase text-white text-base md:text-xl hover:opacity-80 transition-opacity cursor-pointer"
+              >
                 {t('home.projectsSection.evartYalikavak')}
-              </div>
+              </Link>
             </div>
           </div>
         </div>
