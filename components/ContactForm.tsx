@@ -206,7 +206,7 @@ export default function ContactForm({ projectName = "Evart", absoluteOverlay = f
             </p>
 
             {/* İletişim Bilgileri */}
-            <div className="flex flex-col space-y-2 items-center md:items-start">
+            <div className="flex flex-col space-y-2 items-start">
               {/* Adres */}
               <div className="inline-flex items-center gap-2">
                 <svg

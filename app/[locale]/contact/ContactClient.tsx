@@ -245,8 +245,8 @@ export default function ContactClient() {
                 {t('contact.email.title')}
               </h3>
               <p className="font-gotham-book text-base leading-relaxed" style={{ color: "#414042" }}>
-                <a href="mailto:info@https://evartlife.com" className="hover:text-[#869e9e] transition-colors">
-                  info@https://evartlife.com
+                <a href="mailto:info@evartlife.com" className="hover:text-[#869e9e] transition-colors">
+                  info@evartlife.com
                 </a>
               </p>
             </div>
