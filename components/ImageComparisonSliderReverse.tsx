@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "@/hooks/useTranslations";
@@ -14,6 +14,7 @@ export default function ImageComparisonSliderReverse() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const isDraggingFromHandleRef = useRef(false);
+  const isDraggingRef = useRef(false);
 
   const updateSliderPosition = (clientX: number) => {
     if (!containerRef.current) return;
@@ -27,20 +28,22 @@ export default function ImageComparisonSliderReverse() {
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
+    isDraggingRef.current = true;
     setIsDragging(true);
     updateSliderPosition(e.clientX);
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging) return;
+    if (!isDraggingRef.current) return;
     updateSliderPosition(e.clientX);
   };
 
   const handleMouseUp = () => {
+    isDraggingRef.current = false;
     setIsDragging(false);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = useCallback((e: TouchEvent) => {
     // Sadece handle'dan tutulduğunda başlat
     const target = e.target as HTMLElement;
     const isHandle = target.closest('[data-slider-handle]');
@@ -48,16 +51,17 @@ export default function ImageComparisonSliderReverse() {
     if (!isHandle) return;
     
     isDraggingFromHandleRef.current = true;
+    isDraggingRef.current = true;
     setIsDragging(true);
     touchStartRef.current = {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
     };
     updateSliderPosition(e.touches[0].clientX);
-  };
+  }, []);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !isDraggingFromHandleRef.current || !touchStartRef.current) return;
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDraggingRef.current || !isDraggingFromHandleRef.current || !touchStartRef.current) return;
     
     const touch = e.touches[0];
     const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
@@ -74,13 +78,14 @@ export default function ImageComparisonSliderReverse() {
         y: touch.clientY,
       };
     }
-  };
+  }, []);
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = useCallback(() => {
+    isDraggingRef.current = false;
     setIsDragging(false);
     isDraggingFromHandleRef.current = false;
     touchStartRef.current = null;
-  };
+  }, []);
 
   useEffect(() => {
     if (isDragging) {
@@ -93,6 +98,22 @@ export default function ImageComparisonSliderReverse() {
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [isDragging]);
+
+  // Touch event listener'ları native olarak ekle (passive: false ile)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.addEventListener('touchstart', handleTouchStart, { passive: false });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    container.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
 
   useEffect(() => {
     // Mobilde parallax animasyonunu kapat
@@ -159,9 +180,6 @@ export default function ImageComparisonSliderReverse() {
         style={{
           borderRadius: '142px 0 0 142px',
         }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
         {/* İlk Görsel - Arka Plan */}
         <div className="absolute inset-0">

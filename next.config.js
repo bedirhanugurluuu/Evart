@@ -19,8 +19,13 @@ const nextConfig = {
   },
   // Modern ES6+ kodunu çevirme - modern tarayıcılar için
   experimental: {
-    optimizePackageImports: ['@/components'],
+    optimizePackageImports: ['@/components', 'swiper'],
+    // Partial prerendering - daha hızlı sayfa yükleme
+    ppr: false, // Next.js 15'te aktif olacak
   },
+  // Production optimizations
+  poweredByHeader: false,
+  reactStrictMode: true,
   // Experimental features for better performance
   // optimizeCss kaldırıldı - critters dependency gerektiriyor ve build hatası veriyor
   // experimental: {

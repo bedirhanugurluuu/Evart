@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "@/hooks/useTranslations";
@@ -21,6 +21,7 @@ export default function HeroSlider() {
   const [isSwiperTouching, setIsSwiperTouching] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
   const videoRefs = useRef<{ desktop: HTMLVideoElement | null; mobile: HTMLVideoElement | null }>({ desktop: null, mobile: null });
   const wavesVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -84,51 +85,78 @@ export default function HeroSlider() {
   ];
 
 
+  // Mobil cihaz kontrolü
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Locale değiştiğinde hata durumlarını sıfırla
   useEffect(() => {
     setImageErrors({});
     setVideoErrors({});
   }, [locale]);
 
-  // Video'ları başlat - iOS için
+  // Video'ları başlat - iOS için (sadece aktif slide'da)
   useEffect(() => {
     const initVideos = () => {
-      // Mobile video
-      const mobileVideo = videoRefs.current.mobile;
-      if (mobileVideo) {
-        mobileVideo.muted = true;
-        mobileVideo.playsInline = true;
-        mobileVideo.autoplay = true;
-        mobileVideo.loop = true;
-        // iOS bazen play() çağrısı bekler
-        mobileVideo.play().catch(() => {
-          console.warn("Mobile video autoplay engellendi, kullanıcı dokunmalı");
-        });
+      const videoSlideIndex = slides.findIndex(s => s.type === 'video');
+      const isVideoSlideActive = activeIndex === videoSlideIndex;
+      
+      // Sadece video slide aktifse veya yakınsa başlat
+      if (!isVideoSlideActive && videoSlideIndex !== -1) {
+        const prevIndex = (videoSlideIndex - 1 + slides.length) % slides.length;
+        const nextIndex = (videoSlideIndex + 1) % slides.length;
+        if (activeIndex !== prevIndex && activeIndex !== nextIndex) {
+          return; // Video slide'a uzaksa başlatma
+        }
       }
 
-      // Desktop video
-      const desktopVideo = videoRefs.current.desktop;
-      if (desktopVideo) {
-        desktopVideo.muted = true;
-        desktopVideo.playsInline = true;
-        desktopVideo.autoplay = true;
-        desktopVideo.loop = true;
-        // iOS bazen play() çağrısı bekler
-        desktopVideo.play().catch(() => {
-          console.warn("Desktop video autoplay engellendi, kullanıcı dokunmalı");
-        });
+      // Desktop video - sadece desktop'ta
+      if (!isMobile) {
+        const desktopVideo = videoRefs.current.desktop;
+        if (desktopVideo && isVideoSlideActive) {
+          desktopVideo.muted = true;
+          desktopVideo.playsInline = true;
+          desktopVideo.autoplay = true;
+          desktopVideo.loop = true;
+          desktopVideo.play().catch(() => {
+            console.warn("Desktop video autoplay engellendi");
+          });
+        }
       }
 
-      // Waves video
+      // Mobile video - sadece mobile'da ve aktifse
+      if (isMobile) {
+        const mobileVideo = videoRefs.current.mobile;
+        if (mobileVideo && isVideoSlideActive) {
+          mobileVideo.muted = true;
+          mobileVideo.playsInline = true;
+          mobileVideo.autoplay = true;
+          mobileVideo.loop = true;
+          // Mobile'da preload="none" kullandığımız için yükleme tamamlanınca oynat
+          if (mobileVideo.readyState >= 2) {
+            mobileVideo.play().catch(() => {
+              console.warn("Mobile video autoplay engellendi");
+            });
+          }
+        }
+      }
+
+      // Waves video - sadece görünürse başlat
       const wavesVideo = wavesVideoRef.current;
       if (wavesVideo) {
         wavesVideo.muted = true;
         wavesVideo.playsInline = true;
         wavesVideo.autoplay = true;
         wavesVideo.loop = true;
-        // iOS bazen play() çağrısı bekler
+        wavesVideo.preload = isMobile ? "none" : "metadata";
         wavesVideo.play().catch(() => {
-          console.warn("Waves video autoplay engellendi, kullanıcı dokunmalı");
+          console.warn("Waves video autoplay engellendi");
         });
       }
     };
@@ -136,7 +164,7 @@ export default function HeroSlider() {
     // Kısa bir gecikme ile başlat (DOM hazır olsun)
     const timer = setTimeout(initVideos, 100);
     return () => clearTimeout(timer);
-  }, []);
+  }, [activeIndex, isMobile]);
 
   const handleSlideClick = (e: React.MouseEvent) => {
     // Mouse tıklaması ise her zaman izin ver (touch event değilse)
@@ -297,7 +325,7 @@ export default function HeroSlider() {
                       {shouldLoadVideo ? (
                         <video
                           ref={(el) => { videoRefs.current.desktop = el; }}
-                          preload="auto"
+                          preload="metadata"
                           autoPlay
                           muted
                           playsInline
@@ -328,7 +356,7 @@ export default function HeroSlider() {
                       {shouldLoadVideo ? (
                         <video
                           ref={(el) => { videoRefs.current.mobile = el; }}
-                          preload="auto"
+                          preload="none"
                           autoPlay
                           muted
                           playsInline
@@ -338,6 +366,13 @@ export default function HeroSlider() {
                           disableRemotePlayback
                           className="w-full h-auto object-cover object-bottom pointer-events-none select-none"
                           onError={() => handleVideoError('mobile')}
+                          onLoadedData={(e) => {
+                            // Video yüklendiğinde oynatmayı dene
+                            const video = e.currentTarget;
+                            video.play().catch(() => {
+                              console.warn("Mobile video autoplay engellendi");
+                            });
+                          }}
                         >
                           <source src={getVideoSrc('mobile')} type="video/mp4" />
                         </video>
@@ -425,7 +460,7 @@ export default function HeroSlider() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             controls={false}
             disablePictureInPicture
             disableRemotePlayback

@@ -59,8 +59,48 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
 }
 
 export default function Home({ params }: { params: { locale: Locale } }) {
+  const isTr = params.locale === 'tr';
+  const videoLocale = params.locale;
+  
+  // Video structured data for Google
+  const videoStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": isTr ? "Evart - Premium Gayrimenkul Çözümleri" : "Evart - Premium Real Estate Solutions",
+    "description": isTr 
+      ? "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri."
+      : "Find your dream home with Evart. Premium residential projects in Ankara and Bodrum.",
+    "thumbnailUrl": [
+      `${baseUrl}/images/og-image.jpg`,
+      `${baseUrl}/images/hero-slide1-${videoLocale}-desktop.jpg`
+    ],
+    "uploadDate": new Date().toISOString().split('T')[0],
+    "contentUrl": `${baseUrl}/images/hero-video-${videoLocale}-desktop.mp4`,
+    "embedUrl": `${baseUrl}/${params.locale}`,
+    "duration": "PT30S",
+    "inLanguage": videoLocale === 'tr' ? 'tr' : 'en',
+    "publisher": {
+      "@type": "Organization",
+      "name": "Evart",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`
+      }
+    },
+    "potentialAction": {
+      "@type": "WatchAction",
+      "target": `${baseUrl}/${params.locale}`
+    }
+  };
+
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoStructuredData)
+        }}
+      />
       <Header />
       <HeroSlider />
       <AboutSection />
