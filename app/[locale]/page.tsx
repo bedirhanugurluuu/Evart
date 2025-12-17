@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
   const isTr = params.locale === 'tr';
   
   return {
-    title: isTr ? "Ana Sayfa" : "Home",
+    title: "Evart",
     description: isTr 
       ? "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri. Evart Oran ve Evart Yalıkavak ile yaşam hayaliniz bir mesaj uzağınızda."
       : "Find your dream home with Evart. Premium residential projects in Ankara and Bodrum. Your dream life is just a message away with Evart Oran and Evart Yalıkavak.",
