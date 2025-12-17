@@ -91,7 +91,7 @@ export default function LocaleLayout({
     <html lang={params.locale}>
       <head>
         {/* Favicon - Google için açık link etiketleri */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         {/* DNS Preconnect - Vercel ve CDN için */}
