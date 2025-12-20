@@ -68,13 +68,13 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
     },
     icons: {
       icon: [
+        { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+        { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
         { url: '/favicon.ico', sizes: 'any' },
-        { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
-        { url: '/favicon.png', sizes: '16x16', type: 'image/png' },
       ],
       shortcut: '/favicon.ico',
       apple: [
-        { url: '/favicon.png', sizes: '180x180', type: 'image/png' },
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
       ],
     },
   };
@@ -90,10 +90,6 @@ export default function LocaleLayout({
   return (
     <html lang={params.locale}>
       <head>
-        {/* Favicon - Google için açık link etiketleri */}
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
-        <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
         {/* DNS Preconnect - Vercel ve CDN için */}
         <link rel="dns-prefetch" href="https://evart.vercel.app" />
         <link rel="preconnect" href="https://evart.vercel.app" crossOrigin="anonymous" />
