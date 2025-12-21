@@ -5,8 +5,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useTranslations } from "@/hooks/useTranslations";
+import { Locale } from "@/i18n";
 
-export default function NotFound() {
+export default function NotFound({ params }: { params: { locale: Locale } }) {
   const { t, locale } = useTranslations();
   const [isMounted, setIsMounted] = useState(false);
 
