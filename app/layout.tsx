@@ -13,12 +13,12 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        {/* Favicon - Google için tüm boyutlar ve formatlar - Tam URL ile */}
-        <link rel="shortcut icon" type="image/x-icon" media="all" href={`${baseUrl}/favicon.ico`} />
-        <link rel="icon" type="image/x-icon" href={`${baseUrl}/favicon.ico`} />
-        <link rel="icon" type="image/png" sizes="48x48" href={`${baseUrl}/favicon-48x48.png`} />
-        <link rel="icon" type="image/png" sizes="96x96" href={`${baseUrl}/favicon-96x96.png`} />
-        <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}/apple-touch-icon.png`} />
+        {/* Favicon - Google için tüm boyutlar ve formatlar - Yeni isimlerle cache bypass */}
+        <link rel="shortcut icon" type="image/x-icon" media="all" href={`${baseUrl}/evart-favicon.ico`} />
+        <link rel="icon" type="image/x-icon" href={`${baseUrl}/evart-favicon.ico`} />
+        <link rel="icon" type="image/png" sizes="48x48" href={`${baseUrl}/evart-icon-48.png`} />
+        <link rel="icon" type="image/png" sizes="96x96" href={`${baseUrl}/evart-icon-96.png`} />
+        <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}/evart-apple-icon.png`} />
         {/* DNS Preconnect - Vercel ve CDN için */}
         <link rel="dns-prefetch" href="https://evart.vercel.app" />
         <link rel="preconnect" href="https://evart.vercel.app" crossOrigin="anonymous" />
