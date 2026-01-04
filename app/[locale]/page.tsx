@@ -15,10 +15,10 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
   const isTr = params.locale === 'tr';
   
   return {
-    title: "Evart",
+    title: isTr ? "Evart - Premium Gayrimenkul Çözümleri | Ankara & Bodrum" : "Evart - Premium Real Estate Solutions | Ankara & Bodrum",
     description: isTr 
-      ? "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri. Evart Oran ve Evart Yalıkavak ile yaşam hayaliniz bir mesaj uzağınızda."
-      : "Find your dream home with Evart. Premium residential projects in Ankara and Bodrum. Your dream life is just a message away with Evart Oran and Evart Yalıkavak.",
+      ? "Evart ile hayalinizdeki eve kavuşun. Ankara Çankaya'da Evart Oran, Bodrum Yalıkavak'ta Evart Yalıkavak premium konut projeleri. Akıllı ev sistemleri, modern mimari ve yatırım değeri."
+      : "Find your dream home with Evart. Premium residential projects: Evart Oran in Ankara Çankaya, Evart Yalıkavak in Bodrum. Smart home systems, modern architecture and investment value.",
     keywords: isTr
       ? ["evart", "gayrimenkul", "konut", "ankara", "bodrum", "evart oran", "evart yalikavak", "ana sayfa"]
       : ["evart", "real estate", "residential", "ankara", "bodrum", "evart oran", "evart yalikavak", "home"],
@@ -31,10 +31,10 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       },
     },
     openGraph: {
-      title: isTr ? "Evart - Premium Gayrimenkul Çözümleri" : "Evart - Premium Real Estate Solutions",
+      title: isTr ? "Evart - Premium Gayrimenkul Çözümleri | Ankara & Bodrum" : "Evart - Premium Real Estate Solutions | Ankara & Bodrum",
       description: isTr 
-        ? "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri."
-        : "Find your dream home with Evart. Premium residential projects in Ankara and Bodrum.",
+        ? "Evart ile hayalinizdeki eve kavuşun. Ankara Çankaya'da Evart Oran, Bodrum Yalıkavak'ta Evart Yalıkavak premium konut projeleri. Akıllı ev sistemleri ve modern mimari."
+        : "Find your dream home with Evart. Premium residential projects: Evart Oran in Ankara Çankaya, Evart Yalıkavak in Bodrum. Smart home systems and modern architecture.",
       url: `${baseUrl}/${params.locale}`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
@@ -61,6 +61,49 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
 export default function Home({ params }: { params: { locale: Locale } }) {
   const isTr = params.locale === 'tr';
   const videoLocale = params.locale;
+  
+  // Website structured data
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Evart",
+    "alternateName": "Evart Premium Real Estate",
+    "url": baseUrl,
+    "description": isTr 
+      ? "Evart - Premium gayrimenkul çözümleri. Ankara ve Bodrum'da seçkin konut projeleri."
+      : "Evart - Premium real estate solutions. Exclusive residential projects in Ankara and Bodrum.",
+    "inLanguage": [params.locale === 'tr' ? 'tr-TR' : 'en-US', params.locale === 'tr' ? 'en-US' : 'tr-TR'],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${baseUrl}/${params.locale}?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Evart",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`
+      }
+    }
+  };
+
+  // Breadcrumb structured data
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": isTr ? "Ana Sayfa" : "Home",
+        "item": `${baseUrl}/${params.locale}`
+      }
+    ]
+  };
   
   // Video structured data for Google
   const videoStructuredData = {
@@ -95,6 +138,21 @@ export default function Home({ params }: { params: { locale: Locale } }) {
 
   return (
     <main className="min-h-screen">
+      {/* Website Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData)
+        }}
+      />
+      {/* Breadcrumb Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbStructuredData)
+        }}
+      />
+      {/* Video Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -8,10 +8,10 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
   const isTr = params.locale === 'tr';
   
   return {
-    title: isTr ? "İletişim" : "Contact",
+    title: isTr ? "İletişim | Evart - Ankara & Bodrum Ofisleri" : "Contact | Evart - Ankara & Bodrum Offices",
     description: isTr 
-      ? "Evart ile iletişime geçin. Ankara ve Bodrum ofislerimizden bize ulaşın. Projelerimiz hakkında bilgi alın."
-      : "Contact Evart. Reach us from our Ankara and Bodrum offices. Get information about our projects.",
+      ? "Evart ile iletişime geçin. Ankara Çankaya ve Bodrum Yalıkavak ofislerimizden bize ulaşın. Evart Oran ve Evart Yalıkavak projeleri hakkında bilgi alın. 0532 510 12 31"
+      : "Contact Evart. Reach us from our Ankara Çankaya and Bodrum Yalıkavak offices. Get information about Evart Oran and Evart Yalıkavak projects. +90 532 510 12 31",
     keywords: isTr
       ? ["iletişim", "evart iletişim", "ankara ofis", "bodrum ofis", "gayrimenkul danışmanlık", "evart"]
       : ["contact", "evart contact", "ankara office", "bodrum office", "real estate consultation", "evart"],
@@ -24,10 +24,10 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       },
     },
     openGraph: {
-      title: isTr ? "İletişim | Evart" : "Contact | Evart",
+      title: isTr ? "İletişim | Evart - Ankara & Bodrum Ofisleri" : "Contact | Evart - Ankara & Bodrum Offices",
       description: isTr 
-        ? "Evart ile iletişime geçin. Ankara ve Bodrum ofislerimizden bize ulaşın."
-        : "Contact Evart. Reach us from our Ankara and Bodrum offices.",
+        ? "Evart ile iletişime geçin. Ankara Çankaya ve Bodrum Yalıkavak ofislerimizden bize ulaşın. Evart Oran ve Evart Yalıkavak projeleri hakkında bilgi alın."
+        : "Contact Evart. Reach us from our Ankara Çankaya and Bodrum Yalıkavak offices. Get information about Evart Oran and Evart Yalıkavak projects.",
       url: `${baseUrl}/${params.locale}/contact`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
@@ -52,5 +52,92 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
 }
 
 export default function Contact({ params }: { params: { locale: Locale } }) {
-  return <ContactClient />;
+  const isTr = params.locale === 'tr';
+  
+  // ContactPage structured data
+  const contactPageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": isTr ? "İletişim" : "Contact",
+    "description": isTr 
+      ? "Evart ile iletişime geçin. Ankara ve Bodrum ofislerimizden bize ulaşın."
+      : "Contact Evart. Reach us from our Ankara and Bodrum offices.",
+    "url": `${baseUrl}/${params.locale}/contact`,
+    "inLanguage": params.locale === 'tr' ? 'tr-TR' : 'en-US',
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Evart",
+      "url": baseUrl
+    },
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Evart",
+      "url": baseUrl,
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+90-532-510-12-31",
+          "contactType": "customer service",
+          "areaServed": ["TR"],
+          "availableLanguage": ["Turkish", "English"]
+        }
+      ],
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "İlkbahar Mahallesi, Galip Erdem Caddesi, Güney Park Evleri Karşısı",
+          "addressLocality": "Çankaya",
+          "addressRegion": "Ankara",
+          "postalCode": "06550",
+          "addressCountry": "TR"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Dirmil, İnönü Cd.",
+          "addressLocality": "Bodrum",
+          "addressRegion": "Muğla",
+          "postalCode": "48400",
+          "addressCountry": "TR"
+        }
+      ]
+    }
+  };
+
+  // Breadcrumb structured data
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": isTr ? "Ana Sayfa" : "Home",
+        "item": `${baseUrl}/${params.locale}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": isTr ? "İletişim" : "Contact",
+        "item": `${baseUrl}/${params.locale}/contact`
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(contactPageStructuredData)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbStructuredData)
+        }}
+      />
+      <ContactClient />
+    </>
+  );
 }
