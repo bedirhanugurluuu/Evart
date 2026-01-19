@@ -64,7 +64,17 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
     verification: {
       google: 'XCfBCY3DsvFjlTJOZ1ip-exJpCpJeunzgtMoRUOppas',
     },
-    // Favicon tanımları root layout'ta (app/layout.tsx)
+    icons: {
+      icon: [
+        { url: '/evart-icon-48.png', sizes: '48x48', type: 'image/png' },
+        { url: '/evart-icon-96.png', sizes: '96x96', type: 'image/png' },
+        { url: '/evart-favicon.ico', sizes: 'any', type: 'image/x-icon' },
+      ],
+      shortcut: '/evart-favicon.ico',
+      apple: [
+        { url: '/evart-apple-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+    },
   };
 }
 

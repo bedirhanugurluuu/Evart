@@ -7,7 +7,16 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: [
+          '/',
+          '/favicon.ico',
+          '/evart-favicon.ico',
+          '/evart-icon-48.png',
+          '/evart-icon-96.png',
+          '/evart-apple-icon.png',
+          '/fonts/',
+          '/images/',
+        ],
         disallow: ['/api/', '/_next/'],
       },
     ],
