@@ -77,7 +77,7 @@ export default function AboutSection() {
 
           {/* Devamını Oku */}
           <Link 
-            href={`/${locale}/about`} 
+            href={locale === 'tr' ? '/about' : `/${locale}/about`} 
             className="font-gotham-light italic text-sm md:text-lg inline-block relative read-more-link"
             style={{ color: "#414042" }}
           >

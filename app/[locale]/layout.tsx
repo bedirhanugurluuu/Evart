@@ -23,15 +23,15 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
     },
     alternates: {
       languages: {
-        'tr': `${baseUrl}/tr`,
+        'tr': baseUrl, // TR is at root, no /tr
         'en': `${baseUrl}/en`,
-        'x-default': `${baseUrl}/tr`, // Varsayılan dil TR
+        'x-default': baseUrl, // Default is root (TR)
       },
     },
     openGraph: {
       type: "website",
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
-      url: `${baseUrl}/${params.locale}`,
+      url: params.locale === 'tr' ? baseUrl : `${baseUrl}/${params.locale}`,
       siteName: "Evart",
       title: "Evart - Premium Gayrimenkul Çözümleri",
       description: "Evart ile hayalinizdeki eve kavuşun. Ankara ve Bodrum'da seçkin konut projeleri.",

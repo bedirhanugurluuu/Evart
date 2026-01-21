@@ -12,12 +12,21 @@ export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Helper: TR için root URL, EN için /en prefix
+  const getUrl = (path: string) => {
+    if (locale === 'tr') {
+      return path === '/' ? '/' : path;
+    }
+    return `/${locale}${path === '/' ? '' : path}`;
+  };
+
   // Aktif sayfa kontrolü
   const isActive = (path: string) => {
     if (path === '/') {
-      return pathname === `/${locale}` || pathname === '/tr' || pathname === '/en';
+      return pathname === '/' || pathname === `/${locale}` || pathname === '/tr' || pathname === '/en';
     }
-    return pathname === `/${locale}${path}` || pathname === path;
+    const url = getUrl(path);
+    return pathname === url || pathname === `/${locale}${path}`;
   };
 
   useEffect(() => {
@@ -37,7 +46,7 @@ export default function Header() {
       <nav className="container-custom py-2">
         <div className="flex items-center">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center">
+          <Link href={getUrl('/')} className="flex items-center">
             <Image
               src="/logo.png"
               alt="Evart Logo"
@@ -52,25 +61,25 @@ export default function Header() {
           {/* Desktop Menu - Kalan genişliğin tam ortasında */}
           <div className="hidden md:flex flex-1 items-center uppercase justify-center space-x-8">
             <Link 
-              href={`/${locale}/about`} 
+              href={getUrl('/about')} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}
             >
               {t('nav.about')}
             </Link>
             <Link 
-              href={`/${locale}/evart-oran`} 
+              href={getUrl('/evart-oran')} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/evart-oran') ? 'nav-link-active' : ''}`}
             >
               {t('nav.evartOran')}
             </Link>
             <Link 
-              href={`/${locale}/evart-yalikavak`} 
+              href={getUrl('/evart-yalikavak')} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/evart-yalikavak') ? 'nav-link-active' : ''}`}
             >
               {t('nav.evartYalikavak')}
             </Link>
             <Link 
-              href={`/${locale}/contact`} 
+              href={getUrl('/contact')} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}
             >
               {t('nav.contact')}
@@ -146,28 +155,28 @@ export default function Header() {
             {/* Menu Items */}
             <nav className="flex flex-col space-y-6">
               <Link 
-                href={`/${locale}/about`} 
+                href={getUrl('/about')} 
                 onClick={() => setIsMenuOpen(false)}
                 className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}
               >
                 {t('nav.about')}
               </Link>
               <Link 
-                href={`/${locale}/evart-oran`} 
+                href={getUrl('/evart-oran')} 
                 onClick={() => setIsMenuOpen(false)}
                 className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/evart-oran') ? 'nav-link-active' : ''}`}
               >
                 {t('nav.evartOran')}
               </Link>
               <Link 
-                href={`/${locale}/evart-yalikavak`} 
+                href={getUrl('/evart-yalikavak')} 
                 onClick={() => setIsMenuOpen(false)}
                 className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/evart-yalikavak') ? 'nav-link-active' : ''}`}
               >
                 {t('nav.evartYalikavak')}
               </Link>
               <Link 
-                href={`/${locale}/contact`} 
+                href={getUrl('/contact')} 
                 onClick={() => setIsMenuOpen(false)}
                 className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}
               >

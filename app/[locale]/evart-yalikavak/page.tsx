@@ -16,11 +16,11 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       ? ["evart yalıkavak", "bodrum rezidans", "bodrum konut", "yalıkavak daire", "bodrum yatırım", "evart"]
       : ["evart yalikavak", "bodrum residence", "bodrum residential", "yalikavak apartment", "bodrum investment", "evart"],
     alternates: {
-      canonical: `${baseUrl}/${params.locale}/evart-yalikavak`,
+      canonical: isTr ? `${baseUrl}/evart-yalikavak` : `${baseUrl}/${params.locale}/evart-yalikavak`, // TR is at root
       languages: {
-        'tr': `${baseUrl}/tr/evart-yalikavak`,
+        'tr': `${baseUrl}/evart-yalikavak`, // TR is at root, no /tr
         'en': `${baseUrl}/en/evart-yalikavak`,
-        'x-default': `${baseUrl}/tr/evart-yalikavak`, // Varsayılan dil TR
+        'x-default': `${baseUrl}/evart-yalikavak`, // Default is root (TR)
       },
     },
     openGraph: {
@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       description: isTr 
         ? "Evart Yalıkavak - Bodrum'un ilk rezidans projesi. Şehrin enerjisiyle Bodrum'un ruhu buluşuyor."
         : "Evart Yalıkavak - Bodrum's first residence project. The energy of the city meets the soul of Bodrum.",
-      url: `${baseUrl}/${params.locale}/evart-yalikavak`,
+      url: isTr ? `${baseUrl}/evart-yalikavak` : `${baseUrl}/${params.locale}/evart-yalikavak`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
       images: [

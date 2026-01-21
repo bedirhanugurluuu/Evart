@@ -23,11 +23,11 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       ? ["evart", "gayrimenkul", "konut", "ankara", "bodrum", "evart oran", "evart yalikavak", "ana sayfa"]
       : ["evart", "real estate", "residential", "ankara", "bodrum", "evart oran", "evart yalikavak", "home"],
     alternates: {
-      canonical: `${baseUrl}/${params.locale}`,
+      canonical: params.locale === 'tr' ? baseUrl : `${baseUrl}/${params.locale}`, // TR is at root
       languages: {
-        'tr': `${baseUrl}/tr`,
+        'tr': baseUrl, // TR is at root, no /tr
         'en': `${baseUrl}/en`,
-        'x-default': `${baseUrl}/tr`, // Varsayılan dil TR
+        'x-default': baseUrl, // Default is root (TR)
       },
     },
     openGraph: {
@@ -35,7 +35,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       description: isTr 
         ? "Evart ile hayalinizdeki eve kavuşun. Ankara Çankaya'da Evart Oran, Bodrum Yalıkavak'ta Evart Yalıkavak premium konut projeleri. Akıllı ev sistemleri ve modern mimari."
         : "Find your dream home with Evart. Premium residential projects: Evart Oran in Ankara Çankaya, Evart Yalıkavak in Bodrum. Smart home systems and modern architecture.",
-      url: `${baseUrl}/${params.locale}`,
+      url: params.locale === 'tr' ? baseUrl : `${baseUrl}/${params.locale}`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
       images: [

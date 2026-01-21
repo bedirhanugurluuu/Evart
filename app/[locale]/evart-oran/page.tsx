@@ -16,11 +16,11 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       ? ["evart oran", "ankara konut", "premium daire", "akıllı ev", "rezidans ankara", "evart"]
       : ["evart oran", "ankara residential", "premium apartment", "smart home", "residence ankara", "evart"],
     alternates: {
-      canonical: `${baseUrl}/${params.locale}/evart-oran`,
+      canonical: isTr ? `${baseUrl}/evart-oran` : `${baseUrl}/${params.locale}/evart-oran`, // TR is at root
       languages: {
-        'tr': `${baseUrl}/tr/evart-oran`,
+        'tr': `${baseUrl}/evart-oran`, // TR is at root, no /tr
         'en': `${baseUrl}/en/evart-oran`,
-        'x-default': `${baseUrl}/tr/evart-oran`, // Varsayılan dil TR
+        'x-default': `${baseUrl}/evart-oran`, // Default is root (TR)
       },
     },
     openGraph: {
@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       description: isTr 
         ? "Evart Oran - Ankara Çankaya Oran'da premium konut projesi. Akıllı ev sistemleri, modern mimari, yüksek kira getirisi potansiyeli. Büyükelçilik bölgesi, prestijli lokasyon."
         : "Evart Oran - Premium residential project in Ankara Çankaya Oran. Smart home systems, modern architecture, high rental income potential. Embassy district, prestigious location.",
-      url: `${baseUrl}/${params.locale}/evart-oran`,
+      url: isTr ? `${baseUrl}/evart-oran` : `${baseUrl}/${params.locale}/evart-oran`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
       images: [

@@ -163,7 +163,7 @@ export default function ImageComparisonSliderReverse() {
 
         {/* Devamını Oku */}
         <Link 
-          href={`/${locale}/evart-yalikavak`} 
+          href={locale === 'tr' ? '/evart-yalikavak' : `/${locale}/evart-yalikavak`} 
           className="font-gotham-light italic text-center md:text-left text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >

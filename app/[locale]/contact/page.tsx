@@ -16,11 +16,11 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       ? ["iletişim", "evart iletişim", "ankara ofis", "bodrum ofis", "gayrimenkul danışmanlık", "evart"]
       : ["contact", "evart contact", "ankara office", "bodrum office", "real estate consultation", "evart"],
     alternates: {
-      canonical: `${baseUrl}/${params.locale}/contact`,
+      canonical: isTr ? `${baseUrl}/contact` : `${baseUrl}/${params.locale}/contact`, // TR is at root
       languages: {
-        'tr': `${baseUrl}/tr/contact`,
+        'tr': `${baseUrl}/contact`, // TR is at root, no /tr
         'en': `${baseUrl}/en/contact`,
-        'x-default': `${baseUrl}/tr/contact`, // Varsayılan dil TR
+        'x-default': `${baseUrl}/contact`, // Default is root (TR)
       },
     },
     openGraph: {
@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       description: isTr 
         ? "Evart ile iletişime geçin. Ankara Çankaya ve Bodrum Yalıkavak ofislerimizden bize ulaşın. Evart Oran ve Evart Yalıkavak projeleri hakkında bilgi alın."
         : "Contact Evart. Reach us from our Ankara Çankaya and Bodrum Yalıkavak offices. Get information about Evart Oran and Evart Yalıkavak projects.",
-      url: `${baseUrl}/${params.locale}/contact`,
+      url: isTr ? `${baseUrl}/contact` : `${baseUrl}/${params.locale}/contact`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
       images: [

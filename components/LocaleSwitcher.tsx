@@ -13,11 +13,26 @@ export default function LocaleSwitcher() {
   const switchLocale = (newLocale: Locale) => {
     // Remove current locale from pathname
     let pathWithoutLocale = pathname;
-    if (pathname.startsWith(`/${currentLocale}`)) {
+    
+    // If current path has locale prefix, remove it
+    if (pathname.startsWith(`/${currentLocale}/`) || pathname === `/${currentLocale}`) {
       pathWithoutLocale = pathname.slice(`/${currentLocale}`.length) || '/';
     }
-    // Add new locale
-    const newPath = `/${newLocale}${pathWithoutLocale}`;
+    // If current path is root and we're on TR, path is already without locale
+    else if (currentLocale === 'tr' && !pathname.startsWith('/en')) {
+      pathWithoutLocale = pathname;
+    }
+    
+    // Build new path: TR uses root, EN uses /en prefix
+    let newPath: string;
+    if (newLocale === 'tr') {
+      // TR: root URL (no /tr prefix)
+      newPath = pathWithoutLocale === '/' ? '/' : pathWithoutLocale;
+    } else {
+      // EN: /en prefix
+      newPath = `/${newLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
+    }
+    
     router.push(newPath);
   };
 

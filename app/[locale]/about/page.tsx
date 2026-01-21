@@ -16,11 +16,11 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       ? ["hakkımızda", "yapıtek anka", "gayrimenkul", "inşaat", "evart", "ankara", "bodrum"]
       : ["about us", "yapıtek anka", "real estate", "construction", "evart", "ankara", "bodrum"],
     alternates: {
-      canonical: `${baseUrl}/${params.locale}/about`,
+      canonical: isTr ? `${baseUrl}/about` : `${baseUrl}/${params.locale}/about`, // TR is at root
       languages: {
-        'tr': `${baseUrl}/tr/about`,
+        'tr': `${baseUrl}/about`, // TR is at root, no /tr
         'en': `${baseUrl}/en/about`,
-        'x-default': `${baseUrl}/tr/about`, // Varsayılan dil TR
+        'x-default': `${baseUrl}/about`, // Default is root (TR)
       },
     },
     openGraph: {
@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
       description: isTr 
         ? "Yapıtek ANKA İnşaat hakkında bilgi edinin. 2014'ten beri güven, kalite ve sürdürülebilirlik odaklı gayrimenkul projeleri geliştiriyoruz. Evart markası ile premium yaşam alanları."
         : "Learn about Yapıtek ANKA Construction. We have been developing real estate projects focused on trust, quality and sustainability since 2014. Premium living spaces with the Evart brand.",
-      url: `${baseUrl}/${params.locale}/about`,
+      url: isTr ? `${baseUrl}/about` : `${baseUrl}/${params.locale}/about`,
       locale: params.locale === 'tr' ? 'tr_TR' : 'en_US',
       type: 'website',
       images: [

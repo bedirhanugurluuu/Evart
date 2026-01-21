@@ -6,6 +6,14 @@ import Link from 'next/link';
 export default function ProjectsSection() {
   const { t, locale } = useTranslations();
   
+  // Helper: TR için root URL, EN için /en prefix
+  const getUrl = (path: string) => {
+    if (locale === 'tr') {
+      return path;
+    }
+    return `/${locale}${path}`;
+  };
+  
   return (
     <section className="w-full">
       {/* Full Width Stripe */}
@@ -25,13 +33,13 @@ export default function ProjectsSection() {
             {/* Evart Oran ve Evart Yalıkavak - Yan Yana */}
             <div className="flex items-center gap-10 md:gap-40">
               <Link 
-                href={`/${locale}/evart-oran`}
+                href={getUrl('/evart-oran')}
                 className="font-gotham-book uppercase text-white text-base md:text-xl hover:opacity-80 transition-opacity cursor-pointer"
               >
                 {t('home.projectsSection.evartOran')}
               </Link>
               <Link 
-                href={`/${locale}/evart-yalikavak`}
+                href={getUrl('/evart-yalikavak')}
                 className="font-gotham-book uppercase text-white text-base md:text-xl hover:opacity-80 transition-opacity cursor-pointer"
               >
                 {t('home.projectsSection.evartYalikavak')}

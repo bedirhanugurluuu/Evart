@@ -311,7 +311,7 @@ export default function ImageComparisonSlider() {
 
         {/* Devamını Oku */}
         <Link 
-          href={`/${locale}/evart-oran`} 
+          href={locale === 'tr' ? '/evart-oran' : `/${locale}/evart-oran`} 
           className="font-gotham-light italic text-center md:text-left text-sm md:text-base inline-block relative read-more-link w-fit"
           style={{ color: "#414042" }}
         >

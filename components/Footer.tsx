@@ -11,6 +11,14 @@ export default function Footer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  // Helper: TR için root URL, EN için /en prefix
+  const getUrl = (path: string) => {
+    if (locale === 'tr') {
+      return path === '/' ? '/' : path;
+    }
+    return `/${locale}${path === '/' ? '' : path}`;
+  };
+
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
@@ -113,19 +121,19 @@ export default function Footer() {
 
             {/* Orta Taraf - Menü */}
             <div className="flex flex-col space-y-3 border-t border-white/20 pt-4 md:border-none md:pt-0">
-              <Link href={`/${locale}`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+              <Link href={getUrl('/')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.home')}
               </Link>
-              <Link href={`/${locale}/about`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+              <Link href={getUrl('/about')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.about')}
               </Link>
-              <Link href={`/${locale}/evart-oran`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+              <Link href={getUrl('/evart-oran')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.evartOran')}
               </Link>
-              <Link href={`/${locale}/evart-yalikavak`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+              <Link href={getUrl('/evart-yalikavak')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.evartYalikavak')}
               </Link>
-              <Link href={`/${locale}/contact`} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+              <Link href={getUrl('/contact')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.contact')}
               </Link>
             </div>

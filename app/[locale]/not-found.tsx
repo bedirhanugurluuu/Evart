@@ -84,7 +84,7 @@ export default function NotFound({ params }: { params?: { locale: Locale } }) {
 
           {/* Ana Sayfaya Dön Butonu */}
           <Link 
-            href={`/${locale}`}
+            href={locale === 'tr' ? '/' : `/${locale}`}
             className={`inline-block font-gotham-bold text-white uppercase transition-all duration-300 hover:bg-[#6d8a8a] hover:scale-105 hover:shadow-lg ${
               isMounted 
                 ? 'opacity-100 translate-y-0' 
@@ -125,9 +125,9 @@ export default function NotFound({ params }: { params?: { locale: Locale } }) {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
-              { href: `/${locale}/about`, label: t('nav.about') },
-              { href: `/${locale}/evart-oran`, label: t('nav.evartOran') },
-              { href: `/${locale}/evart-yalikavak`, label: t('nav.evartYalikavak') }
+              { href: locale === 'tr' ? '/about' : `/${locale}/about`, label: t('nav.about') },
+              { href: locale === 'tr' ? '/evart-oran' : `/${locale}/evart-oran`, label: t('nav.evartOran') },
+              { href: locale === 'tr' ? '/evart-yalikavak' : `/${locale}/evart-yalikavak`, label: t('nav.evartYalikavak') }
             ].map((item, index) => (
               <Link 
                 key={item.href}
