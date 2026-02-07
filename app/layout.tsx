@@ -19,6 +19,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="48x48" href={`${baseUrl}/evart-icon-48.png`} />
         <link rel="icon" type="image/png" sizes="96x96" href={`${baseUrl}/evart-icon-96.png`} />
         <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}/evart-apple-icon.png`} />
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="XCfBCY3DsvFjlTJOZ1ip-exJpCpJeunzgtMoRUOppas" />
         {/* DNS Preconnect - Vercel ve CDN için */}
         <link rel="dns-prefetch" href="https://evart.vercel.app" />
         <link rel="preconnect" href="https://evart.vercel.app" crossOrigin="anonymous" />
