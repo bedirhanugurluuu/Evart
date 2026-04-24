@@ -351,7 +351,7 @@ export default function HeroSlider() {
                       )}
                     </div>
                     {/* Mobile video (Evart Oran) */}
-                    <div className="block md:hidden w-full relative">
+                    <div className="block md:hidden w-full h-full relative">
                       {!oranVideoError ? (
                         <video
                           preload="none"
@@ -362,7 +362,7 @@ export default function HeroSlider() {
                           controls={false}
                           disablePictureInPicture
                           disableRemotePlayback
-                          className="w-full h-auto object-cover object-center pointer-events-none select-none"
+                          className="w-full h-full object-cover object-center pointer-events-none select-none"
                           onError={() => setOranVideoError(true)}
                           onLoadedData={(e) => {
                             const video = e.currentTarget;
@@ -464,10 +464,10 @@ export default function HeroSlider() {
               </>
             );
 
-            if (slide.type === 'video') {
+            if (slide.type === 'video' || slide.type === 'imageVideo') {
               return (
                 <SwiperSlide key={slide.id} className="md:h-[calc(100vh-80px)]">
-                  <div className="w-full md:h-full">
+                  <div className="w-full h-full md:h-full">
                     {slideContent}
                   </div>
                 </SwiperSlide>
