@@ -1,0 +1,16 @@
+export const EVART_MANSION_MEDIA = [
+  "/images/evart-estates.jpeg",
+  "/images/evart-estates-2.jpeg",
+  "/images/evart-estates-9.jpg",
+  "/images/evart-estates-4.jpg",
+  "/images/evart-estates-5.jpg",
+  "/images/evart-estates-6.jpg",
+  "/images/evart-estates.jpeg",
+  "/images/evart-estates-8.jpeg",
+  "/images/evart-estates-3.jpg",
+  "/images/evart-estates-10.jpg",
+  "/images/evart-estates-11.jpg",
+  "/images/evart-estates-12.jpg",
+  "/images/evart-estates-13.jpg",
+  "/images/evart-estates-14.jpg",
+] as const;

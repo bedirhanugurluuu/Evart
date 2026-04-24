@@ -5,6 +5,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SimpleImageSlider from "@/components/SimpleImageSlider";
+import { EvartOranSampleCarousels } from "@/components/EvartOranCarouseles";
 import { useTranslations } from "@/hooks/useTranslations";
 
 export default function EvartOranClient() {
@@ -368,7 +369,9 @@ export default function EvartOranClient() {
           </div>
         </div>
       </section>
-      
+
+      <EvartOranSampleCarousels />
+
       <Footer />
     </main>
   );

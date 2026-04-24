@@ -52,14 +52,14 @@ export default function Header() {
               alt="Evart Logo"
               width={120}
               height={64}
-              className="h-12 md:h-16 w-auto"
+              className="h-12 lg:h-16 w-auto"
               priority
               quality={90}
             />
           </Link>
 
           {/* Desktop Menu - Kalan genişliğin tam ortasında */}
-          <div className="hidden md:flex flex-1 items-center uppercase justify-center space-x-8">
+          <div className="hidden lg:flex flex-1 items-center uppercase justify-center space-x-8">
             <Link 
               href={getUrl('/about')} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/about') ? 'nav-link-active' : ''}`}
@@ -78,6 +78,12 @@ export default function Header() {
             >
               {t('nav.evartYalikavak')}
             </Link>
+            <Link
+              href={getUrl('/evart-mansion')}
+              className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/evart-mansion') ? 'nav-link-active' : ''}`}
+            >
+              {t('nav.evartMansion')}
+            </Link>
             <Link 
               href={getUrl('/contact')} 
               className={`hover:text-gray-900 text-base transition font-gotham-book nav-link ${isActive('/contact') ? 'nav-link-active' : ''}`}
@@ -87,13 +93,13 @@ export default function Header() {
           </div>
 
           {/* Locale Switcher */}
-          <div className="hidden md:flex items-center ml-4">
+          <div className="hidden lg:flex items-center ml-4">
             <LocaleSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 ml-auto"
+            className="lg:hidden text-gray-700 ml-auto"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Menu"
           >
@@ -175,6 +181,13 @@ export default function Header() {
               >
                 {t('nav.evartYalikavak')}
               </Link>
+              <Link
+                href={getUrl('/evart-mansion')}
+                onClick={() => setIsMenuOpen(false)}
+                className={`font-gotham-book text-xl text-gray-700 hover:text-gray-900 transition-colors nav-link ${isActive('/evart-mansion') ? 'nav-link-active' : ''}`}
+              >
+                {t('nav.evartMansion')}
+              </Link>
               <Link 
                 href={getUrl('/contact')} 
                 onClick={() => setIsMenuOpen(false)}
@@ -194,7 +207,7 @@ export default function Header() {
         {/* Overlay */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             onClick={() => setIsMenuOpen(false)}
           />
         )}

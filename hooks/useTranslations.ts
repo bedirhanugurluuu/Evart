@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { Locale } from '@/i18n';
+import { Locale, defaultLocale, locales } from '@/i18n';
 import trMessages from '@/messages/tr.json';
 import enMessages from '@/messages/en.json';
 
@@ -12,19 +12,33 @@ const messages = {
 
 export function useTranslations() {
   const params = useParams();
-  const locale = (params?.locale as Locale) || 'tr';
-  
-  const t = (key: string): string => {
+  const paramLocale = params?.locale;
+  const normalizedLocale = Array.isArray(paramLocale) ? paramLocale[0] : paramLocale;
+  const locale = (normalizedLocale && locales.includes(normalizedLocale as Locale)
+    ? (normalizedLocale as Locale)
+    : defaultLocale);
+
+  const getValueByKey = (key: string): unknown => {
     const keys = key.split('.');
     let value: any = messages[locale];
-    
+
     for (const k of keys) {
       value = value?.[k];
     }
-    
-    return value || key;
+
+    return value;
   };
 
-  return { t, locale };
+  const t = (key: string): string => {
+    const value = getValueByKey(key);
+    return typeof value === 'string' ? value : key;
+  };
+
+  const raw = <T = unknown>(key: string): T => {
+    const value = getValueByKey(key);
+    return (value ?? key) as T;
+  };
+
+  return { t, raw, locale };
 }
 

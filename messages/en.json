@@ -4,6 +4,7 @@
     "about": "About",
     "evartOran": "Evart Oran",
     "evartYalikavak": "Evart Yalıkavak",
+    "evartMansion": "Evart Mansion",
     "contact": "Contact"
   },
   "home": {
@@ -135,6 +136,136 @@
       "description": "Each unit is designed as a gross 40 m² compact yet functional 1+1 layout. Thanks to modular architecture, units can be combined to create larger and more flexible living environments."
     }
   },
+  "ProjectEvartEstates": {
+    "hero": {
+      "title": "EVART MANSION YALIKAVAK",
+      "subtitle": "A unique mansion lifestyle in Bodrum",
+      "description": "Developed in limited numbers, this project is not just a residence; it is a private experience combining privacy, prestige, and life quality in one framework.",
+      "imageAlt": "Evart Mansion Yalikavak hero image"
+    },
+    "sections": [
+      {
+        "kicker": "Cover",
+        "title": "EVART MANSION YALIKAVAK",
+        "subtitle": "A unique mansion lifestyle in Bodrum",
+        "body": "A limited and privileged living experience.",
+        "body2": "Developed in limited numbers, this project is not just a residence; it is a private experience combining privacy, prestige, and life quality in one framework.",
+        "imageAlt": "Evart Mansion Yalikavak cover image"
+      },
+      {
+        "kicker": "Concept",
+        "title": "A Lifestyle Where Privilege Is Redefined",
+        "body": "Evart Mansion Yalikavak is a mansion-scale living concept in Bodrum that goes beyond standard residential projects.",
+        "body2": "The project prioritizes spaciousness over density, selectiveness over crowds, and permanent living over temporary use.",
+        "imageAlt": "Evart Mansion concept layout"
+      },
+      {
+        "kicker": "Concept Deep Dive",
+        "title": "A Limited and Controlled Living Concept",
+        "subtitle": "Only 28 Mansions",
+        "body": "Comprising only 28 mansions, this structure provides more space, more privacy, and a distinguished living experience.",
+        "imageAlt": "Evart Mansion low-density mansion layout"
+      },
+      {
+        "kicker": "Location",
+        "title": "At a Prime Point of Yalikavak",
+        "body": "Offers an accessible life integrated with nature.",
+        "metrics": [
+          { "label": "To the Sea", "value": "600 meters" },
+          { "label": "Yalikavak Marina", "value": "8.4 km" },
+          { "label": "Turgutreis Marina", "value": "9.7 km" },
+          { "label": "Milas-Bodrum Airport", "value": "60 km" }
+        ],
+        "imageAlt": "Evart Mansion location and surrounding access"
+      },
+      {
+        "kicker": "Project Overview",
+        "title": "Low Density, High Living Standards",
+        "body": "Designed with only 28 mansions on 48 acres of land, the project offers a spacious and comfortable living scenario.",
+        "imageAlt": "Evart Mansion overall project layout"
+      },
+      {
+        "kicker": "Mansion Structure",
+        "title": "Independence in Every Structure, Privacy in Every Detail",
+        "body": "Planned for maximum privacy.",
+        "bullets": [
+          "5+1 mansion concept",
+          "~300 m² indoor area",
+          "~1,800 m² usage area"
+        ],
+        "imageAlt": "Evart Mansion mansion plan and volume"
+      },
+      {
+        "kicker": "Living Experience",
+        "title": "A World of Your Own",
+        "body": "Offers a personal and isolated living experience.",
+        "bullets": [
+          "62 m² private pool",
+          "Infinity pool concept",
+          "Fire pit",
+          "Large landscaping areas"
+        ],
+        "imageAlt": "Evart Mansion private pool and landscape"
+      },
+      {
+        "kicker": "Comfort & Technology",
+        "title": "Top-Level Comfort with Modern Technology",
+        "body": "Comfort, security, and technology are designed together in each structure.",
+        "bullets": [
+          "VRF system",
+          "Heated pool",
+          "Smart home infrastructure",
+          "24/7 security systems"
+        ],
+        "imageAlt": "Evart Mansion smart living technologies"
+      },
+      {
+        "kicker": "Social Areas",
+        "title": "Details That Complete Life",
+        "body": "Distinctive social amenities supporting daily life are provided.",
+        "bullets": [
+          "On-site restaurant",
+          "Private sauna",
+          "Indoor parking for 2 vehicles"
+        ],
+        "imageAlt": "Evart Mansion social areas"
+      },
+      {
+        "kicker": "Material Quality",
+        "title": "Privilege Hidden in Details",
+        "body": "Every interior material strengthens the premium living standard.",
+        "bullets": [
+          "Miele built-in kitchen",
+          "Grohe fixtures",
+          "Marble floors",
+          "Laminated parquet"
+        ],
+        "imageAlt": "Evart Mansion material and interior quality"
+      },
+      {
+        "kicker": "Positional Advantage",
+        "title": "Every Structure Is Positioned for the View",
+        "body": "All mansions are oriented to sea views.",
+        "body2": "Each structure generates value on its own.",
+        "imageAlt": "Evart Mansion sea-view-oriented structures"
+      },
+      {
+        "kicker": "Target Lifestyle",
+        "title": "Not a Season, but a Way of Life",
+        "body": "Livable all year round.",
+        "body2": "Offers a distinguished living standard.",
+        "imageAlt": "Evart Mansion four-season living"
+      },
+      {
+        "kicker": "Closing",
+        "title": "Limited in Number. Lasting in Value.",
+        "body": "Evart Mansion Yalikavak offers a privileged life in Bodrum.",
+        "body2": "This is not just a residence; it is a selected way of life.",
+        "imageAlt": "Evart Mansion closing visual"
+      }
+    ],
+    "closingCta": "Get in Touch"
+  },
   "contact": {
     "title": "Contact",
     "banner": {
@@ -203,12 +334,30 @@
     "success": "Your message has been sent successfully!",
     "error": "An error occurred. Please try again."
   },
+  "PhotoGallery": {
+    "prev": "Previous slide",
+    "next": "Next slide",
+    "dotsLabel": "Gallery pagination dots",
+    "goToSlide": "Go to slide"
+  },
+  "ProjectEvartOran": {
+    "sample1Plus1Kicker": "Sample Unit",
+    "sample1Plus1Title": "1+1 Unit Type",
+    "sample1Plus1SlideAlt": "Evart Oran 1+1 image",
+    "sample2Plus1Kicker": "Sample Unit",
+    "sample2Plus1Title": "2+1 Unit Type",
+    "sample2Plus1SlideAlt": "Evart Oran 2+1 image",
+    "sampleLoftKicker": "Sample Unit",
+    "sampleLoftTitle": "Duplex Unit Type",
+    "sampleLoftImageAlt": "Evart Oran duplex image"
+  },
   "footer": {
     "menu": {
       "home": "HOME",
       "about": "ABOUT",
       "evartOran": "EVART ORAN",
       "evartYalikavak": "EVART YALIKAVAK",
+      "evartMansion": "EVART MANSION",
       "contact": "CONTACT"
     },
     "newsletter": {

@@ -133,6 +133,9 @@ export default function Footer() {
               <Link href={getUrl('/evart-yalikavak')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.evartYalikavak')}
               </Link>
+              <Link href={getUrl('/evart-mansion')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
+                {t('footer.menu.evartMansion')}
+              </Link>
               <Link href={getUrl('/contact')} className="font-gotham-book text-md text-white hover:opacity-80 transition-opacity">
                 {t('footer.menu.contact')}
               </Link>

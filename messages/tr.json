@@ -4,6 +4,7 @@
     "about": "Hakkımızda",
     "evartOran": "Evart Oran",
     "evartYalikavak": "Evart Yalıkavak",
+    "evartMansion": "Evart Mansion",
     "contact": "İletişim"
   },
   "home": {
@@ -135,6 +136,136 @@
       "description": "Her daire brüt 40 m² olarak kompakt ama fonksiyonel 1+1 planlarda tasarlandı. Modüler mimari sayesinde birleştirme imkânı sunarak büyüyebilen, esnek yaşam alanları oluşturmak mümkün."
     }
   },
+  "ProjectEvartEstates": {
+    "hero": {
+      "title": "EVART MANSION YALIKAVAK",
+      "subtitle": "Bodrum'da benzersiz malikane yaşamı",
+      "description": "Sınırlı sayıda geliştirilen bu proje, yalnızca bir konut değil; mahremiyet, prestij ve yaşam kalitesini aynı çerçevede sunan özel bir deneyimdir.",
+      "imageAlt": "Evart Mansion Yalıkavak hero görseli"
+    },
+    "sections": [
+      {
+        "kicker": "Kapak",
+        "title": "EVART MANSION YALIKAVAK",
+        "subtitle": "Bodrum'da benzersiz malikane yaşamı",
+        "body": "Sınırlı sayıda, ayrıcalıklı bir yaşam deneyimi.",
+        "body2": "Sınırlı sayıda geliştirilen bu proje, yalnızca bir konut değil; mahremiyet, prestij ve yaşam kalitesini aynı çerçevede sunan özel bir deneyimdir.",
+        "imageAlt": "Evart Mansion Yalıkavak kapak görseli"
+      },
+      {
+        "kicker": "Konsept",
+        "title": "Ayrıcalığın Yeniden Tanımlandığı Bir Yaşam",
+        "body": "Evart Mansion Yalıkavak, Bodrum'da standart konut projelerinin ötesine geçen, malikane ölçeğinde tasarlanmış bir yaşam kurgusudur.",
+        "body2": "Bu proje, yoğunluk yerine ferahlığı; kalabalık yerine seçilmişliği; geçici kullanım yerine kalıcı bir yaşamı merkezine alır.",
+        "imageAlt": "Evart Mansion konsept yerleşimi"
+      },
+      {
+        "kicker": "Konsept Derinleşme",
+        "title": "Sınırlı Sayıda, Kontrollü Bir Yaşam Kurgusu",
+        "subtitle": "Yalnızca 28 Malikane",
+        "body": "Sadece 28 malikaneden oluşan bu yapı, daha fazla alan, daha fazla mahremiyet ve seçkin bir yaşam deneyimi sunar.",
+        "imageAlt": "Evart Mansion düşük yoğunluklu malikane düzeni"
+      },
+      {
+        "kicker": "Lokasyon",
+        "title": "Yalıkavak'ın Seçkin Noktasında",
+        "body": "Doğayla iç içe, erişilebilir bir yaşam sunar.",
+        "metrics": [
+          { "label": "Denize", "value": "600 metre" },
+          { "label": "Yalıkavak Marina", "value": "8.4 km" },
+          { "label": "Turgutreis Marina", "value": "9.7 km" },
+          { "label": "Milas-Bodrum Havalimanı", "value": "60 km" }
+        ],
+        "imageAlt": "Evart Mansion lokasyon ve çevre erişimi"
+      },
+      {
+        "kicker": "Proje Genel Bilgi",
+        "title": "Düşük Yoğunluk, Yüksek Yaşam Standardı",
+        "body": "48 dönüm arazi üzerinde yalnızca 28 malikane ile tasarlanan proje, ferah ve geniş bir yaşam kurgusu sunar.",
+        "imageAlt": "Evart Mansion genel proje yerleşimi"
+      },
+      {
+        "kicker": "Malikane Yapısı",
+        "title": "Her Yapıda Bağımsızlık, Her Detayda Mahremiyet",
+        "body": "Maksimum mahremiyet için planlanmıştır.",
+        "bullets": [
+          "5+1 malikane konsepti",
+          "~300 m² kapalı alan",
+          "~1.800 m² kullanım alanı"
+        ],
+        "imageAlt": "Evart Mansion malikane planı ve hacmi"
+      },
+      {
+        "kicker": "Yaşam Deneyimi",
+        "title": "Size Ait Bir Dünya",
+        "body": "Kişisel ve izole bir yaşam deneyimi sunar.",
+        "bullets": [
+          "62 m² özel havuz",
+          "Sonsuzluk havuzu konsepti",
+          "Ateş çukuru",
+          "Geniş peyzaj alanları"
+        ],
+        "imageAlt": "Evart Mansion özel havuz ve peyzaj"
+      },
+      {
+        "kicker": "Konfor & Teknoloji",
+        "title": "Modern Teknoloji ile Üst Düzey Konfor",
+        "body": "Her yapıda konfor, güvenlik ve teknoloji birlikte kurgulanır.",
+        "bullets": [
+          "VRF sistem",
+          "Isıtmalı havuz",
+          "Akıllı ev altyapısı",
+          "7/24 güvenlik sistemleri"
+        ],
+        "imageAlt": "Evart Mansion akıllı yaşam teknolojileri"
+      },
+      {
+        "kicker": "Sosyal Alanlar",
+        "title": "Yaşamı Tamamlayan Detaylar",
+        "body": "Günlük yaşamı destekleyen seçkin sosyal donatılar sunulur.",
+        "bullets": [
+          "Site içi restoran",
+          "Özel sauna",
+          "2 araçlık kapalı otopark"
+        ],
+        "imageAlt": "Evart Mansion sosyal alanlar"
+      },
+      {
+        "kicker": "Malzeme Kalitesi",
+        "title": "Detaylarda Saklı Ayrıcalık",
+        "body": "İç mekanda kullanılan her malzeme, premium yaşam standardını güçlendirir.",
+        "bullets": [
+          "Miele ankastre mutfak",
+          "Grohe armatürler",
+          "Mermer zeminler",
+          "Lamine parke"
+        ],
+        "imageAlt": "Evart Mansion malzeme ve iç mekan kalitesi"
+      },
+      {
+        "kicker": "Konumsal Avantaj",
+        "title": "Her Yapı, Manzaraya Konumlanır",
+        "body": "Tüm malikaneler deniz manzarasına yönlendirilmiştir.",
+        "body2": "Her yapı kendi başına değer üretir.",
+        "imageAlt": "Evart Mansion deniz manzarasına yönlenen yapılar"
+      },
+      {
+        "kicker": "Hedef Yaşam",
+        "title": "Bir Sezon Değil, Bir Yaşam Biçimi",
+        "body": "Yılın her döneminde yaşanabilir.",
+        "body2": "Seçkin bir yaşam standardı sunar.",
+        "imageAlt": "Evart Mansion dört mevsim yaşam"
+      },
+      {
+        "kicker": "Kapanış",
+        "title": "Sınırlı Sayıda. Kalıcı Değer.",
+        "body": "Evart Mansion Yalıkavak, Bodrum'da ayrıcalıklı bir yaşam sunar.",
+        "body2": "Bu, bir konut değil; seçilmiş bir yaşam biçimidir.",
+        "imageAlt": "Evart Mansion kapanış görseli"
+      }
+    ],
+    "closingCta": "İletişime Geç"
+  },
   "contact": {
     "title": "İletişim",
     "banner": {
@@ -203,12 +334,30 @@
     "success": "Mesajınız başarıyla gönderildi!",
     "error": "Bir hata oluştu. Lütfen tekrar deneyin."
   },
+  "PhotoGallery": {
+    "prev": "Önceki slayt",
+    "next": "Sonraki slayt",
+    "dotsLabel": "Galeri sayfalama noktaları",
+    "goToSlide": "Slayta git"
+  },
+  "ProjectEvartOran": {
+    "sample1Plus1Kicker": "Örnek Daire",
+    "sample1Plus1Title": "1+1 Daire Tipi",
+    "sample1Plus1SlideAlt": "Evart Oran 1+1 görsel",
+    "sample2Plus1Kicker": "Örnek Daire",
+    "sample2Plus1Title": "2+1 Daire Tipi",
+    "sample2Plus1SlideAlt": "Evart Oran 2+1 görsel",
+    "sampleLoftKicker": "Örnek Daire",
+    "sampleLoftTitle": "Dubleks Daire Tipi",
+    "sampleLoftImageAlt": "Evart Oran dubleks görsel"
+  },
   "footer": {
     "menu": {
       "home": "ANASAYFA",
       "about": "HAKKIMIZDA",
       "evartOran": "EVART ORAN",
       "evartYalikavak": "EVART YALIKAVAK",
+      "evartMansion": "EVART MANSION",
       "contact": "İLETİŞİM"
     },
     "newsletter": {
