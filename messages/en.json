@@ -342,13 +342,13 @@
   },
   "ProjectEvartOran": {
     "sample1Plus1Kicker": "Sample Unit",
-    "sample1Plus1Title": "1+1 Unit Type",
+    "sample1Plus1Title": "1+1 Unit",
     "sample1Plus1SlideAlt": "Evart Oran 1+1 image",
     "sample2Plus1Kicker": "Sample Unit",
-    "sample2Plus1Title": "2+1 Unit Type",
+    "sample2Plus1Title": "2+1 Unit",
     "sample2Plus1SlideAlt": "Evart Oran 2+1 image",
     "sampleLoftKicker": "Sample Unit",
-    "sampleLoftTitle": "Duplex Unit Type",
+    "sampleLoftTitle": "Loft Unit",
     "sampleLoftImageAlt": "Evart Oran duplex image"
   },
   "footer": {

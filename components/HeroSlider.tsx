@@ -18,6 +18,7 @@ export default function HeroSlider() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
+  const [oranVideoError, setOranVideoError] = useState(false);
   const [isSwiperTouching, setIsSwiperTouching] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
@@ -79,7 +80,7 @@ export default function HeroSlider() {
     },
     {
       id: 3,
-      type: 'image' as const,
+      type: 'imageVideo' as const,
       link: (locale: string) => `/${locale}/evart-oran`,
     },
   ];
@@ -307,6 +308,84 @@ export default function HeroSlider() {
                         }}
                         onError={() => handleImageError(index, 'mobile')}
                       />
+                    </div>
+                  </>
+                ) : slide.type === 'imageVideo' ? (
+                  <>
+                    {/* Desktop video (Evart Oran) */}
+                    <div
+                      className="hidden md:block w-full h-full relative"
+                      style={{
+                        height: 'calc(100vh - 80px)',
+                      }}
+                    >
+                      {!oranVideoError ? (
+                        <video
+                          preload="metadata"
+                          autoPlay
+                          muted
+                          playsInline
+                          loop
+                          controls={false}
+                          disablePictureInPicture
+                          disableRemotePlayback
+                          className="w-full h-full object-cover object-center pointer-events-none select-none"
+                          style={{ height: '100%', width: '100%' }}
+                          onError={() => setOranVideoError(true)}
+                        >
+                          <source src="/images/hero-video-evart-oran.mp4" type="video/mp4" />
+                        </video>
+                      ) : (
+                        <Image
+                          key={`${locale}-desktop-${index}`}
+                          src={getImageSrc(index, 'desktop')}
+                          alt={`Slide ${index + 1}`}
+                          fill
+                          className="object-cover pointer-events-none select-none"
+                          loading="lazy"
+                          quality={95}
+                          unoptimized
+                          sizes="100vw"
+                          onError={() => handleImageError(index, 'desktop')}
+                        />
+                      )}
+                    </div>
+                    {/* Mobile video (Evart Oran) */}
+                    <div className="block md:hidden w-full relative">
+                      {!oranVideoError ? (
+                        <video
+                          preload="none"
+                          autoPlay
+                          muted
+                          playsInline
+                          loop
+                          controls={false}
+                          disablePictureInPicture
+                          disableRemotePlayback
+                          className="w-full h-auto object-cover object-center pointer-events-none select-none"
+                          onError={() => setOranVideoError(true)}
+                          onLoadedData={(e) => {
+                            const video = e.currentTarget;
+                            video.play().catch(() => {});
+                          }}
+                        >
+                          <source src="/images/hero-video-evart-oran.mp4" type="video/mp4" />
+                        </video>
+                      ) : (
+                        <Image
+                          key={`${locale}-mobile-${index}`}
+                          src={getImageSrc(index, 'mobile')}
+                          alt={`Slide ${index + 1}`}
+                          width={768}
+                          height={600}
+                          className="w-full h-auto object-contain pointer-events-none select-none"
+                          loading="lazy"
+                          quality={95}
+                          sizes="100vw"
+                          unoptimized
+                          onError={() => handleImageError(index, 'mobile')}
+                        />
+                      )}
                     </div>
                   </>
                 ) : (
