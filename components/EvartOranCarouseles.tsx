@@ -19,14 +19,17 @@ const SLIDE_W = 600;
 const SLIDE_H = 480;
 
 function slideWidthClass() {
-  return "w-[min(600px,calc(100vw-7rem))]";
+  return "md:w-[min(600px,calc(100vw-7rem))]";
 }
 
 type CarouselProps = {
   headingId: string;
-  kickerKey: "sample1Plus1Kicker" | "sample2Plus1Kicker";
-  titleKey: "sample1Plus1Title" | "sample2Plus1Title";
-  slideAltKey: "sample1Plus1SlideAlt" | "sample2Plus1SlideAlt";
+  kickerKey: "sample1Plus1Kicker" | "sample2Plus1Kicker" | "sampleLoftKicker";
+  titleKey: "sample1Plus1Title" | "sample2Plus1Title" | "sampleLoftTitle";
+  slideAltKey:
+    | "sample1Plus1SlideAlt"
+    | "sample2Plus1SlideAlt"
+    | "sampleLoftImageAlt";
   images: readonly string[];
 };
 
@@ -165,16 +168,12 @@ function UnitCarousel({
             {slides.map((slide, index) => (
               <div
                 key={slide.key}
-                className={`relative shrink-0 overflow-hidden bg-[#d1dfdf]/40 ${slideWidthClass()}`}
+                className={`relative shrink-0 overflow-hidden bg-[#d1dfdf]/40 w-full ${slideWidthClass()}`}
                 style={{ height: SLIDE_H }}
               >
                 <img
                   src={slide.src}
-                  alt={
-                    slideAltKey === "sample1Plus1SlideAlt"
-                      ? `${t("ProjectEvartOran.sample1Plus1SlideAlt")} ${index + 1}`
-                      : `${t("ProjectEvartOran.sample2Plus1SlideAlt")} ${index + 1}`
-                  }
+                  alt={`${t(`ProjectEvartOran.${slideAltKey}`)} ${index + 1}`}
                   width={SLIDE_W}
                   height={SLIDE_H}
                   className="h-full w-full object-cover"
@@ -218,8 +217,6 @@ function UnitCarousel({
 }
 
 export function EvartOranSampleCarousels() {
-  const { t } = useTranslations();
-
   return (
     <div className="border-t border-[#d1dfe0] px-6 py-12 lg:px-10 lg:py-16">
       <div className="mx-auto max-w-[1200px]">
@@ -237,43 +234,13 @@ export function EvartOranSampleCarousels() {
           slideAltKey="sample2Plus1SlideAlt"
           images={EVART_ORAN_2PLUS1_IMAGES}
         />
-        <section
-          className="w-full pb-2 pt-10 text-[#1f3a40] lg:pt-14"
-          aria-labelledby="evart-oran-sample-loft-heading"
-        >
-          <p className="px-4 text-center tracking-tight text-[#0f677d]">
-            {t("ProjectEvartOran.sampleLoftKicker")}
-          </p>
-          <h2
-            id="evart-oran-sample-loft-heading"
-            className="px-4 pb-8 pt-6 text-center font-serif text-3xl tracking-tight text-[#1f3a40] md:text-5xl"
-          >
-            {t("ProjectEvartOran.sampleLoftTitle")}
-          </h2>
-          <div className="grid grid-cols-1 gap-5 md:flex md:gap-5">
-            {EVART_ORAN_LOFT_IMAGES.map((src: string, index: number) => (
-              <div
-                key={src}
-                className={`relative overflow-hidden bg-[#d1dfdf]/40 ${
-                  index === 2
-                    ? "aspect-4/3 md:w-[20%] md:aspect-3/4"
-                    : "aspect-4/3 md:w-[40%]"
-                }`}
-              >
-                <img
-                  src={src}
-                  alt={`${t("ProjectEvartOran.sampleLoftImageAlt")} ${index + 1}`}
-                  width={1200}
-                  height={900}
-                  className="h-full w-full object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+        <UnitCarousel
+          headingId="evart-oran-sample-loft-heading"
+          kickerKey="sampleLoftKicker"
+          titleKey="sampleLoftTitle"
+          slideAltKey="sampleLoftImageAlt"
+          images={EVART_ORAN_LOFT_IMAGES}
+        />
       </div>
     </div>
   );
